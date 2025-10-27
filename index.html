@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCLAU Solutions - Chemical Formulation, Manufacturing & Distribution</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            background: linear-gradient(135deg, rgba(26, 26, 46, 0.9) 0%, rgba(22, 33, 62, 0.9) 100%);
+            padding: 1.5rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: 3px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #f39c12;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #f39c12;
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: 
+                linear-gradient(135deg, rgba(22, 33, 62, 0.85) 0%, rgba(26, 26, 46, 0.85) 50%, rgba(15, 52, 96, 0.85) 100%),
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%231a1a2e"/><path d="M0,0 L100,100 M100,0 L0,100" stroke="%23f39c12" stroke-width="1" opacity="0.1"/><circle cx="50" cy="50" r="30" fill="none" stroke="%23f39c12" stroke-width="1" opacity="0.1"/></svg>'),
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><rect width="200" height="200" fill="%230f3460"/><path d="M20,20 L180,180 M180,20 L20,180" stroke="%23f39c12" stroke-width="2" opacity="0.1"/></svg>');
+            background-size: cover, 100px 100px, 200px 200px;
+            background-position: center, 0 0, 50px 50px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8rem 5% 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(243, 156, 18, 0.1) 0%, transparent 70%);
+            top: -200px;
+            right: -200px;
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            color: #fff;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero-text .highlight {
+            color: #f39c12;
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero-text p {
+            font-size: 1.3rem;
+            color: #ddd;
+            margin-bottom: 2rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: #f39c12;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(243, 156, 18, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(243, 156, 18, 0.5);
+            background: #e67e22;
+        }
+
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .year-badge {
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 20px 60px rgba(243, 156, 18, 0.4);
+            animation: float 3s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .year-badge::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 30% 30%, rgba(255,255,255,0.2) 0%, transparent 50%),
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60"><circle cx="30" cy="30" r="25" fill="none" stroke="white" stroke-width="1" opacity="0.3"/><path d="M15,15 L45,45 M45,15 L15,45" stroke="white" stroke-width="1" opacity="0.3"/></svg>');
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .year-badge .year {
+            font-size: 5rem;
+            font-weight: 900;
+            color: #fff;
+            line-height: 1;
+            z-index: 1;
+        }
+
+        .year-badge .text {
+            font-size: 1.2rem;
+            color: #fff;
+            font-weight: 600;
+            margin-top: 0.5rem;
+            z-index: 1;
+        }
+
+        /* About Section */
+        .about {
+            padding: 6rem 5%;
+            background: 
+                linear-gradient(rgba(248, 249, 250, 0.9), rgba(248, 249, 250, 0.9)),
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23f8f9fa"/><path d="M0,50 L100,50 M50,0 L50,100" stroke="%23f39c12" stroke-width="1" opacity="0.1"/><circle cx="50" cy="50" r="30" fill="none" stroke="%23f39c12" stroke-width="1" opacity="0.1"/></svg>');
+            background-size: cover, 100px 100px;
+        }
+
+        .about-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: #1a1a2e;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: #f39c12;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            color: #555;
+            max-width: 800px;
+            margin-top: 2rem;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 6rem 5%;
+            background: 
+                linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)),
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120"><rect width="120" height="120" fill="%23ffffff"/><path d="M20,20 L100,100 M100,20 L20,100" stroke="%23f39c12" stroke-width="1" opacity="0.1"/><circle cx="60" cy="60" r="40" fill="none" stroke="%23f39c12" stroke-width="1" opacity="0.1"/></svg>');
+            background-size: cover, 120px 120px;
+        }
+
+        .services-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            background: #f8f9fa;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-left: 5px solid #f39c12;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 80px;
+            height: 80px;
+            background: 
+                radial-gradient(circle at 30px 30px, rgba(243, 156, 18, 0.1) 0%, transparent 70%);
+            border-radius: 0 0 0 80px;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(243, 156, 18, 0.1);
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            color: #1a1a2e;
+            margin-bottom: 1rem;
+        }
+
+        .service-card p {
+            font-size: 1rem;
+            color: #555;
+        }
+
+        /* Values Section */
+        .values {
+            padding: 6rem 5%;
+            background: 
+                linear-gradient(rgba(248, 249, 250, 0.9), rgba(248, 249, 250, 0.9)),
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" viewBox="0 0 150 150"><rect width="150" height="150" fill="%23f8f9fa"/><path d="M0,75 L150,75 M75,0 L75,150" stroke="%23f39c12" stroke-width="1" opacity="0.1"/><circle cx="75" cy="75" r="50" fill="none" stroke="%23f39c12" stroke-width="1" opacity="0.1"/></svg>');
+            background-size: cover, 150px 150px;
+        }
+
+        .values-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .value-card {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            text-align: center;
+            transition: transform 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .value-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: #f39c12;
+        }
+
+        .value-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .value-card h3 {
+            font-size: 1.3rem;
+            color: #1a1a2e;
+            margin-bottom: 1rem;
+        }
+
+        .value-card p {
+            font-size: 1rem;
+            color: #555;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 6rem 5%;
+            background: 
+                linear-gradient(135deg, rgba(22, 33, 62, 0.9) 0%, rgba(26, 26, 46, 0.9) 100%),
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%231a1a2e"/><path d="M0,0 L100,100 M100,0 L0,100" stroke="%23f39c12" stroke-width="1" opacity="0.1"/><circle cx="50" cy="50" r="30" fill="none" stroke="%23f39c12" stroke-width="1" opacity="0.1"/></svg>');
+            background-size: cover, 100px 100px;
+            color: #fff;
+        }
+
+        .contact-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .contact-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2.5rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(243, 156, 18, 0.1) 0%, transparent 50%);
+        }
+
+        .contact-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(243, 156, 18, 0.2);
+        }
+
+        .contact-card h3 {
+            font-size: 1.5rem;
+            color: #f39c12;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-card p {
+            font-size: 1.1rem;
+            color: #ddd;
+            word-break: break-word;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-card a {
+            color: #f39c12;
+            text-decoration: none;
+            transition: color 0.3s;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-card a:hover {
+            color: #e67e22;
+        }
+
+        /* Footer */
+        footer {
+            background: #0a0a0a;
+            padding: 2rem 5%;
+            text-align: center;
+            color: #888;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50"><rect width="50" height="50" fill="%230a0a0a"/><circle cx="25" cy="25" r="10" fill="none" stroke="%23f39c12" stroke-width="0.5" opacity="0.1"/></svg>');
+        }
+
+        footer p {
+            font-size: 0.9rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .year-badge {
+                width: 250px;
+                height: 250px;
+            }
+
+            .year-badge .year {
+                font-size: 4rem;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-content">
+            <div class="logo">MCLAU</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <!--<li><a href="#values">Values</a></li>-->
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Chemical Formulation, <span class="highlight">Manufacturing & Distribution</span></h1>
+                <p>Manufacturing and supplying unique detergents with the highest quality & brightest results since 2019</p>
+                <a href="#contact" class="cta-button">Get In Touch</a>
+            </div>
+            <div class="hero-visual">
+                <div class="year-badge">
+                    <div class="year">2019</div>
+                    <div class="text">ESTABLISHED</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about" id="about">
+        <div class="about-content">
+            <h2 class="section-title">About MCLAU</h2>
+            <p class="about-text">
+                Since 2019, MCLAU Solutions Pty Ltd has been manufacturing and supplying a unique range of detergents to end users. We are a 100% Youth, 100% Women & 100% Black owned company based in Northern Cape, Kathu with an extended footprint in Gauteng. We specialize in manufacturing and distributing detergent products, cleaning materials, chemicals and paper products to retailers and customers.
+            </p>
+            <p class="about-text">
+                Our products are tested at Tshwane University of Technology and technology innovation agency in line with SARS Quality Standards. We believe in "core" business, "COST and RESULT", delivering products directly to your door personally or through couriers.
+            </p>
+        </div>
+    </section>
+
+    <section class="services" id="services">
+        <div class="services-content">
+            <h2 class="section-title">Our Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>Detergents & Chemicals</h3>
+                    <p>Manufacturing a wide range of specifically formulated detergents, degreasers, industrial chemicals, mining chemicals, water treatment chemicals, and more. Available in 5L, 25L, 210L or 1000L containers.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Cleaning Services</h3>
+                    <p>Professional cleaning services for households, offices, PPE, kitchens, bathrooms, carpets, and more. We ensure hygienic and environmentally sound facilities.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Maintenance Services</h3>
+                    <p>Building repair and maintenance, inspecting and replacing light bulbs, changing air conditioners & filters, repairing locks, landscaping, and more.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="values" id="values">
+        <div class="values-content">
+            <h2 class="section-title">Our Values</h2>
+            <div class="values-grid">
+                <div class="value-card">
+                    <h3>Care & Respect</h3>
+                    <p>We deeply understand our team members and clients, acknowledging individuals' opinions, wishes, and needs.</p>
+                </div>
+                <div class="value-card">
+                    <h3>Innovation</h3>
+                    <p>We bring products, services and solutions that have significant, positive impact and value for our customers.</p>
+                </div>
+                <div class="value-card">
+                    <h3>Integrity</h3>
+                    <p>We are honest, dependable, and always do the right thing even in difficult circumstances.</p>
+                </div>
+                <div class="value-card">
+                    <h3>Safety</h3>
+                    <p>We commit to zero harm to people, environment and property, with efficient and total customer satisfaction.</p>
+                </div>
+                <div class="value-card">
+                    <h3>Accountability</h3>
+                    <p>We do what we say and say what we do, holding ourselves to the highest standards of integrity.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="contact-content">
+            <h2 class="section-title" style="color: #fff;">Get In Touch</h2>
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <h3>Location</h3>
+                    <p>10236 Muswodi Dipeni<br>0900<br>Northern Cape, Kathu</p>
+                </div>
+                <div class="contact-card">
+                    <h3>Email</h3>
+                    <p><a href="mailto:info@mclausolutions.co.za">info@mclausolutions.co.za</a></p>
+                    <p><a href="mailto:ndivhuwo.nemurombane@gmail.com">ndivhuwo.nemurombane@gmail.com</a></p>
+                </div>
+                <div class="contact-card">
+                    <h3>Phone</h3>
+                    <p><a href="tel:0715384746">071 538 4746</a></p>
+                    <p>Contact Person: Ndivhuwo</p>
+                </div>
+                <div class="contact-card">
+                    <h3>Business Details</h3>
+                    <p>MCLAU Solutions (Pty) Ltd</p>
+                    <p>Reg Number: 2019/345296/07</p>
+                    <p>B-BBEE: EME Level 1</p>
+                    <p>Recognition Level: 100% BWO</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 MCLAU Solutions. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start' 
+                    });
+                }
+            });
+        });
+
+        // Scroll effect for nav
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.style.background = 'linear-gradient(135deg, rgba(10, 10, 10, 0.9) 0%, rgba(22, 33, 62, 0.9) 100%)';
+            } else {
+                nav.style.background = 'linear-gradient(135deg, rgba(26, 26, 46, 0.9) 0%, rgba(22, 33, 62, 0.9) 100%)';
+            }
+        });
+    </script>
+</body>
+</html>
