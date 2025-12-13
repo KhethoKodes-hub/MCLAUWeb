@@ -5,7 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MCLAU Solutions - Chemical Formulation, Manufacturing & Distribution</title>
     <link rel="icon" type="image/png" href="assets/MclauLogo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* CSS Variables */
+        :root {
+            --primary-green: #00b33a;
+            --primary-blue: #4392d1;
+            --dark-blue: #1a1a2e;
+            --light-bg: #f8f9fa;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --text-dark: #333;
+            --text-light: #fff;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -15,20 +30,22 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
-            color: #333;
+            color: var(--text-dark);
             overflow-x: hidden;
+            background-color: var(--light-bg);
         }
 
         /* Navigation */
         nav {
-            background: linear-gradient(135deg, rgba(26, 26, 46, 0.9) 0%, rgba(22, 33, 62, 0.9) 100%);
-            padding: 1.5rem 5%;
+            background: linear-gradient(135deg, rgba(26, 26, 46, 0.95) 0%, rgba(22, 33, 62, 0.95) 100%);
+            padding: 1.2rem 5%;
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
-            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(67, 146, 209, 0.2);
         }
 
         .nav-content {
@@ -40,53 +57,80 @@
         }
 
         .logo {
-            font-size: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo img {
+            height: 60px;
+            width: auto;
+            transition: var(--transition);
+        }
+
+        .logo:hover img {
+            transform: scale(1.05);
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
             font-weight: 800;
-            color: #fff;
-            letter-spacing: 3px;
+            color: var(--text-light);
+            letter-spacing: 2px;
         }
 
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 2.5rem;
             list-style: none;
         }
 
         .nav-links a {
-            color: #fff;
+            color: var(--text-light);
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.3s;
+            transition: var(--transition);
             position: relative;
+            padding: 0.5rem 0;
         }
 
         .nav-links a:hover {
-            color: #f39c12;
+            color: var(--primary-green);
         }
 
         .nav-links a::after {
             content: '';
             position: absolute;
-            bottom: -5px;
+            bottom: 0;
             left: 0;
             width: 0;
-            height: 2px;
-            background: #f39c12;
-            transition: width 0.3s;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary-green), var(--primary-blue));
+            transition: width 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-radius: 2px;
         }
 
         .nav-links a:hover::after {
             width: 100%;
         }
 
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
         /* Hero Section */
         .hero {
             background: 
-                linear-gradient(135deg, rgba(22, 33, 62, 0.85) 0%, rgba(26, 26, 46, 0.85) 50%, rgba(15, 52, 96, 0.85) 100%),
-                url('./assets/hero2.png'),
-                url('./assets/hero3.png');
-            background-size: cover, 100px 100px, 200px 200px;
-            background-position: center, 0 0, 50px 50px;
+                linear-gradient(135deg, rgba(0, 179, 58, 0.85) 0%, rgba(67, 146, 209, 0.85) 100%),
+                url('https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -99,17 +143,30 @@
         .hero::before {
             content: '';
             position: absolute;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(243, 156, 18, 0.1) 0%, transparent 70%);
-            top: -200px;
-            right: -200px;
-            animation: pulse 4s ease-in-out infinite;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
+            top: -100px;
+            right: -100px;
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
         }
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 0.5; }
-            50% { transform: scale(1.1); opacity: 0.8; }
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
+            bottom: -50px;
+            left: -50px;
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
         }
 
         .hero-content {
@@ -122,52 +179,111 @@
             z-index: 1;
         }
 
+        .hero-text {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            padding: 3rem;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--shadow);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         .hero-text h1 {
-            font-size: 3.5rem;
-            color: #fff;
+            font-size: 3.2rem;
+            color: var(--text-light);
             margin-bottom: 1.5rem;
             line-height: 1.2;
+            background: linear-gradient(to right, var(--text-light), #e6f7ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .hero-text .highlight {
-            color: #f39c12;
+            color: var(--primary-green);
             position: relative;
             display: inline-block;
         }
 
         .hero-text p {
             font-size: 1.3rem;
-            color: #ddd;
-            margin-bottom: 2rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2.5rem;
         }
 
         .cta-button {
-            display: inline-block;
-            padding: 1rem 2.5rem;
-            background: #f39c12;
-            color: #fff;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1.1rem 2.8rem;
+            background: linear-gradient(135deg, var(--primary-green), var(--primary-blue));
+            color: var(--text-light);
             text-decoration: none;
             border-radius: 50px;
             font-weight: 600;
             font-size: 1.1rem;
-            transition: all 0.3s;
-            box-shadow: 0 10px 30px rgba(243, 156, 18, 0.3);
+            transition: var(--transition);
+            box-shadow: 0 10px 30px rgba(0, 179, 58, 0.4);
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            transition: width 0.4s ease;
+            z-index: -1;
+            border-radius: 50px;
+        }
+
+        .cta-button:hover::before {
+            width: 100%;
         }
 
         .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(243, 156, 18, 0.5);
-            background: #e67e22;
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 179, 58, 0.6);
         }
 
         .hero-visual {
             display: flex;
             justify-content: center;
             align-items: center;
+            animation: fadeInRight 1s ease-out 0.3s both;
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
 
         .year-badge {
-            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--primary-blue) 100%);
             width: 300px;
             height: 300px;
             border-radius: 50%;
@@ -175,10 +291,13 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            box-shadow: 0 20px 60px rgba(243, 156, 18, 0.4);
-            animation: float 3s ease-in-out infinite;
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.3),
+                inset 0 10px 30px rgba(255, 255, 255, 0.2);
+            animation: pulse 3s ease-in-out infinite;
             position: relative;
             overflow: hidden;
+            border: 8px solid rgba(255, 255, 255, 0.2);
         }
 
         .year-badge::before {
@@ -187,49 +306,58 @@
             width: 100%;
             height: 100%;
             background: 
-                radial-gradient(circle at 30% 30%, rgba(255,255,255,0.2) 0%, transparent 50%),
+                radial-gradient(circle at 30% 30%, rgba(255,255,255,0.3) 0%, transparent 50%),
                 url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60"><circle cx="30" cy="30" r="25" fill="none" stroke="white" stroke-width="1" opacity="0.3"/><path d="M15,15 L45,45 M45,15 L15,45" stroke="white" stroke-width="1" opacity="0.3"/></svg>');
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
+        @keyframes pulse {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-15px) scale(1.05); }
         }
 
         .year-badge .year {
             font-size: 5rem;
             font-weight: 900;
-            color: #fff;
+            color: var(--text-light);
             line-height: 1;
             z-index: 1;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
         .year-badge .text {
-            font-size: 1.2rem;
-            color: #fff;
+            font-size: 1.3rem;
+            color: var(--text-light);
             font-weight: 600;
             margin-top: 0.5rem;
             z-index: 1;
+            letter-spacing: 2px;
         }
 
         /* About Section */
         .about {
-            padding: 6rem 5%;
+            padding: 8rem 5%;
             background: 
-                linear-gradient(rgba(248, 249, 250, 0.9), rgba(248, 249, 250, 0.9)),
-                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23f8f9fa"/><path d="M0,50 L100,50 M50,0 L50,100" stroke="%23f39c12" stroke-width="1" opacity="0.1"/><circle cx="50" cy="50" r="30" fill="none" stroke="%23f39c12" stroke-width="1" opacity="0.1"/></svg>');
-            background-size: cover, 100px 100px;
+                linear-gradient(rgba(248, 249, 250, 0.95), rgba(248, 249, 250, 0.95)),
+                url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: relative;
         }
 
         .about-content {
             max-width: 1400px;
             margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
         }
 
         .section-title {
-            font-size: 2.5rem;
-            color: #1a1a2e;
-            margin-bottom: 1rem;
+            font-size: 2.8rem;
+            color: var(--dark-blue);
+            margin-bottom: 1.5rem;
             position: relative;
             display: inline-block;
         }
@@ -239,25 +367,67 @@
             position: absolute;
             bottom: -10px;
             left: 0;
-            width: 60px;
-            height: 4px;
-            background: #f39c12;
+            width: 80px;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary-green), var(--primary-blue));
+            border-radius: 3px;
         }
 
         .about-text {
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             color: #555;
-            max-width: 800px;
-            margin-top: 2rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .about-image-container {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            height: 500px;
+            animation: fadeInRight 1s ease-out;
+        }
+
+        .about-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+
+        .about-image-container:hover .about-image {
+            transform: scale(1.05);
+        }
+
+        .image-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary-green), var(--primary-blue));
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .image-placeholder i {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.8;
         }
 
         /* Services Section */
         .services {
-            padding: 6rem 5%;
+            padding: 8rem 5%;
             background: 
-                linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)),
-                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120"><rect width="120" height="120" fill="%23ffffff"/><path d="M20,20 L100,100 M100,20 L20,100" stroke="%23f39c12" stroke-width="1" opacity="0.1"/><circle cx="60" cy="60" r="40" fill="none" stroke="%23f39c12" stroke-width="1" opacity="0.1"/></svg>');
-            background-size: cover, 120px 120px;
+                linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95)),
+                url('https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
         }
 
         .services-content {
@@ -267,57 +437,75 @@
 
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 4rem;
         }
 
         .service-card {
-            background: #f8f9fa;
-            padding: 2.5rem;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            transition: transform 0.3s, box-shadow 0.3s;
-            border-left: 5px solid #f39c12;
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            padding: 3rem 2.5rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid var(--glass-border);
             position: relative;
             overflow: hidden;
+            z-index: 1;
         }
 
         .service-card::before {
             content: '';
             position: absolute;
             top: 0;
-            right: 0;
-            width: 80px;
-            height: 80px;
-            background: 
-                radial-gradient(circle at 30px 30px, rgba(243, 156, 18, 0.1) 0%, transparent 70%);
-            border-radius: 0 0 0 80px;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 179, 58, 0.05) 0%, rgba(67, 146, 209, 0.05) 100%);
+            z-index: -1;
         }
 
         .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(243, 156, 18, 0.1);
+            transform: translateY(-15px);
+            box-shadow: 0 20px 40px rgba(0, 179, 58, 0.15);
+            border-color: rgba(0, 179, 58, 0.3);
         }
 
         .service-card h3 {
-            font-size: 1.5rem;
-            color: #1a1a2e;
-            margin-bottom: 1rem;
+            font-size: 1.7rem;
+            color: var(--dark-blue);
+            margin-bottom: 1.2rem;
+            position: relative;
+            padding-bottom: 0.8rem;
+        }
+
+        .service-card h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary-green), var(--primary-blue));
+            border-radius: 2px;
         }
 
         .service-card p {
-            font-size: 1rem;
+            font-size: 1.05rem;
             color: #555;
+            line-height: 1.7;
         }
 
         /* Values Section */
         .values {
-            padding: 6rem 5%;
+            padding: 8rem 5%;
             background: 
-                linear-gradient(rgba(248, 249, 250, 0.9), rgba(248, 249, 250, 0.9)),
-                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" viewBox="0 0 150 150"><rect width="150" height="150" fill="%23f8f9fa"/><path d="M0,75 L150,75 M75,0 L75,150" stroke="%23f39c12" stroke-width="1" opacity="0.1"/><circle cx="75" cy="75" r="50" fill="none" stroke="%23f39c12" stroke-width="1" opacity="0.1"/></svg>');
-            background-size: cover, 150px 150px;
+                linear-gradient(rgba(248, 249, 250, 0.95), rgba(248, 249, 250, 0.95)),
+                url('https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
         }
 
         .values-content {
@@ -328,19 +516,22 @@
         .values-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
+            gap: 2.5rem;
+            margin-top: 4rem;
         }
 
         .value-card {
-            background: #fff;
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            padding: 2.5rem 2rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
             text-align: center;
-            transition: transform 0.3s;
+            transition: var(--transition);
+            border: 1px solid var(--glass-border);
             position: relative;
             overflow: hidden;
+            z-index: 1;
         }
 
         .value-card::before {
@@ -350,32 +541,65 @@
             left: 0;
             width: 100%;
             height: 5px;
-            background: #f39c12;
+            background: linear-gradient(to right, var(--primary-green), var(--primary-blue));
+        }
+
+        .value-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 179, 58, 0.05) 0%, rgba(67, 146, 209, 0.05) 100%);
+            z-index: -1;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .value-card:hover::after {
+            opacity: 1;
         }
 
         .value-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 179, 58, 0.15);
+        }
+
+        .value-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-blue);
+            transition: var(--transition);
+        }
+
+        .value-card:hover .value-icon {
+            color: var(--primary-green);
+            transform: scale(1.1);
         }
 
         .value-card h3 {
-            font-size: 1.3rem;
-            color: #1a1a2e;
+            font-size: 1.4rem;
+            color: var(--dark-blue);
             margin-bottom: 1rem;
         }
 
         .value-card p {
             font-size: 1rem;
             color: #555;
+            line-height: 1.6;
         }
 
         /* Contact Section */
         .contact {
-            padding: 6rem 5%;
+            padding: 8rem 5%;
             background: 
-                linear-gradient(135deg, rgba(22, 33, 62, 0.9) 0%, rgba(26, 26, 46, 0.9) 100%),
-                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%231a1a2e"/><path d="M0,0 L100,100 M100,0 L0,100" stroke="%23f39c12" stroke-width="1" opacity="0.1"/><circle cx="50" cy="50" r="30" fill="none" stroke="%23f39c12" stroke-width="1" opacity="0.1"/></svg>');
-            background-size: cover, 100px 100px;
-            color: #fff;
+                linear-gradient(135deg, rgba(0, 179, 58, 0.9) 0%, rgba(67, 146, 209, 0.9) 100%),
+                url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: var(--text-light);
         }
 
         .contact-content {
@@ -387,18 +611,19 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 3rem;
-            margin-top: 3rem;
+            margin-top: 4rem;
         }
 
         .contact-card {
-            background: rgba(255, 255, 255, 0.05);
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
             padding: 2.5rem;
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+            transition: var(--transition);
             position: relative;
             overflow: hidden;
+            z-index: 1;
         }
 
         .contact-card::before {
@@ -408,49 +633,60 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: 
-                radial-gradient(circle at 20% 80%, rgba(243, 156, 18, 0.1) 0%, transparent 50%);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.1) 100%);
+            z-index: -1;
         }
 
         .contact-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(243, 156, 18, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            border-color: rgba(255, 255, 255, 0.3);
         }
 
         .contact-card h3 {
-            font-size: 1.5rem;
-            color: #f39c12;
-            margin-bottom: 1rem;
+            font-size: 1.6rem;
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
             position: relative;
-            z-index: 1;
+            padding-bottom: 0.8rem;
+        }
+
+        .contact-card h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--text-light);
+            border-radius: 2px;
         }
 
         .contact-card p {
             font-size: 1.1rem;
-            color: #ddd;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 0.8rem;
             word-break: break-word;
-            position: relative;
-            z-index: 1;
         }
 
         .contact-card a {
-            color: #f39c12;
+            color: var(--text-light);
             text-decoration: none;
-            transition: color 0.3s;
-            position: relative;
-            z-index: 1;
+            transition: var(--transition);
+            display: inline-block;
+            border-bottom: 1px solid transparent;
         }
 
         .contact-card a:hover {
-            color: #e67e22;
+            color: #e6f7ff;
+            border-bottom: 1px solid #e6f7ff;
         }
 
         /* Footer */
         footer {
-            background: #0a0a0a;
-            padding: 2rem 5%;
-            text-align: center;
-            color: #888;
+            background: var(--dark-blue);
+            padding: 3rem 5% 2rem;
+            color: rgba(255, 255, 255, 0.7);
             position: relative;
             overflow: hidden;
         }
@@ -461,43 +697,163 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
-            background: 
-                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50"><rect width="50" height="50" fill="%230a0a0a"/><circle cx="25" cy="25" r="10" fill="none" stroke="%23f39c12" stroke-width="0.5" opacity="0.1"/></svg>');
+            height: 5px;
+            background: linear-gradient(to right, var(--primary-green), var(--primary-blue));
         }
 
-        footer p {
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .footer-logo img {
+            height: 50px;
+            width: auto;
+        }
+
+        .footer-logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-light);
+            letter-spacing: 2px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-green);
+        }
+
+        .copyright {
             font-size: 0.9rem;
-            position: relative;
-            z-index: 1;
+            text-align: center;
+            margin-top: 1rem;
+            color: rgba(255, 255, 255, 0.5);
         }
 
-        /* Responsive */
-        @media (max-width: 968px) {
-            .nav-links {
-                display: none;
-            }
-
-            .hero-content {
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero-content, .about-content {
                 grid-template-columns: 1fr;
+                gap: 3rem;
                 text-align: center;
             }
-
+            
             .hero-text h1 {
-                font-size: 2.5rem;
+                font-size: 2.8rem;
             }
+            
+            .section-title {
+                font-size: 2.4rem;
+            }
+            
+            .about-image-container {
+                height: 400px;
+                order: -1;
+            }
+        }
 
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: rgba(26, 26, 46, 0.98);
+                backdrop-filter: blur(12px);
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1.5rem;
+                transform: translateY(-100%);
+                opacity: 0;
+                transition: var(--transition);
+                z-index: 999;
+            }
+            
+            .nav-links.active {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            
+            .menu-toggle {
+                display: block;
+            }
+            
+            .hero-text h1 {
+                font-size: 2.3rem;
+            }
+            
+            .hero-text p {
+                font-size: 1.1rem;
+            }
+            
             .year-badge {
                 width: 250px;
                 height: 250px;
             }
-
+            
             .year-badge .year {
                 font-size: 4rem;
             }
-
-            .contact-grid {
+            
+            .services-grid, .values-grid, .contact-grid {
                 grid-template-columns: 1fr;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-text h1 {
+                font-size: 1.9rem;
+            }
+            
+            .cta-button {
+                padding: 1rem 2rem;
+                font-size: 1rem;
+            }
+            
+            .hero-text, .service-card, .contact-card {
+                padding: 2rem;
+            }
+            
+            .year-badge {
+                width: 220px;
+                height: 220px;
+            }
+            
+            .year-badge .year {
+                font-size: 3.5rem;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
             }
         }
     </style>
@@ -505,13 +861,19 @@
 <body>
     <nav>
         <div class="nav-content">
-            <div class="logo"><a><img src="assets/MclauLogo.png" height="80" width="80"></a></div>
-            <ul class="nav-links">
+            <div class="logo">
+                <a href="#home"><img src="assets/MclauLogo.png" alt="MCLAU Solutions Logo"></a>
+                <div class="logo-text">MCLAU SOLUTIONS</div>
+            </div>
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links" id="navLinks">
                 <li><a href="#home">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="services.html">Services</a></li>
-                <!--<li><a href="#values">Values</a></li>-->
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#values">Values</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
         </div>
     </nav>
@@ -521,7 +883,9 @@
             <div class="hero-text">
                 <h1>Chemical Formulation, <span class="highlight">Manufacturing & Distribution</span></h1>
                 <p>Manufacturing and supplying unique detergents with the highest quality & brightest results since 2019</p>
-                <a href="#contact" class="cta-button">Get In Touch</a>
+                <a href="#contact" class="cta-button">
+                    <i class="fas fa-envelope"></i> Get In Touch
+                </a>
             </div>
             <div class="hero-visual">
                 <div class="year-badge">
@@ -534,13 +898,26 @@
 
     <section class="about" id="about">
         <div class="about-content">
-            <h2 class="section-title">About MCLAU</h2>
-            <p class="about-text">
-                Since 2019, MCLAU Solutions Pty Ltd has been manufacturing and supplying a unique range of detergents to end users. We are a 100% Youth, 100% Women & 100% Black owned company based in Northern Cape, Kathu with an extended footprint in Gauteng. We specialize in manufacturing and distributing detergent products, cleaning materials, chemicals and paper products to retailers and customers.
-            </p>
-            <p class="about-text">
-                Our products are tested at Tshwane University of Technology and technology innovation agency in line with SARS Quality Standards. We believe in "core" business, "COST and RESULT", delivering products directly to your door personally or through couriers.
-            </p>
+            <div class="about-text-content">
+                <h2 class="section-title">About MCLAU</h2>
+                <p class="about-text">
+                    Since 2019, MCLAU Solutions Pty Ltd has been manufacturing and supplying a unique range of detergents to end users. We are a 100% Youth, 100% Women & 100% Black owned company based in Northern Cape, Kathu with an extended footprint in Gauteng.
+                </p>
+                <p class="about-text">
+                    We specialize in manufacturing and distributing detergent products, cleaning materials, chemicals and paper products to retailers and customers.
+                </p>
+                <p class="about-text">
+                    Our products are tested at Tshwane University of Technology and technology innovation agency in line with SARS Quality Standards. We believe in "core" business, "COST and RESULT", delivering products directly to your door personally or through couriers.
+                </p>
+            </div>
+            <div class="about-image-container">
+                <!-- Replace this with your image by adding: <img src="your-image.jpg" alt="About MCLAU" class="about-image"> -->
+                <div class="image-placeholder">
+                    <i class="fas fa-flask"></i>
+                    <h3>Your Company Image Here</h3>
+                    <p>Add your professional image showcasing MCLAU Solutions</p>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -569,22 +946,37 @@
             <h2 class="section-title">Our Values</h2>
             <div class="values-grid">
                 <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
                     <h3>Care & Respect</h3>
                     <p>We deeply understand our team members and clients, acknowledging individuals' opinions, wishes, and needs.</p>
                 </div>
                 <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
                     <h3>Innovation</h3>
                     <p>We bring products, services and solutions that have significant, positive impact and value for our customers.</p>
                 </div>
                 <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
                     <h3>Integrity</h3>
                     <p>We are honest, dependable, and always do the right thing even in difficult circumstances.</p>
                 </div>
                 <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
                     <h3>Safety</h3>
                     <p>We commit to zero harm to people, environment and property, with efficient and total customer satisfaction.</p>
                 </div>
                 <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
                     <h3>Accountability</h3>
                     <p>We do what we say and say what we do, holding ourselves to the highest standards of integrity.</p>
                 </div>
@@ -622,10 +1014,42 @@
     </section>
 
     <footer>
-        <p>&copy; 2025 MCLAU Solutions. All rights reserved.</p>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="assets/MclauLogo.png" alt="MCLAU Solutions Logo">
+                <div class="footer-logo-text">MCLAU SOLUTIONS</div>
+            </div>
+            <ul class="footer-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#values">Values</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <p class="copyright">&copy; 2025 MCLAU Solutions. All rights reserved.</p>
+        </div>
     </footer>
 
     <script>
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            menuToggle.innerHTML = navLinks.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+        
         // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -639,15 +1063,28 @@
                 }
             });
         });
-
-        // Scroll effect for nav
+        
+        // Nav scroll effect
         window.addEventListener('scroll', () => {
             const nav = document.querySelector('nav');
             if (window.scrollY > 100) {
-                nav.style.background = 'linear-gradient(135deg, rgba(10, 10, 10, 0.9) 0%, rgba(22, 33, 62, 0.9) 100%)';
+                nav.style.background = 'linear-gradient(135deg, rgba(10, 10, 10, 0.95) 0%, rgba(22, 33, 62, 0.95) 100%)';
+                nav.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.2)';
             } else {
-                nav.style.background = 'linear-gradient(135deg, rgba(26, 26, 46, 0.9) 0%, rgba(22, 33, 62, 0.9) 100%)';
+                nav.style.background = 'linear-gradient(135deg, rgba(26, 26, 46, 0.95) 0%, rgba(22, 33, 62, 0.95) 100%)';
+                nav.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.1)';
             }
+        });
+        
+        // Add image upload functionality for the about section placeholder
+        document.addEventListener('DOMContentLoaded', function() {
+            const imagePlaceholder = document.querySelector('.image-placeholder');
+            
+            // This is a placeholder for actual image upload functionality
+            // In a real implementation, you would connect this to a file input
+            imagePlaceholder.addEventListener('click', function() {
+                alert('In a real implementation, this would open a file picker to upload your company image.');
+            });
         });
     </script>
 </body>

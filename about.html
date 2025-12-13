@@ -5,7 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us - MCLAU Solutions</title>
     <link rel="icon" type="image/png" href="assets/MclauLogo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* CSS Variables */
+        :root {
+            --primary-green: #00b33a;
+            --primary-blue: #4392d1;
+            --dark-blue: #1a1a2e;
+            --light-bg: #f8f9fa;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --text-dark: #333;
+            --text-light: #fff;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -15,20 +30,22 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
-            color: #333;
+            color: var(--text-dark);
             overflow-x: hidden;
+            background-color: var(--light-bg);
         }
 
         /* Navigation */
         nav {
             background: linear-gradient(135deg, rgba(26, 26, 46, 0.95) 0%, rgba(22, 33, 62, 0.95) 100%);
-            padding: 1.5rem 5%;
+            padding: 1.2rem 5%;
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
-            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(67, 146, 209, 0.2);
         }
 
         .nav-content {
@@ -40,52 +57,85 @@
         }
 
         .logo {
-            font-size: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo img {
+            height: 60px;
+            width: auto;
+            transition: var(--transition);
+        }
+
+        .logo:hover img {
+            transform: scale(1.05);
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
             font-weight: 800;
-            color: #fff;
-            letter-spacing: 3px;
+            color: var(--text-light);
+            letter-spacing: 2px;
         }
 
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 2.5rem;
             list-style: none;
         }
 
         .nav-links a {
-            color: #fff;
+            color: var(--text-light);
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.3s;
+            transition: var(--transition);
             position: relative;
+            padding: 0.5rem 0;
         }
 
         .nav-links a:hover {
-            color: #f39c12;
+            color: var(--primary-green);
+        }
+
+        .nav-links a.active {
+            color: var(--primary-green);
         }
 
         .nav-links a::after {
             content: '';
             position: absolute;
-            bottom: -5px;
+            bottom: 0;
             left: 0;
             width: 0;
-            height: 2px;
-            background: #f39c12;
-            transition: width 0.3s;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary-green), var(--primary-blue));
+            transition: width 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-radius: 2px;
         }
 
-        .nav-links a:hover::after {
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
             width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
         }
 
         /* Hero Section */
         .about-hero {
             background: 
-                linear-gradient(135deg, rgba(22, 33, 62, 0.85) 0%, rgba(26, 26, 46, 0.85) 50%, rgba(15, 52, 96, 0.85) 100%),
-                url('./assets/hero3.png');
-            background-size: cover, 400px 400px;
-            background-position: center, 0 0;
+                linear-gradient(135deg, rgba(0, 179, 58, 0.85) 0%, rgba(67, 146, 209, 0.85) 100%),
+                url('https://images.unsplash.com/photo-1582719508461-905c673771fd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
             min-height: 70vh;
             display: flex;
             align-items: center;
@@ -99,52 +149,75 @@
         .about-hero::before {
             content: '';
             position: absolute;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(243, 156, 18, 0.1) 0%, transparent 70%);
-            bottom: -150px;
-            left: -150px;
-            animation: pulse 4s ease-in-out infinite;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
+            bottom: -200px;
+            left: -200px;
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite;
         }
 
         .about-hero::after {
             content: '';
             position: absolute;
-            width: 200px;
-            height: 200px;
-            background: radial-gradient(circle, rgba(243, 156, 18, 0.1) 0%, transparent 70%);
-            top: -100px;
-            right: -100px;
-            animation: pulse 3s ease-in-out infinite reverse;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            top: -150px;
+            right: -150px;
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite reverse;
         }
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 0.5; }
-            50% { transform: scale(1.1); opacity: 0.8; }
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
         }
 
         .about-hero-content {
             max-width: 1000px;
             position: relative;
             z-index: 1;
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            padding: 4rem;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--shadow);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .about-hero h1 {
             font-size: 3.5rem;
-            color: #fff;
+            color: var(--text-light);
             margin-bottom: 1.5rem;
             line-height: 1.2;
+            background: linear-gradient(to right, var(--text-light), #e6f7ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .about-hero .highlight {
-            color: #f39c12;
+            color: var(--primary-green);
             position: relative;
             display: inline-block;
         }
 
         .about-hero p {
             font-size: 1.3rem;
-            color: #ddd;
+            color: rgba(255, 255, 255, 0.9);
             margin-bottom: 2rem;
             max-width: 800px;
             margin-left: auto;
@@ -153,8 +226,13 @@
 
         /* About Content Section */
         .about-content {
-            padding: 6rem 5%;
-            background: #f8f9fa;
+            padding: 8rem 5%;
+            background: 
+                linear-gradient(rgba(248, 249, 250, 0.95), rgba(248, 249, 250, 0.95)),
+                url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
         }
 
         .about-container {
@@ -163,8 +241,8 @@
         }
 
         .section-title {
-            font-size: 2.5rem;
-            color: #1a1a2e;
+            font-size: 2.8rem;
+            color: var(--dark-blue);
             margin-bottom: 3rem;
             position: relative;
             display: inline-block;
@@ -175,58 +253,107 @@
         .section-title::after {
             content: '';
             position: absolute;
-            bottom: -10px;
+            bottom: -15px;
             left: 50%;
             transform: translateX(-50%);
-            width: 60px;
-            height: 4px;
-            background: #f39c12;
+            width: 80px;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary-green), var(--primary-blue));
+            border-radius: 3px;
         }
 
         .about-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 4rem;
+            gap: 5rem;
             align-items: center;
             margin-bottom: 4rem;
         }
 
         .about-text {
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             color: #555;
             line-height: 1.8;
+            animation: fadeInLeft 1s ease-out;
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
 
         .about-text p {
             margin-bottom: 1.5rem;
         }
 
-        .about-image {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            height: 400px;
-            border-radius: 15px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            font-size: 1.2rem;
+        .about-image-container {
             position: relative;
+            border-radius: 20px;
             overflow: hidden;
+            box-shadow: var(--shadow);
+            height: 450px;
+            animation: fadeInRight 1s ease-out;
         }
 
-        .about-image::before {
-            content: '';
-            position: absolute;
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .about-image {
             width: 100%;
             height: 100%;
-            background: 
-                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><rect width="200" height="200" fill="%231a1a2e"/><circle cx="100" cy="100" r="80" fill="none" stroke="%23f39c12" stroke-width="2" opacity="0.1"/><path d="M50,50 L150,150 M150,50 L50,150" stroke="%23f39c12" stroke-width="2" opacity="0.1"/></svg>');
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+
+        .about-image-container:hover .about-image {
+            transform: scale(1.05);
+        }
+
+        .image-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            padding: 2rem;
+            color: white;
+            z-index: 2;
+        }
+
+        .image-overlay h3 {
+            color: var(--primary-green);
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .image-overlay p {
+            font-size: 1rem;
+            opacity: 0.9;
         }
 
         /* Vision & Mission Section */
         .vision-mission {
-            padding: 6rem 5%;
-            background: #fff;
+            padding: 8rem 5%;
+            background: 
+                linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95)),
+                url('https://images.unsplash.com/photo-1582719508461-905c673771fd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
         }
 
         .vm-container {
@@ -241,21 +368,39 @@
         }
 
         .vm-card {
-            background: #f8f9fa;
-            padding: 3rem;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            transition: transform 0.3s;
-            border-top: 5px solid #f39c12;
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            padding: 3.5rem 3rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid var(--glass-border);
+            border-top: 5px solid var(--primary-green);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .vm-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 179, 58, 0.05) 0%, rgba(67, 146, 209, 0.05) 100%);
+            z-index: -1;
         }
 
         .vm-card:hover {
             transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 179, 58, 0.15);
+            border-color: rgba(0, 179, 58, 0.3);
         }
 
         .vm-card h3 {
             font-size: 1.8rem;
-            color: #1a1a2e;
+            color: var(--dark-blue);
             margin-bottom: 1.5rem;
             position: relative;
             display: inline-block;
@@ -266,9 +411,10 @@
             position: absolute;
             bottom: -8px;
             left: 0;
-            width: 40px;
+            width: 50px;
             height: 3px;
-            background: #f39c12;
+            background: linear-gradient(to right, var(--primary-green), var(--primary-blue));
+            border-radius: 2px;
         }
 
         .vm-card p {
@@ -279,8 +425,13 @@
 
         /* Values Section */
         .values {
-            padding: 6rem 5%;
-            background: #f8f9fa;
+            padding: 8rem 5%;
+            background: 
+                linear-gradient(rgba(248, 249, 250, 0.95), rgba(248, 249, 250, 0.95)),
+                url('https://images.unsplash.com/photo-1582719508461-905c673771fd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
         }
 
         .values-container {
@@ -291,19 +442,22 @@
         .values-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
+            gap: 2.5rem;
+            margin-top: 4rem;
         }
 
         .value-card {
-            background: #fff;
-            padding: 2.5rem;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            padding: 3rem 2.5rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
             text-align: center;
-            transition: transform 0.3s;
+            transition: var(--transition);
+            border: 1px solid var(--glass-border);
             position: relative;
             overflow: hidden;
+            z-index: 1;
         }
 
         .value-card::before {
@@ -313,36 +467,65 @@
             left: 0;
             width: 100%;
             height: 5px;
-            background: #f39c12;
+            background: linear-gradient(to right, var(--primary-green), var(--primary-blue));
+        }
+
+        .value-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 179, 58, 0.05) 0%, rgba(67, 146, 209, 0.05) 100%);
+            z-index: -1;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .value-card:hover::after {
+            opacity: 1;
         }
 
         .value-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 179, 58, 0.15);
         }
 
         .value-icon {
-            font-size: 2.5rem;
-            color: #f39c12;
+            font-size: 3rem;
+            color: var(--primary-blue);
             margin-bottom: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .value-card:hover .value-icon {
+            color: var(--primary-green);
+            transform: scale(1.1);
         }
 
         .value-card h3 {
             font-size: 1.5rem;
-            color: #1a1a2e;
+            color: var(--dark-blue);
             margin-bottom: 1rem;
         }
 
         .value-card p {
-            font-size: 1rem;
+            font-size: 1.05rem;
             color: #555;
             line-height: 1.6;
         }
 
         /* Stats Section */
         .stats {
-            padding: 6rem 5%;
-            background: linear-gradient(135deg, #16213e 0%, #1a1a2e 100%);
-            color: #fff;
+            padding: 8rem 5%;
+            background: 
+                linear-gradient(135deg, rgba(0, 179, 58, 0.9) 0%, rgba(67, 146, 209, 0.9) 100%),
+                url('https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: var(--text-light);
         }
 
         .stats-container {
@@ -355,31 +538,69 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 3rem;
-            margin-top: 3rem;
+            margin-top: 4rem;
         }
 
         .stat-card {
-            padding: 2rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.1) 100%);
+            z-index: -1;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            border-color: rgba(255, 255, 255, 0.3);
         }
 
         .stat-number {
-            font-size: 3rem;
+            font-size: 3.5rem;
             font-weight: 800;
-            color: #f39c12;
+            color: var(--text-light);
             margin-bottom: 0.5rem;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
         .stat-text {
-            font-size: 1.2rem;
-            color: #ddd;
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
         }
 
         /* Footer */
         footer {
-            background: #0a0a0a;
-            padding: 3rem 5%;
-            text-align: center;
-            color: #888;
+            background: var(--dark-blue);
+            padding: 4rem 5% 2rem;
+            color: rgba(255, 255, 255, 0.7);
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary-green), var(--primary-blue));
         }
 
         .footer-content {
@@ -392,46 +613,138 @@
         }
 
         .footer-column h3 {
-            color: #f39c12;
+            color: var(--primary-green);
             margin-bottom: 1.5rem;
             font-size: 1.3rem;
+            position: relative;
+            padding-bottom: 0.8rem;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--primary-blue);
+            border-radius: 2px;
         }
 
         .footer-column p, .footer-column a {
-            color: #aaa;
+            color: rgba(255, 255, 255, 0.7);
             margin-bottom: 0.8rem;
             display: block;
             text-decoration: none;
-            transition: color 0.3s;
+            transition: var(--transition);
         }
 
         .footer-column a:hover {
-            color: #f39c12;
+            color: var(--primary-green);
         }
 
         .copyright {
-            margin-top: 3rem;
+            margin-top: 4rem;
             padding-top: 2rem;
-            border-top: 1px solid #333;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
             font-size: 0.9rem;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
         }
 
         /* Responsive */
-        @media (max-width: 968px) {
-            .nav-links {
-                display: none;
+        @media (max-width: 1024px) {
+            .about-grid, .vm-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
             }
-
+            
             .about-hero h1 {
-                font-size: 2.5rem;
+                font-size: 2.8rem;
             }
-
-            .about-grid {
-                grid-template-columns: 1fr;
+            
+            .section-title {
+                font-size: 2.4rem;
             }
+            
+            .about-image-container {
+                height: 400px;
+                order: -1;
+            }
+        }
 
-            .vm-grid {
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: rgba(26, 26, 46, 0.98);
+                backdrop-filter: blur(12px);
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1.5rem;
+                transform: translateY(-100%);
+                opacity: 0;
+                transition: var(--transition);
+                z-index: 999;
+            }
+            
+            .nav-links.active {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            
+            .menu-toggle {
+                display: block;
+            }
+            
+            .about-hero h1 {
+                font-size: 2.3rem;
+            }
+            
+            .about-hero p {
+                font-size: 1.1rem;
+            }
+            
+            .about-hero-content {
+                padding: 3rem 2rem;
+            }
+            
+            .vm-card, .value-card, .stat-card {
+                padding: 2.5rem 2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .about-hero h1 {
+                font-size: 1.9rem;
+            }
+            
+            .about-hero-content {
+                padding: 2.5rem 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .stat-number {
+                font-size: 2.8rem;
+            }
+            
+            .footer-content {
                 grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .footer-column h3::after {
+                left: 50%;
+                transform: translateX(-50%);
             }
         }
     </style>
@@ -439,8 +752,14 @@
 <body>
     <nav>
         <div class="nav-content">
-            <div class="logo"><a><img src="assets/MclauLogo.png" height="80" width="80"></a></div>
-            <ul class="nav-links">
+            <div class="logo">
+                <a href="index.html"><img src="assets/MclauLogo.png" alt="MCLAU Solutions Logo"></a>
+                <div class="logo-text">MCLAU SOLUTIONS</div>
+            </div>
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links" id="navLinks">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html" class="active">About</a></li>
                 <li><a href="services.html">Services</a></li>
@@ -464,11 +783,19 @@
                     <p>Since 2019, MCLAU Solutions Pty Ltd has been manufacturing and supplying a very unique range of detergents to the end user. At MCLAU Solutions we manufacture our own range of products on site where we ensure that our clients receive only the highest quality & brightest results.</p>
                     <p>MCLAU Solutions is 100% Youth, 100% Women & 100% Black owned company. The company is based in Northern Cape, Kathu with an extended footprint in Gauteng in association with an established company with the capacity for research, development, manufacturing, warehousing and distribution.</p>
                     <p>We specialize in the manufacturing and distribution of detergents products / Cleaning Materials / chemical and paper products to retailers and customers. Not only do we manufacture but we also supply cleaning consumables, cleaning and maintenance services of i.e Workshops, plants, offices, households, etc.</p>
+                    <p>Our products are tested at Tshwane University of Technology, technology innovation agency inline with SARS Quality Standards. We believe in "core" business, "COST and RESULT", delivering products directly to your door personally or through couriers.</p>
                 </div>
-                <div class="about-image">
-                    <div style="z-index: 1; text-align: center; padding: 2rem;">
-                        <h3 style="color: #f39c12; margin-bottom: 1rem;">Quality & Innovation</h3>
-                        <p>Our products are tested at Tshwane University of Technology, technology innovation agency inline with SARS Quality Standards.</p>
+                <div class="about-image-container">
+                    <!-- Replace this with your company image -->
+                    <!-- <img src="your-company-image.jpg" alt="MCLAU Solutions Manufacturing" class="about-image"> -->
+                    <div style="background: linear-gradient(135deg, var(--primary-green), var(--primary-blue)); width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; padding: 2rem; text-align: center;">
+                        <i class="fas fa-industry" style="font-size: 4rem; margin-bottom: 1.5rem; opacity: 0.8;"></i>
+                        <h3 style="font-size: 1.8rem; margin-bottom: 1rem;">Quality Manufacturing</h3>
+                        <p>Our state-of-the-art facility ensures the highest quality standards for all our chemical formulations.</p>
+                    </div>
+                    <div class="image-overlay">
+                        <h3>Innovation in Chemistry</h3>
+                        <p>Cutting-edge research meets practical application</p>
                     </div>
                 </div>
             </div>
@@ -481,11 +808,11 @@
             <div class="vm-grid">
                 <div class="vm-card">
                     <h3>Our Vision</h3>
-                    <p>Our company vision is to expand our horizons and to make our company the leader in manufacturing and supply of cleaning detergents and industrial cleaning products. We aim to provide quality service to all our customers' needs.</p>
+                    <p>Our company vision is to expand our horizons and to make our company the leader in manufacturing and supply of cleaning detergents and industrial cleaning products. We aim to provide quality service to all our customers' needs while maintaining our commitment to sustainability and innovation.</p>
                 </div>
                 <div class="vm-card">
                     <h3>Our Mission</h3>
-                    <p>To establish good relationships with our clients and other stakeholders. To consistently research methods of improving our products to ensure that we are always in compliance with industry requirements, standard and trends.</p>
+                    <p>To establish good relationships with our clients and other stakeholders. To consistently research methods of improving our products to ensure that we are always in compliance with industry requirements, standard and trends. We are committed to delivering excellence in every product and service we provide.</p>
                 </div>
             </div>
         </div>
@@ -496,29 +823,39 @@
             <h2 class="section-title">Our Values</h2>
             <div class="values-grid">
                 <div class="value-card">
-                    <div class="value-icon">❤️</div>
+                    <div class="value-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
                     <h3>Care & Respect</h3>
-                    <p>We deeply understand our team members and those we do business with. We acknowledge individuals' opinions, wishes, and needs.</p>
+                    <p>We deeply understand our team members and those we do business with. We acknowledge individuals' opinions, wishes, and needs, creating an environment of mutual respect and understanding.</p>
                 </div>
                 <div class="value-card">
-                    <div class="value-icon">💡</div>
+                    <div class="value-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
                     <h3>Innovation</h3>
-                    <p>We bring products, services and solutions to our customers that have a significant, positive, impact and value.</p>
+                    <p>We bring products, services and solutions to our customers that have a significant, positive impact and value. Continuous improvement drives everything we do.</p>
                 </div>
                 <div class="value-card">
-                    <div class="value-icon">🛡️</div>
+                    <div class="value-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
                     <h3>Integrity</h3>
-                    <p>We are honest and dependable. We are thoughtful of others and always doing the right thing even in difficult circumstances.</p>
+                    <p>We are honest and dependable. We are thoughtful of others and always doing the right thing even in difficult circumstances, building trust through transparency.</p>
                 </div>
                 <div class="value-card">
-                    <div class="value-icon">🔒</div>
+                    <div class="value-icon">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
                     <h3>Safety</h3>
-                    <p>At MCLAU Solutions, safety is treated as a priority in our organization. We commit to zero harm to people, environment and property.</p>
+                    <p>At MCLAU Solutions, safety is treated as a priority in our organization. We commit to zero harm to people, environment and property, with efficient and total customer satisfaction.</p>
                 </div>
                 <div class="value-card">
-                    <div class="value-icon">✅</div>
+                    <div class="value-icon">
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
                     <h3>Accountability</h3>
-                    <p>We do what we say and say what we do, holding ourselves and each other to the highest standards of integrity and transparency.</p>
+                    <p>We do what we say and say what we do, holding ourselves and each other to the highest standards of integrity and transparency in all our business dealings.</p>
                 </div>
             </div>
         </div>
@@ -543,6 +880,10 @@
                 <div class="stat-card">
                     <div class="stat-number">2019</div>
                     <div class="stat-text">Established</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">Level 1</div>
+                    <div class="stat-text">B-BBEE Rating</div>
                 </div>
             </div>
         </div>
@@ -578,7 +919,26 @@
     </footer>
 
     <script>
-        // Smooth scrolling
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            menuToggle.innerHTML = navLinks.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+        
+        // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -591,15 +951,36 @@
                 }
             });
         });
-
-        // Scroll effect for nav
+        
+        // Nav scroll effect
         window.addEventListener('scroll', () => {
             const nav = document.querySelector('nav');
             if (window.scrollY > 100) {
                 nav.style.background = 'linear-gradient(135deg, rgba(10, 10, 10, 0.95) 0%, rgba(22, 33, 62, 0.95) 100%)';
+                nav.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.2)';
             } else {
                 nav.style.background = 'linear-gradient(135deg, rgba(26, 26, 46, 0.95) 0%, rgba(22, 33, 62, 0.95) 100%)';
+                nav.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.1)';
             }
+        });
+        
+        // Animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+
+        // Observe animated elements
+        document.querySelectorAll('.about-text, .about-image-container, .vm-card, .value-card, .stat-card').forEach(el => {
+            observer.observe(el);
         });
     </script>
 </body>
