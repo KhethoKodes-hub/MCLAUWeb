@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>MCLAU Solutions - Chemical Formulation, Manufacturing & Distribution</title>
     <link rel="icon" type="image/png" href="assets/mclogo.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -41,6 +41,10 @@
             font-size: 16px;
         }
 
+        body.menu-open {
+            overflow: hidden;
+        }
+
         /* Navigation */
         nav {
             background: linear-gradient(135deg, rgba(26, 26, 46, 0.95) 0%, rgba(22, 33, 62, 0.95) 100%);
@@ -60,6 +64,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: relative;
         }
 
         .logo {
@@ -132,6 +137,16 @@
             cursor: pointer;
             padding: 0.5rem;
             z-index: 1001;
+            transition: var(--transition);
+        }
+
+        .menu-toggle:hover {
+            color: var(--primary-green);
+        }
+
+        .menu-toggle:focus {
+            outline: 2px solid var(--primary-green);
+            outline-offset: 2px;
         }
 
         /* Hero Section */
@@ -503,7 +518,7 @@
 
         .service-card h3 {
             font-size: 1.4rem;
-            color: var(--dark-blue);
+            color: white;
             margin-bottom: 1rem;
             position: relative;
             padding-bottom: 0.8rem;
@@ -606,7 +621,7 @@
 
         .value-card h3 {
             font-size: 1.2rem;
-            color: var(--dark-blue);
+            color: white;
             margin-bottom: 0.8rem;
         }
 
@@ -785,8 +800,12 @@
 
         /* ========== RESPONSIVE DESIGN ========== */
         
-        /* Mobile Menu Styles */
+        /* Mobile Menu Styles - Fixed */
         @media (max-width: 767px) {
+            .menu-toggle {
+                display: block !important;
+            }
+            
             .nav-links {
                 position: fixed;
                 top: 0;
@@ -803,19 +822,18 @@
                 z-index: 1000;
                 overflow-y: auto;
                 box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+                display: flex !important;
             }
             
             .nav-links.active {
                 right: 0;
             }
             
-            .menu-toggle {
-                display: block;
-            }
-            
             .nav-links li {
                 width: 100%;
                 border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                margin: 0;
+                padding: 0;
             }
             
             .nav-links a {
@@ -823,10 +841,15 @@
                 padding: 1rem 0;
                 font-size: 1.1rem;
                 width: 100%;
+                text-align: left;
             }
             
             .nav-links a::after {
                 display: none;
+            }
+            
+            .nav-links a:hover {
+                padding-left: 10px;
             }
             
             /* Overlay when menu is open */
@@ -839,10 +862,11 @@
                 height: 100%;
                 background: rgba(0, 0, 0, 0.5);
                 z-index: 999;
+                backdrop-filter: blur(2px);
             }
             
             .nav-overlay.active {
-                display: block;
+                display: block !important;
             }
             
             .logo-text {
@@ -1090,7 +1114,7 @@
                 <a href="index.html"><img src="assets/mclogo.png" alt="MCLAU Solutions Logo" style="width: 80px; height:80px"></a>
                 <!--<div class="logo-text">MCLAU SOLUTIONS</div>-->
             </div>
-            <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu">
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu" aria-expanded="false">
                 <i class="fas fa-bars"></i>
             </button>
             <ul class="nav-links" id="navLinks">
@@ -1125,7 +1149,7 @@
             <div class="about-text-content">
                 <h2 class="section-title">About MCLAU</h2>
                 <p class="about-text">
-                    Since 2019, MCLAU Solutions Pty Ltd has been manufacturing and supplying a unique range of detergents to end users. We are a 100% Youth, 100% Women & 100% Black owned company based in Northern Cape, Kathu with an extended footprint in Gauteng.
+                    Since 2019, MCLAU Solutions Pty Ltd has been manufacturing and supplying a unique range of detergents to end users. We are a 100% Youth, 100% Women & 100% Black owned company.
                 </p>
                 <p class="about-text">
                     We specialize in manufacturing and distributing detergent products, cleaning materials, chemicals and paper products to retailers and customers.
@@ -1255,132 +1279,161 @@
 
     <script>
         // Mobile menu toggle with improved functionality
-        const menuToggle = document.getElementById('menuToggle');
-        const navLinks = document.getElementById('navLinks');
-        const navOverlay = document.getElementById('navOverlay');
-        const body = document.body;
-        
-        // Toggle mobile menu
-        function toggleMobileMenu() {
-            const isActive = navLinks.classList.toggle('active');
-            navOverlay.classList.toggle('active');
+        (function() {
+            // Get DOM elements
+            const menuToggle = document.getElementById('menuToggle');
+            const navLinks = document.getElementById('navLinks');
+            const navOverlay = document.getElementById('navOverlay');
+            const body = document.body;
             
-            // Update menu icon
-            menuToggle.innerHTML = isActive 
-                ? '<i class="fas fa-times"></i>' 
-                : '<i class="fas fa-bars"></i>';
+            // Check if elements exist
+            if (!menuToggle || !navLinks || !navOverlay) {
+                console.error('Required menu elements not found');
+                return;
+            }
             
-            // Prevent body scrolling when menu is open
-            body.style.overflow = isActive ? 'hidden' : 'auto';
+            // Function to open mobile menu
+            function openMobileMenu() {
+                navLinks.classList.add('active');
+                navOverlay.classList.add('active');
+                body.classList.add('menu-open');
+                menuToggle.innerHTML = '<i class="fas fa-times"></i>';
+                menuToggle.setAttribute('aria-expanded', 'true');
+            }
             
-            // Update aria-expanded for accessibility
-            menuToggle.setAttribute('aria-expanded', isActive);
-        }
-        
-        // Close mobile menu
-        function closeMobileMenu() {
-            navLinks.classList.remove('active');
-            navOverlay.classList.remove('active');
-            menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
-            body.style.overflow = 'auto';
-            menuToggle.setAttribute('aria-expanded', 'false');
-        }
-        
-        // Event listeners
-        menuToggle.addEventListener('click', toggleMobileMenu);
-        
-        // Close menu when clicking overlay
-        navOverlay.addEventListener('click', closeMobileMenu);
-        
-        // Close menu when clicking a link
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', closeMobileMenu);
-        });
-        
-        // Close menu when clicking outside on mobile
-        document.addEventListener('click', (e) => {
-            if (window.innerWidth <= 767) {
-                if (!navLinks.contains(e.target) && 
-                    !menuToggle.contains(e.target) && 
-                    navLinks.classList.contains('active')) {
+            // Function to close mobile menu
+            function closeMobileMenu() {
+                navLinks.classList.remove('active');
+                navOverlay.classList.remove('active');
+                body.classList.remove('menu-open');
+                menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                menuToggle.setAttribute('aria-expanded', 'false');
+            }
+            
+            // Function to toggle mobile menu
+            function toggleMobileMenu(event) {
+                event.preventDefault();
+                event.stopPropagation();
+                
+                if (navLinks.classList.contains('active')) {
                     closeMobileMenu();
+                } else {
+                    openMobileMenu();
                 }
             }
-        });
-        
-        // Close menu on escape key press
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && navLinks.classList.contains('active')) {
-                closeMobileMenu();
+            
+            // Event listener for menu toggle
+            menuToggle.addEventListener('click', toggleMobileMenu);
+            
+            // Event listener for overlay click
+            navOverlay.addEventListener('click', closeMobileMenu);
+            
+            // Event listeners for all nav links to close menu when clicked
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', function(event) {
+                    // Check if it's a hash link (same page anchor)
+                    const href = this.getAttribute('href');
+                    if (href && href.startsWith('#')) {
+                        event.preventDefault();
+                        const targetElement = document.querySelector(href);
+                        if (targetElement) {
+                            targetElement.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        }
+                    }
+                    
+                    // Close menu after navigation
+                    setTimeout(closeMobileMenu, 300);
+                });
+            });
+            
+            // Close menu when clicking outside on mobile
+            document.addEventListener('click', function(event) {
+                if (window.innerWidth <= 767) {
+                    if (!navLinks.contains(event.target) && 
+                        !menuToggle.contains(event.target) && 
+                        navLinks.classList.contains('active')) {
+                        closeMobileMenu();
+                    }
+                }
+            });
+            
+            // Close menu on escape key press
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape' && navLinks.classList.contains('active')) {
+                    closeMobileMenu();
+                }
+            });
+            
+            // Smooth scrolling for anchor links (works on all devices)
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(event) {
+                    const href = this.getAttribute('href');
+                    
+                    // Skip if it's not an anchor link or if it's a link to another page
+                    if (href === '#' || !href.startsWith('#')) return;
+                    
+                    event.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+            
+            // Nav scroll effect
+            window.addEventListener('scroll', function() {
+                const nav = document.querySelector('nav');
+                if (window.scrollY > 100) {
+                    nav.style.background = 'linear-gradient(135deg, rgba(10, 10, 10, 0.95) 0%, rgba(22, 33, 62, 0.95) 100%)';
+                    nav.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.2)';
+                } else {
+                    nav.style.background = 'linear-gradient(135deg, rgba(26, 26, 46, 0.95) 0%, rgba(22, 33, 62, 0.95) 100%)';
+                    nav.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.1)';
+                }
+            });
+            
+            // Touch device detection
+            function isTouchDevice() {
+                return (('ontouchstart' in window) ||
+                    (navigator.maxTouchPoints > 0) ||
+                    (navigator.msMaxTouchPoints > 0));
             }
-        });
-        
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                const href = this.getAttribute('href');
+            
+            // Add hover effects only for non-touch devices
+            if (!isTouchDevice()) {
+                document.body.classList.add('no-touch-device');
+            }
+            
+            // Handle window resize - close menu if switching to desktop
+            let resizeTimer;
+            window.addEventListener('resize', function() {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(function() {
+                    if (window.innerWidth > 767 && navLinks.classList.contains('active')) {
+                        closeMobileMenu();
+                    }
+                }, 250);
+            });
+            
+            // Initialize - ensure menu is closed on load
+            document.addEventListener('DOMContentLoaded', function() {
+                closeMobileMenu();
                 
-                // Skip if it's not an anchor link
-                if (href === '#') return;
-                
-                e.preventDefault();
-                const target = document.querySelector(href);
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
+                // Add image upload functionality for the about section placeholder
+                const imagePlaceholder = document.querySelector('.image-placeholder');
+                if (imagePlaceholder) {
+                    imagePlaceholder.addEventListener('click', function() {
+                        alert('In a real implementation, this would open a file picker to upload your company image.');
                     });
                 }
             });
-        });
-        
-        // Nav scroll effect
-        window.addEventListener('scroll', () => {
-            const nav = document.querySelector('nav');
-            if (window.scrollY > 100) {
-                nav.style.background = 'linear-gradient(135deg, rgba(10, 10, 10, 0.95) 0%, rgba(22, 33, 62, 0.95) 100%)';
-                nav.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.2)';
-            } else {
-                nav.style.background = 'linear-gradient(135deg, rgba(26, 26, 46, 0.95) 0%, rgba(22, 33, 62, 0.95) 100%)';
-                nav.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.1)';
-            }
-        });
-        
-        // Touch device detection
-        const isTouchDevice = () => {
-            return (('ontouchstart' in window) ||
-                (navigator.maxTouchPoints > 0) ||
-                (navigator.msMaxTouchPoints > 0));
-        };
-        
-        // Add hover effects only for non-touch devices
-        if (isTouchDevice()) {
-            document.body.classList.add('touch-device');
-        }
-        
-        // Handle window resize - close menu if switching to desktop
-        let resizeTimer;
-        window.addEventListener('resize', () => {
-            clearTimeout(resizeTimer);
-            resizeTimer = setTimeout(() => {
-                if (window.innerWidth > 767 && navLinks.classList.contains('active')) {
-                    closeMobileMenu();
-                }
-            }, 250);
-        });
-        
-        // Initialize - ensure menu is closed on load
-        document.addEventListener('DOMContentLoaded', () => {
-            closeMobileMenu();
-            
-            // Add image upload functionality for the about section placeholder
-            const imagePlaceholder = document.querySelector('.image-placeholder');
-            if (imagePlaceholder) {
-                imagePlaceholder.addEventListener('click', function() {
-                    alert('In a real implementation, this would open a file picker to upload your company image.');
-                });
-            }
-        });
+        })();
     </script>
 </body>
 </html>
