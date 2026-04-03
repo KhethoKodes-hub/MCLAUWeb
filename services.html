@@ -234,7 +234,7 @@
 
     <!-- hero section with chemical manufacturing background -->
     <section class="relative min-h-[70vh] flex items-center justify-center overflow-hidden pt-28">
-        <div class="absolute inset-0 hero-zoom-bg" style="background-image: linear-gradient(135deg, rgba(1,6,15,0.65) 0%, rgba(3,13,28,0.8) 100%), url('https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=1800&q=85'); background-size: cover; background-position: center 25%;"></div>
+        <div class="absolute inset-0 hero-zoom-bg" style="background-image: linear-gradient(135deg, rgba(1,6,15,0.65) 0%, rgba(3,13,28,0.8) 100%), url('./assets/hero3.png'); background-size: cover; background-position: center 25%;"></div>
         <div class="absolute inset-0 bg-gradient-to-t from-navy-950 via-transparent to-transparent"></div>
         
         <div class="relative z-10 max-w-6xl mx-auto px-6 text-center">
@@ -391,24 +391,64 @@
         </div>
     </footer>
 
-    <script>
-        // reveal observer
-        const reveals = document.querySelectorAll('.reveal-up');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
-        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-        reveals.forEach(el => observer.observe(el));
-
-        // nav scroll effect
-        const nav = document.querySelector('nav');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) nav.classList.add('bg-navy-950/95');
-            else nav.classList.remove('bg-navy-950/95');
+   <script>
+    // Reveal animations
+    const reveals = document.querySelectorAll('.reveal-up');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => { 
+            if (entry.isIntersecting) entry.target.classList.add('visible'); 
         });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(el => observer.observe(el));
 
-        // mobile menu alert placeholder (keep consistent)
-        const menuBtn = document.getElementById('menuBtn');
-        if(menuBtn) menuBtn.addEventListener('click', () => alert('Full responsive navigation ready — all links active'));
-    </script>
+    // Nav scroll effect
+    const nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 60) {
+            nav.classList.add('bg-navy-950/95', 'backdrop-blur-xl');
+        } else {
+            nav.classList.remove('bg-navy-950/95', 'backdrop-blur-xl');
+        }
+    });
+
+    // === MOBILE MENU (same as Home page) ===
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const menuOverlay = document.getElementById('menuOverlay');
+    const closeMenu = document.getElementById('closeMenu');
+    const h1 = document.getElementById('hLine1');
+    const h2 = document.getElementById('hLine2');
+    const h3 = document.getElementById('hLine3');
+
+    function openMenu() {
+        mobileMenu.classList.add('open');
+        menuOverlay.classList.add('open');
+        menuOverlay.classList.remove('hidden');
+        // Hamburger → X animation
+        h1.style.transform = 'rotate(45deg) translate(4px, 4px)';
+        h2.style.opacity = '0';
+        h3.style.transform = 'rotate(-45deg) translate(3px, -3px)';
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeMenuFn() {
+        mobileMenu.classList.remove('open');
+        menuOverlay.classList.remove('open');
+        setTimeout(() => menuOverlay.classList.add('hidden'), 300);
+        h1.style.transform = '';
+        h2.style.opacity = '';
+        h3.style.transform = '';
+        document.body.style.overflow = '';
+    }
+
+    hamburger.addEventListener('click', openMenu);
+    closeMenu.addEventListener('click', closeMenuFn);
+    menuOverlay.addEventListener('click', closeMenuFn);
+
+    // Close menu when clicking any link
+    document.querySelectorAll('#mobileMenu a').forEach(link => {
+        link.addEventListener('click', closeMenuFn);
+    });
+</script>
 </body>
 </html>
