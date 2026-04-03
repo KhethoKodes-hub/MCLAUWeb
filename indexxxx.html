@@ -1,1027 +1,1451 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MCLAU Solutions — Chemical Formulation, Manufacturing & Distribution</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MCLAU Solutions — Chemical Formulation, Manufacturing & Distribution</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Barlow+Condensed:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        navy: { 950:'#01060f', 900:'#030d1c', 800:'#061527', 700:'#0a2040', 600:'#0e2d5a' },
+        cobalt: { DEFAULT:'#0a3d91', light:'#1456c8', bright:'#2d7fff', glow:'#5ba3ff' },
+        emerald: { DEFAULT:'#00e676', dim:'#00b359', dark:'#007a3d', glow:'#69ffb5' },
+        ice: '#e8f5ff',
+        fog: 'rgba(232,245,255,0.06)',
+      },
+      fontFamily: {
+        display: ['Syncopate','sans-serif'],
+        body: ['Space Grotesk','sans-serif'],
+        condensed: ['Barlow Condensed','sans-serif'],
+      },
+    }
+  }
+}
+</script>
+<style>
+:root {
+  --navy-950: #01060f;
+  --navy-900: #030d1c;
+  --navy-800: #061527;
+  --navy-700: #0a2040;
+  --cobalt: #0a3d91;
+  --cobalt-bright: #2d7fff;
+  --cobalt-glow: #5ba3ff;
+  --emerald: #00e676;
+  --emerald-dim: #00b359;
+  --emerald-glow: #69ffb5;
+  --ice: #e8f5ff;
+}
 
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        navy: { 950: '#050d1a', 900: '#0a1628', 800: '#0f2040', 700: '#162d58', 600: '#1e3d70' },
-                        cobalt: { DEFAULT: '#1a4fa0', light: '#2563c8', bright: '#3b82f6' },
-                        mint: { DEFAULT: '#00c853', light: '#69f0ae', dim: '#00875a' },
-                        ice: { DEFAULT: '#e8f4ff', dark: '#b8d9f8' }
-                    },
-                    fontFamily: {
-                        display: ['Bebas Neue', 'sans-serif'],
-                        label: ['Orbitron', 'sans-serif'],
-                        body: ['DM Sans', 'sans-serif'],
-                    },
-                    backdropBlur: { xs: '2px' },
-                    animation: {
-                        'bubble-1': 'bubble 8s ease-in-out infinite',
-                        'bubble-2': 'bubble 12s ease-in-out infinite 2s',
-                        'bubble-3': 'bubble 10s ease-in-out infinite 4s',
-                        'spin-slow': 'spin 20s linear infinite',
-                        'float': 'float 6s ease-in-out infinite',
-                        'float-delay': 'float 6s ease-in-out infinite 3s',
-                        'glow-pulse': 'glowPulse 3s ease-in-out infinite',
-                        'slide-up': 'slideUp 0.8s ease-out forwards',
-                        'slide-in-left': 'slideInLeft 0.8s ease-out forwards',
-                        'slide-in-right': 'slideInRight 0.8s ease-out forwards',
-                        'molecule-rotate': 'moleculeRotate 15s linear infinite',
-                        'drip': 'drip 4s ease-in-out infinite',
-                        'shimmer': 'shimmer 2.5s ease-in-out infinite',
-                        'ticker': 'ticker 20s linear infinite',
-                    },
-                    keyframes: {
-                        bubble: {
-                            '0%,100%': { transform: 'translateY(0) scale(1)', opacity: '0.6' },
-                            '50%': { transform: 'translateY(-40px) scale(1.1)', opacity: '0.9' },
-                        },
-                        float: {
-                            '0%,100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-16px)' },
-                        },
-                        glowPulse: {
-                            '0%,100%': { boxShadow: '0 0 20px rgba(0,200,83,0.3), 0 0 40px rgba(0,200,83,0.1)' },
-                            '50%': { boxShadow: '0 0 40px rgba(0,200,83,0.6), 0 0 80px rgba(0,200,83,0.3)' },
-                        },
-                        slideUp: {
-                            from: { opacity: '0', transform: 'translateY(40px)' },
-                            to: { opacity: '1', transform: 'translateY(0)' },
-                        },
-                        slideInLeft: {
-                            from: { opacity: '0', transform: 'translateX(-40px)' },
-                            to: { opacity: '1', transform: 'translateX(0)' },
-                        },
-                        slideInRight: {
-                            from: { opacity: '0', transform: 'translateX(40px)' },
-                            to: { opacity: '1', transform: 'translateX(0)' },
-                        },
-                        moleculeRotate: {
-                            from: { transform: 'rotate(0deg)' },
-                            to: { transform: 'rotate(360deg)' },
-                        },
-                        drip: {
-                            '0%,100%': { transform: 'scaleY(1) translateY(0)', borderRadius: '50%' },
-                            '50%': { transform: 'scaleY(1.15) translateY(6px)', borderRadius: '48% 48% 52% 52% / 40% 40% 60% 60%' },
-                        },
-                        shimmer: {
-                            '0%': { backgroundPosition: '-200% center' },
-                            '100%': { backgroundPosition: '200% center' },
-                        },
-                        ticker: {
-                            '0%': { transform: 'translateX(0)' },
-                            '100%': { transform: 'translateX(-50%)' },
-                        },
-                    }
-                }
-            }
-        }
-    </script>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  font-family:'Space Grotesk',sans-serif;
+  background: var(--navy-950);
+  color: var(--ice);
+  overflow-x: hidden;
+}
 
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body { font-family: 'DM Sans', sans-serif; background: #050d1a; overflow-x: hidden; }
+::-webkit-scrollbar { width:4px; }
+::-webkit-scrollbar-track { background:var(--navy-950); }
+::-webkit-scrollbar-thumb { background:linear-gradient(var(--emerald),var(--cobalt-bright)); border-radius:2px; }
 
-        /* ── Scrollbar ── */
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #0a1628; }
-        ::-webkit-scrollbar-thumb { background: linear-gradient(#00c853, #1a4fa0); border-radius: 3px; }
+/* ─── NOISE OVERLAY ─── */
+body::before {
+  content:'';
+  position:fixed; inset:0; z-index:0; pointer-events:none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity:0.35;
+}
 
-        /* ── Glass card ── */
-        .glass {
-            background: rgba(255,255,255,0.04);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255,255,255,0.10);
-        }
-        .glass-light {
-            background: rgba(255,255,255,0.08);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255,255,255,0.14);
-        }
-        .glass-card {
-            background: rgba(10,22,40,0.6);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(59,130,246,0.2);
-        }
+/* ─── GLASSMORPHISM ─── */
+.glass {
+  background: rgba(6,21,39,0.55);
+  backdrop-filter: blur(24px) saturate(1.4);
+  -webkit-backdrop-filter: blur(24px) saturate(1.4);
+  border: 1px solid rgba(45,127,255,0.18);
+}
+.glass-light {
+  background: rgba(232,245,255,0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(232,245,255,0.12);
+}
+.glass-green {
+  background: rgba(0,230,118,0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(0,230,118,0.2);
+}
 
-        /* ── Gradient text ── */
-        .grad-text {
-            background: linear-gradient(135deg, #69f0ae 0%, #3b82f6 50%, #e8f4ff 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        .grad-text-gold {
-            background: linear-gradient(135deg, #ffffff 0%, #69f0ae 60%, #3b82f6 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
+/* ─── GRADIENT TEXT ─── */
+.text-gradient {
+  background: linear-gradient(135deg, var(--emerald-glow) 0%, var(--cobalt-bright) 50%, var(--ice) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.text-gradient-blue {
+  background: linear-gradient(135deg, var(--ice) 0%, var(--cobalt-bright) 60%, var(--cobalt-glow) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
 
-        /* ── Hero bg ── */
-        .hero-bg {
-            background-image:
-                linear-gradient(to bottom right, rgba(5,13,26,0.88) 0%, rgba(10,22,40,0.72) 40%, rgba(5,13,26,0.92) 100%),
-                url('https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=1800&q=80');
-            background-size: cover;
-            background-position: center;
-        }
+/* ─── NAV ─── */
+#nav {
+  position:fixed; top:0; inset-x:0; z-index:100;
+  transition: all 0.5s cubic-bezier(0.4,0,0.2,1);
+  padding: 20px 0;
+}
+#nav.scrolled {
+  background: rgba(1,6,15,0.95);
+  backdrop-filter: blur(30px);
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(45,127,255,0.15);
+  box-shadow: 0 8px 60px rgba(0,0,0,0.6);
+}
+.nav-link {
+  position: relative;
+  color: rgba(232,245,255,0.6);
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:600;
+  font-size:0.8rem;
+  letter-spacing:0.15em;
+  text-transform:uppercase;
+  transition:color 0.3s;
+}
+.nav-link::after {
+  content:'';
+  position:absolute; bottom:-4px; left:0;
+  width:0; height:1px;
+  background:linear-gradient(90deg,var(--emerald),var(--cobalt-bright));
+  transition:width 0.4s cubic-bezier(0.4,0,0.2,1);
+}
+.nav-link:hover { color: #fff; }
+.nav-link:hover::after { width:100%; }
 
-        /* ── Section bgs ── */
-        .about-bg {
-            background-image:
-                linear-gradient(135deg, rgba(5,13,26,0.96) 0%, rgba(22,45,88,0.90) 100%),
-                url('https://images.unsplash.com/photo-1518152006812-edab29b069ac?w=1600&q=80');
-            background-size: cover; background-position: center;
-        }
-        .services-bg {
-            background-image:
-                linear-gradient(to bottom, rgba(5,13,26,0.95) 0%, rgba(10,22,40,0.88) 100%),
-                url('https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=1600&q=80');
-            background-size: cover; background-position: center;
-        }
-        .values-bg {
-            background-image:
-                linear-gradient(135deg, rgba(5,13,26,0.95) 0%, rgba(10,32,64,0.92) 100%),
-                url('https://images.unsplash.com/photo-1564153575348-9096f5b6e9c5?w=1600&q=80');
-            background-size: cover; background-position: center;
-        }
-        .contact-bg {
-            background-image:
-                linear-gradient(to bottom right, rgba(0,135,90,0.25) 0%, rgba(5,13,26,0.97) 50%, rgba(26,79,160,0.25) 100%),
-                url('https://images.unsplash.com/photo-1559757175-5700dde675bc?w=1600&q=80');
-            background-size: cover; background-position: center;
-        }
+/* ─── HERO ─── */
+#hero {
+  min-height:100vh;
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  overflow:hidden;
+}
+.hero-bg-img {
+  position:absolute; inset:0;
+  background-image:
+    linear-gradient(180deg, rgba(1,6,15,0.3) 0%, rgba(3,13,28,0.6) 40%, rgba(1,6,15,0.97) 100%),
+    linear-gradient(90deg, rgba(10,61,145,0.35) 0%, transparent 60%),
+    url('https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1800&q=85');
+  background-size:cover;
+  background-position:center 30%;
+  animation:heroZoom 20s ease-in-out infinite alternate;
+}
+@keyframes heroZoom {
+  from { transform: scale(1); }
+  to   { transform: scale(1.06); }
+}
 
-        /* ── Nav ── */
-        nav { transition: all 0.4s ease; }
-        nav.scrolled { background: rgba(5,13,26,0.97) !important; box-shadow: 0 2px 40px rgba(0,0,0,0.5); }
-        .nav-link {
-            position: relative;
-            color: rgba(255,255,255,0.75);
-            font-weight: 500;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-            font-size: 0.8rem;
-            transition: color 0.3s;
-            padding-bottom: 4px;
-        }
-        .nav-link::after {
-            content: '';
-            position: absolute; bottom: 0; left: 0;
-            width: 0; height: 2px;
-            background: linear-gradient(to right, #00c853, #3b82f6);
-            transition: width 0.35s cubic-bezier(0.4,0,0.2,1);
-        }
-        .nav-link:hover { color: #fff; }
-        .nav-link:hover::after { width: 100%; }
+/* ─── CHEMICAL BLOB CANVAS ─── */
+#blobCanvas { position:absolute; inset:0; pointer-events:none; z-index:1; }
+#particleCanvas { position:absolute; inset:0; pointer-events:none; z-index:2; }
 
-        /* ── Service cards ── */
-        .service-card {
-            background: rgba(10,22,40,0.55);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(59,130,246,0.15);
-            transition: all 0.45s cubic-bezier(0.4,0,0.2,1);
-            position: relative;
-            overflow: hidden;
-        }
-        .service-card::before {
-            content: '';
-            position: absolute; top: 0; left: 0;
-            width: 100%; height: 3px;
-            background: linear-gradient(to right, #00c853, #3b82f6);
-            transform: scaleX(0); transform-origin: left;
-            transition: transform 0.45s ease;
-        }
-        .service-card::after {
-            content: '';
-            position: absolute; inset: 0;
-            background: linear-gradient(135deg, rgba(0,200,83,0.06) 0%, rgba(59,130,246,0.06) 100%);
-            opacity: 0;
-            transition: opacity 0.45s ease;
-        }
-        .service-card:hover {
-            transform: translateY(-10px);
-            border-color: rgba(0,200,83,0.35);
-            box-shadow: 0 24px 60px rgba(0,0,0,0.4), 0 0 0 1px rgba(0,200,83,0.15);
-        }
-        .service-card:hover::before { transform: scaleX(1); }
-        .service-card:hover::after { opacity: 1; }
-        .service-icon {
-            width: 60px; height: 60px;
-            border-radius: 14px;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1.5rem;
-            background: linear-gradient(135deg, rgba(0,200,83,0.2), rgba(59,130,246,0.2));
-            border: 1px solid rgba(0,200,83,0.3);
-            transition: all 0.4s ease;
-        }
-        .service-card:hover .service-icon {
-            background: linear-gradient(135deg, rgba(0,200,83,0.35), rgba(59,130,246,0.35));
-            transform: rotate(8deg) scale(1.1);
-            box-shadow: 0 0 20px rgba(0,200,83,0.4);
-        }
+/* ─── LAVA LAMP BLOBS ─── */
+.blob {
+  position:absolute;
+  border-radius:50%;
+  filter:blur(80px);
+  animation:blobFloat linear infinite;
+  pointer-events:none;
+}
+@keyframes blobFloat {
+  0%   { transform:translate(0,0) scale(1); }
+  25%  { transform:translate(40px,-60px) scale(1.1); }
+  50%  { transform:translate(-30px,-80px) scale(0.9); }
+  75%  { transform:translate(-60px,-30px) scale(1.05); }
+  100% { transform:translate(0,0) scale(1); }
+}
 
-        /* ── Value cards ── */
-        .value-card {
-            background: rgba(10,22,40,0.5);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255,255,255,0.07);
-            transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
-            position: relative; overflow: hidden;
-        }
-        .value-card::before {
-            content: '';
-            position: absolute; bottom: 0; left: 0;
-            width: 100%; height: 0;
-            background: linear-gradient(to top, rgba(0,200,83,0.1), transparent);
-            transition: height 0.4s ease;
-        }
-        .value-card:hover { transform: translateY(-8px) scale(1.02); border-color: rgba(0,200,83,0.3); }
-        .value-card:hover::before { height: 100%; }
+/* ─── MOLECULE ORBIT ─── */
+.orbit-ring {
+  position:absolute;
+  border-radius:50%;
+  border:1px solid rgba(45,127,255,0.15);
+}
+@keyframes spinCW  { from { transform:translate(-50%,-50%) rotate(0deg); }   to { transform:translate(-50%,-50%) rotate(360deg); } }
+@keyframes spinCCW { from { transform:translate(-50%,-50%) rotate(0deg); }   to { transform:translate(-50%,-50%) rotate(-360deg); } }
 
-        /* ── Contact cards ── */
-        .contact-card {
-            background: rgba(10,22,40,0.6);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(59,130,246,0.2);
-            transition: all 0.4s ease;
-            position: relative; overflow: hidden;
-        }
-        .contact-card:hover {
-            border-color: rgba(0,200,83,0.4);
-            transform: translateY(-6px);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.3), 0 0 30px rgba(0,200,83,0.1);
-        }
+/* ─── LIQUID DROP ─── */
+.drop {
+  position:absolute;
+  border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;
+  animation:dropWobble 4s ease-in-out infinite;
+}
+@keyframes dropWobble {
+  0%,100% { transform:scaleY(1) scaleX(1); border-radius:50% 50% 50% 50%/60% 60% 40% 40%; }
+  50%      { transform:scaleY(1.1) scaleX(0.95); border-radius:48% 48% 52% 52%/55% 55% 45% 45%; }
+}
 
-        /* ── CTA Button ── */
-        .cta-btn {
-            position: relative; overflow: hidden;
-            background: linear-gradient(135deg, #00c853 0%, #1a4fa0 100%);
-            border: none; cursor: pointer;
-            transition: all 0.4s ease;
-        }
-        .cta-btn::before {
-            content: '';
-            position: absolute; inset: 0;
-            background: linear-gradient(135deg, #1a4fa0 0%, #00c853 100%);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-        .cta-btn:hover::before { opacity: 1; }
-        .cta-btn:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(0,200,83,0.4); }
-        .cta-btn span { position: relative; z-index: 1; }
+/* ─── STAT COUNTER ─── */
+.stat-ring {
+  position:relative;
+  width:100px; height:100px;
+  display:flex; align-items:center; justify-content:center;
+}
+.stat-ring svg { position:absolute; inset:0; }
+.stat-ring-track { fill:none; stroke:rgba(45,127,255,0.12); stroke-width:2; }
+.stat-ring-fill  { fill:none; stroke-width:2; stroke-linecap:round;
+  stroke-dasharray:283; stroke-dashoffset:283;
+  transition: stroke-dashoffset 2s cubic-bezier(0.4,0,0.2,1);
+  animation: ringFill 2s cubic-bezier(0.4,0,0.2,1) 0.5s forwards;
+}
+@keyframes ringFill {
+  to { stroke-dashoffset: var(--dash-target, 0); }
+}
 
-        /* ── Molecule SVG ── */
-        .molecule-ring {
-            position: absolute;
-            border-radius: 50%;
-            border: 1px solid rgba(0,200,83,0.2);
-        }
+/* ─── SERVICE CARDS ─── */
+.svc-card {
+  position:relative;
+  background:rgba(6,21,39,0.5);
+  backdrop-filter:blur(30px);
+  border:1px solid rgba(45,127,255,0.12);
+  border-radius:24px;
+  overflow:hidden;
+  transition:all 0.5s cubic-bezier(0.4,0,0.2,1);
+  cursor:pointer;
+}
+.svc-card::before {
+  content:'';
+  position:absolute; top:0; left:0; right:0;
+  height:2px;
+  background:linear-gradient(90deg, transparent, var(--cobalt-bright), var(--emerald), transparent);
+  opacity:0;
+  transition:opacity 0.5s;
+}
+.svc-card::after {
+  content:'';
+  position:absolute; inset:0;
+  background:radial-gradient(circle at 50% -20%, rgba(0,230,118,0.08) 0%, transparent 60%);
+  opacity:0;
+  transition:opacity 0.5s;
+}
+.svc-card:hover {
+  transform:translateY(-12px) scale(1.01);
+  border-color:rgba(0,230,118,0.3);
+  box-shadow:
+    0 30px 80px rgba(0,0,0,0.5),
+    0 0 0 1px rgba(0,230,118,0.1),
+    inset 0 1px 0 rgba(232,245,255,0.08);
+}
+.svc-card:hover::before { opacity:1; }
+.svc-card:hover::after  { opacity:1; }
+.svc-card:hover .svc-icon { transform:rotate(-8deg) scale(1.15); box-shadow:0 0 30px rgba(0,230,118,0.5); }
+.svc-card:hover .svc-arrow { transform:translateX(6px); opacity:1; }
 
-        /* ── Chemical drip ── */
-        .drip-drop {
-            width: 16px; height: 20px;
-            background: linear-gradient(180deg, #00c853, #3b82f6);
-            border-radius: 50% 50% 52% 52% / 40% 40% 60% 60%;
-            animation: drip 4s ease-in-out infinite;
-        }
+.svc-icon {
+  width:56px; height:56px;
+  border-radius:16px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:1.3rem;
+  background:linear-gradient(135deg,rgba(0,230,118,0.15),rgba(45,127,255,0.15));
+  border:1px solid rgba(0,230,118,0.25);
+  transition:all 0.5s cubic-bezier(0.4,0,0.2,1);
+}
+.svc-arrow { opacity:0.3; transition:all 0.4s ease; }
 
-        /* ── Shimmer btn ── */
-        .shimmer-btn {
-            background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.12) 50%, transparent 100%);
-            background-size: 200% auto;
-            animation: shimmer 2.5s ease-in-out infinite;
-        }
+/* ─── VALUE CARDS ─── */
+.val-card {
+  position:relative;
+  background:rgba(6,21,39,0.4);
+  backdrop-filter:blur(24px);
+  border:1px solid rgba(232,245,255,0.07);
+  border-radius:20px;
+  overflow:hidden;
+  transition:all 0.5s cubic-bezier(0.4,0,0.2,1);
+}
+.val-card-glow {
+  position:absolute;
+  bottom:-40px; left:50%;
+  transform:translateX(-50%);
+  width:120px; height:120px;
+  border-radius:50%;
+  filter:blur(40px);
+  opacity:0;
+  transition:opacity 0.5s;
+}
+.val-card:hover { transform:translateY(-10px) scale(1.03); border-color:rgba(45,127,255,0.25); }
+.val-card:hover .val-card-glow { opacity:0.6; }
+.val-card:hover .val-icon { transform:scale(1.2) rotate(5deg); }
 
-        /* ── Ticker ── */
-        .ticker-wrap { overflow: hidden; white-space: nowrap; }
-        .ticker-inner { display: inline-block; animation: ticker 20s linear infinite; }
+.val-icon {
+  width:52px; height:52px;
+  border-radius:14px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:1.2rem;
+  transition:transform 0.5s cubic-bezier(0.4,0,0.2,1);
+}
 
-        /* ── Stat number ── */
-        .stat-number {
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 900;
-        }
+/* ─── CONTACT CARDS ─── */
+.contact-card {
+  position:relative;
+  background:rgba(6,21,39,0.6);
+  backdrop-filter:blur(30px);
+  border:1px solid rgba(45,127,255,0.15);
+  border-radius:20px;
+  overflow:hidden;
+  transition:all 0.5s cubic-bezier(0.4,0,0.2,1);
+}
+.contact-card::before {
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(135deg, rgba(45,127,255,0.06) 0%, rgba(0,230,118,0.06) 100%);
+  opacity:0;
+  transition:opacity 0.5s;
+}
+.contact-card:hover { transform:translateY(-8px); border-color:rgba(0,230,118,0.35); box-shadow:0 20px 60px rgba(0,0,0,0.4), 0 0 40px rgba(0,230,118,0.08); }
+.contact-card:hover::before { opacity:1; }
+.contact-card:hover .contact-icon { transform:scale(1.1) rotate(-6deg); box-shadow:0 0 25px rgba(0,230,118,0.4); }
 
-        /* ── Mobile menu ── */
-        #mobileMenu {
-            transform: translateX(100%);
-            transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
-        }
-        #mobileMenu.open { transform: translateX(0); }
-        #menuOverlay { opacity: 0; pointer-events: none; transition: opacity 0.3s; }
-        #menuOverlay.open { opacity: 1; pointer-events: all; }
+.contact-icon {
+  width:48px; height:48px;
+  border-radius:14px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:1.1rem;
+  background:linear-gradient(135deg,rgba(0,230,118,0.12),rgba(45,127,255,0.12));
+  border:1px solid rgba(0,230,118,0.2);
+  transition:all 0.5s cubic-bezier(0.4,0,0.2,1);
+}
 
-        /* ── Reveal on scroll ── */
-        .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
-        .reveal.visible { opacity: 1; transform: translateY(0); }
-        .reveal-left { opacity: 0; transform: translateX(-30px); transition: opacity 0.8s ease, transform 0.8s ease; }
-        .reveal-left.visible { opacity: 1; transform: translateX(0); }
-        .reveal-right { opacity: 0; transform: translateX(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
-        .reveal-right.visible { opacity: 1; transform: translateX(0); }
+/* ─── CTA BUTTON ─── */
+.btn-primary {
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(135deg, var(--emerald-dim) 0%, var(--cobalt) 100%);
+  color:#fff;
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:700;
+  font-size:0.85rem;
+  letter-spacing:0.15em;
+  text-transform:uppercase;
+  padding:14px 36px;
+  border-radius:100px;
+  border:none;
+  cursor:pointer;
+  transition:all 0.4s ease;
+  display:inline-flex; align-items:center; gap:10px;
+}
+.btn-primary::before {
+  content:'';
+  position:absolute; inset:0;
+  background:linear-gradient(135deg, var(--cobalt-bright) 0%, var(--emerald-dim) 100%);
+  opacity:0;
+  transition:opacity 0.4s;
+}
+.btn-primary:hover { transform:translateY(-3px); box-shadow:0 20px 50px rgba(0,230,118,0.35), 0 0 0 1px rgba(0,230,118,0.2); }
+.btn-primary:hover::before { opacity:1; }
+.btn-primary > * { position:relative; z-index:1; }
 
-        /* ── Particle canvas ── */
-        #particleCanvas { position: absolute; inset: 0; pointer-events: none; }
+.btn-ghost {
+  position:relative;
+  overflow:hidden;
+  background:transparent;
+  color:var(--ice);
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:600;
+  font-size:0.85rem;
+  letter-spacing:0.15em;
+  text-transform:uppercase;
+  padding:13px 36px;
+  border-radius:100px;
+  border:1px solid rgba(232,245,255,0.25);
+  cursor:pointer;
+  transition:all 0.4s ease;
+  display:inline-flex; align-items:center; gap:10px;
+  backdrop-filter:blur(10px);
+}
+.btn-ghost:hover {
+  border-color:rgba(45,127,255,0.5);
+  background:rgba(45,127,255,0.08);
+  transform:translateY(-3px);
+  color:#fff;
+}
 
-        /* ── Glowing line ── */
-        .glow-line {
-            height: 2px;
-            background: linear-gradient(to right, transparent, #00c853, #3b82f6, transparent);
-        }
-    </style>
+/* ─── GLOW LINE ─── */
+.glow-line {
+  height:1px;
+  background:linear-gradient(90deg, transparent 0%, var(--cobalt-bright) 30%, var(--emerald) 70%, transparent 100%);
+  opacity:0.4;
+}
+
+/* ─── TICKER ─── */
+.ticker-wrap { overflow:hidden; }
+.ticker-inner { display:inline-block; white-space:nowrap; animation:ticker 28s linear infinite; }
+@keyframes ticker { from { transform:translateX(0); } to { transform:translateX(-50%); } }
+
+/* ─── SECTION BACKGROUNDS ─── */
+.about-section {
+  background-image:
+    linear-gradient(135deg, rgba(1,6,15,0.97) 0%, rgba(10,32,64,0.92) 60%, rgba(1,6,15,0.97) 100%),
+    url('https://images.unsplash.com/photo-1583911372824-52d56b91b14d?w=1800&q=80');
+  background-size:cover; background-position:center;
+}
+.services-section {
+  background-image:
+    linear-gradient(180deg, rgba(1,6,15,0.98) 0%, rgba(6,21,39,0.93) 50%, rgba(1,6,15,0.98) 100%),
+    url('https://images.unsplash.com/photo-1518152006812-edab29b069ac?w=1800&q=80');
+  background-size:cover; background-position:center;
+}
+.values-section {
+  background-image:
+    linear-gradient(135deg, rgba(1,6,15,0.97) 0%, rgba(6,21,39,0.95) 100%),
+    url('https://images.unsplash.com/photo-1564153575348-9096f5b6e9c5?w=1800&q=80');
+  background-size:cover; background-position:center;
+}
+.contact-section {
+  background-image:
+    linear-gradient(180deg, rgba(1,6,15,0.97) 0%, rgba(10,26,60,0.92) 50%, rgba(1,6,15,0.97) 100%),
+    url('https://images.unsplash.com/photo-1416169607655-0c2b3ce2e1cc?w=1800&q=80');
+  background-size:cover; background-position:center;
+}
+
+/* ─── REVEAL ANIMATIONS ─── */
+.reveal        { opacity:0; transform:translateY(40px); transition:opacity 0.9s ease, transform 0.9s ease; }
+.reveal-left   { opacity:0; transform:translateX(-40px); transition:opacity 0.9s ease, transform 0.9s ease; }
+.reveal-right  { opacity:0; transform:translateX(40px); transition:opacity 0.9s ease, transform 0.9s ease; }
+.reveal.visible, .reveal-left.visible, .reveal-right.visible { opacity:1; transform:translate(0); }
+
+/* ─── MOBILE MENU ─── */
+#mobileMenu { transform:translateX(100%); transition:transform 0.5s cubic-bezier(0.4,0,0.2,1); }
+#mobileMenu.open { transform:translateX(0); }
+#overlay { opacity:0; pointer-events:none; transition:opacity 0.4s; }
+#overlay.open { opacity:1; pointer-events:all; }
+
+/* ─── PIPELINE VISUAL ─── */
+.pipe-segment {
+  height:4px;
+  background:linear-gradient(90deg,transparent,var(--cobalt-bright),transparent);
+  border-radius:2px;
+  position:relative;
+  overflow:hidden;
+}
+.pipe-flow {
+  position:absolute; inset:0;
+  background:linear-gradient(90deg, transparent, var(--emerald), transparent);
+  animation:pipeFlow 2s linear infinite;
+}
+@keyframes pipeFlow { from { transform:translateX(-100%); } to { transform:translateX(200%); } }
+
+/* ─── CONTAINER BARS ─── */
+.container-bar {
+  position:relative;
+  border-radius:6px;
+  overflow:hidden;
+  transition:all 0.4s ease;
+}
+.container-bar-fill {
+  border-radius:6px;
+  background:linear-gradient(90deg, var(--cobalt-bright), var(--emerald));
+  transition:width 1s cubic-bezier(0.4,0,0.2,1);
+}
+.container-bar:hover .container-bar-fill { filter:brightness(1.3); }
+
+/* ─── CHEMICAL FORMULA FLOAT ─── */
+.formula-float {
+  position:absolute;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:0.65rem;
+  letter-spacing:0.1em;
+  color:rgba(45,127,255,0.3);
+  pointer-events:none;
+  animation:formulaDrift linear infinite;
+}
+@keyframes formulaDrift {
+  from { transform:translateY(0) rotate(0deg); opacity:0.4; }
+  50%  { opacity:0.15; }
+  to   { transform:translateY(-120px) rotate(10deg); opacity:0; }
+}
+
+/* ─── HERO SCROLLDOWN ─── */
+.scroll-hint {
+  display:flex; flex-direction:column; align-items:center; gap:6px;
+  animation:scrollPulse 2s ease-in-out infinite;
+}
+@keyframes scrollPulse {
+  0%,100% { transform:translateY(0); opacity:0.6; }
+  50%      { transform:translateY(8px); opacity:1; }
+}
+
+/* ─── TAG CHIPS ─── */
+.chip {
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:0.7rem;
+  font-weight:600;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  padding:4px 12px;
+  border-radius:100px;
+  display:inline-block;
+}
+.chip-green { background:rgba(0,230,118,0.1); border:1px solid rgba(0,230,118,0.25); color:var(--emerald-glow); }
+.chip-blue  { background:rgba(45,127,255,0.1); border:1px solid rgba(45,127,255,0.25); color:var(--cobalt-glow); }
+
+/* ─── CERTIFICATION CARD ─── */
+.cert-card {
+  background:rgba(6,21,39,0.6);
+  backdrop-filter:blur(20px);
+  border:1px solid rgba(232,245,255,0.08);
+  border-radius:16px;
+  transition:all 0.4s ease;
+}
+.cert-card:hover {
+  border-color:rgba(0,230,118,0.3);
+  transform:translateY(-5px);
+  box-shadow:0 15px 40px rgba(0,0,0,0.3), 0 0 20px rgba(0,230,118,0.08);
+}
+
+/* ─── UNDERLINE LABEL ─── */
+.section-label {
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:600;
+  font-size:0.7rem;
+  letter-spacing:0.3em;
+  text-transform:uppercase;
+  color:var(--emerald);
+  display:flex; align-items:center; gap:10px;
+}
+.section-label::before, .section-label::after {
+  content:'';
+  height:1px;
+  flex:1;
+  max-width:40px;
+  background:var(--emerald);
+  opacity:0.5;
+}
+
+/* ─── HERO STAT BOX ─── */
+.hero-stat {
+  background:rgba(6,21,39,0.7);
+  backdrop-filter:blur(30px);
+  border:1px solid rgba(45,127,255,0.2);
+  border-radius:16px;
+  padding:16px 20px;
+  position:relative;
+  overflow:hidden;
+  transition:all 0.4s ease;
+}
+.hero-stat::before {
+  content:'';
+  position:absolute; bottom:0; left:0; right:0; height:2px;
+  background:linear-gradient(90deg, var(--cobalt-bright), var(--emerald));
+}
+.hero-stat:hover { border-color:rgba(0,230,118,0.3); transform:scale(1.03); }
+
+/* ─── IMAGE FLOAT ─── */
+@keyframes imgFloat {
+  0%,100% { transform:translateY(0) rotate(-1deg); }
+  50%      { transform:translateY(-12px) rotate(1deg); }
+}
+.float-img { animation:imgFloat 7s ease-in-out infinite; }
+
+/* ─── ABOUT IMAGE FRAME ─── */
+.about-frame {
+  position:relative;
+  border-radius:24px;
+  overflow:hidden;
+}
+.about-frame::before {
+  content:'';
+  position:absolute; inset:0; z-index:1;
+  background:
+    linear-gradient(to bottom, rgba(1,6,15,0.1) 0%, rgba(1,6,15,0.0) 40%, rgba(1,6,15,0.85) 100%),
+    linear-gradient(135deg, rgba(45,127,255,0.12) 0%, transparent 50%);
+  pointer-events:none;
+}
+.about-frame::after {
+  content:'';
+  position:absolute; top:-2px; left:-2px; right:-2px; bottom:-2px;
+  border-radius:26px;
+  background:linear-gradient(135deg, var(--cobalt-bright), var(--emerald), var(--cobalt));
+  z-index:-1;
+  opacity:0.4;
+}
+
+/* corner accent */
+.corner-tl, .corner-br {
+  position:absolute;
+  width:40px; height:40px;
+  pointer-events:none; z-index:2;
+}
+.corner-tl { top:16px; left:16px; border-top:2px solid var(--emerald); border-left:2px solid var(--emerald); border-radius:4px 0 0 0; }
+.corner-br { bottom:16px; right:16px; border-bottom:2px solid var(--cobalt-bright); border-right:2px solid var(--cobalt-bright); border-radius:0 0 4px 0; }
+
+/* ─── PIPELINE STEP ─── */
+.pipeline-step {
+  display:flex; align-items:flex-start; gap:20px;
+  position:relative;
+  padding-bottom:32px;
+}
+.pipeline-step:not(:last-child)::after {
+  content:'';
+  position:absolute;
+  left:20px; top:44px; bottom:0;
+  width:1px;
+  background:linear-gradient(180deg, rgba(45,127,255,0.4), transparent);
+}
+.pipe-dot {
+  width:40px; height:40px; border-radius:50%; flex-shrink:0;
+  display:flex; align-items:center; justify-content:center;
+  font-size:0.85rem;
+  background:rgba(6,21,39,0.8);
+  border:1px solid rgba(45,127,255,0.3);
+  transition:all 0.4s ease;
+}
+.pipeline-step:hover .pipe-dot {
+  border-color:var(--emerald);
+  box-shadow:0 0 20px rgba(0,230,118,0.3);
+  transform:scale(1.1);
+}
+
+/* ─── FOOTER ─── */
+footer { background:#00050d; border-top:1px solid rgba(45,127,255,0.1); }
+
+/* ─── CHEMICAL BUBBLES ─── */
+.bubble {
+  position:absolute;
+  border-radius:50%;
+  border:1px solid rgba(0,230,118,0.25);
+  animation:bubbleRise linear infinite;
+  pointer-events:none;
+}
+@keyframes bubbleRise {
+  0%   { transform:translateY(0) translateX(0) scale(0.8); opacity:0; }
+  10%  { opacity:0.6; }
+  90%  { opacity:0.2; }
+  100% { transform:translateY(-300px) translateX(var(--drift,20px)) scale(1.2); opacity:0; }
+}
+
+/* ─── HEXGRID BACKGROUND ─── */
+.hex-bg {
+  background-image:
+    repeating-linear-gradient(0deg, transparent, transparent 28px, rgba(45,127,255,0.03) 28px, rgba(45,127,255,0.03) 29px),
+    repeating-linear-gradient(60deg, transparent, transparent 28px, rgba(45,127,255,0.03) 28px, rgba(45,127,255,0.03) 29px),
+    repeating-linear-gradient(120deg, transparent, transparent 28px, rgba(45,127,255,0.03) 28px, rgba(45,127,255,0.03) 29px);
+}
+
+/* ─── FEATURED BADGE ─── */
+.featured-badge {
+  position:absolute; top:20px; right:20px;
+  background:linear-gradient(135deg, var(--emerald-dim), var(--cobalt));
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:0.65rem; font-weight:700;
+  letter-spacing:0.15em; text-transform:uppercase;
+  color:#fff;
+  padding:4px 12px; border-radius:100px;
+  display:flex; align-items:center; gap:6px;
+}
+
+/* ─── SCANLINES ─── */
+.scanlines::before {
+  content:'';
+  position:absolute; inset:0; pointer-events:none; z-index:3;
+  background:repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(1,6,15,0.08) 2px, rgba(1,6,15,0.08) 4px);
+}
+
+/* ─── MoleculeOrbit Large ─── */
+.mol-orbit {
+  position:absolute;
+  border-radius:50%;
+  border:1px solid rgba(45,127,255,0.1);
+  top:50%; left:50%;
+}
+
+.hero-content { position:relative; z-index:5; }
+.hero-visual  { position:relative; z-index:5; }
+</style>
 </head>
-<body class="bg-navy-950 text-white font-body">
+<body>
 
-<!-- ═══════════════════════ NAV ═══════════════════════ -->
-<nav id="mainNav" class="fixed top-0 inset-x-0 z-50 glass border-b border-white/5 transition-all duration-300">
-    <div class="max-w-7xl mx-auto px-5 py-4 flex items-center justify-between">
+<!-- ═══════ NAV ═══════ -->
+<nav id="nav">
+  <div class="max-w-7xl mx-auto px-6 flex items-center justify-between">
+    <!-- Logo -->
+    <a href="#" class="flex items-center gap-3 group">
+      <div class="relative w-10 h-10 flex items-center justify-center rounded-xl overflow-hidden" style="background:linear-gradient(135deg,#00b359,#0a3d91)">
+        <span class="font-display text-white text-xs tracking-wider font-bold relative z-10">MC</span>
+        <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style="background:linear-gradient(135deg,#0a3d91,#00e676)"></div>
+      </div>
+      <div>
+        <div class="font-display text-white text-[11px] tracking-[0.25em] leading-none">MCLAU</div>
+        <div style="color:rgba(232,245,255,0.35);font-family:'Barlow Condensed',sans-serif;font-size:0.6rem;letter-spacing:0.22em;text-transform:uppercase;margin-top:2px">Solutions</div>
+      </div>
+    </a>
 
-        <!-- Logo -->
-        <a href="#" class="flex items-center gap-3 group">
-            <div class="w-10 h-10 rounded-xl flex items-center justify-center text-white text-lg font-display tracking-wide animate-glow-pulse"
-                 style="background:linear-gradient(135deg,#00c853,#1a4fa0)">MC</div>
-            <div>
-                <div class="font-label text-white text-xs tracking-widest leading-none">MCLAU</div>
-                <div class="text-white/40 text-[9px] tracking-[0.2em] uppercase leading-none mt-0.5">Solutions</div>
-            </div>
-        </a>
+    <!-- Desktop links -->
+    <ul class="hidden md:flex items-center gap-10">
+      <li><a href="#hero"     class="nav-link">Home</a></li>
+      <li><a href="#about"    class="nav-link">About</a></li>
+      <li><a href="#services" class="nav-link">Services</a></li>
+      <li><a href="#values"   class="nav-link">Values</a></li>
+      <li><a href="#contact"  class="nav-link">Contact</a></li>
+    </ul>
 
-        <!-- Desktop links -->
-        <ul class="hidden md:flex items-center gap-8">
-            <li><a href="#home" class="nav-link">Home</a></li>
-            <li><a href="#about" class="nav-link">About</a></li>
-            <li><a href="#services" class="nav-link">Services</a></li>
-            <li><a href="#values" class="nav-link">Values</a></li>
-            <li><a href="#contact" class="nav-link">Contact</a></li>
-        </ul>
+    <!-- CTA -->
+    <a href="#contact" class="hidden md:inline-flex btn-primary text-sm">
+      <i class="fas fa-flask text-xs"></i>
+      <span>Get A Quote</span>
+    </a>
 
-        <!-- CTA Desktop -->
-        <a href="#contact" class="hidden md:inline-flex items-center gap-2 cta-btn text-white font-label text-xs tracking-widest px-5 py-2.5 rounded-full">
-            <span class="flex items-center gap-2"><i class="fas fa-flask text-xs"></i> Get A Quote</span>
-        </a>
-
-        <!-- Hamburger -->
-        <button id="hamburger" class="md:hidden text-white/80 hover:text-white transition w-9 h-9 flex flex-col justify-center gap-1.5 items-end">
-            <span class="block h-0.5 bg-current w-6 transition-all duration-300" id="hLine1"></span>
-            <span class="block h-0.5 bg-current w-4 transition-all duration-300" id="hLine2"></span>
-            <span class="block h-0.5 bg-current w-5 transition-all duration-300" id="hLine3"></span>
-        </button>
-    </div>
+    <!-- Hamburger -->
+    <button id="hamburger" class="md:hidden flex flex-col gap-1.5 items-end p-2">
+      <span class="block h-px w-6 bg-white/70 transition-all" id="h1"></span>
+      <span class="block h-px w-4 bg-white/70 transition-all" id="h2"></span>
+      <span class="block h-px w-5 bg-white/70 transition-all" id="h3"></span>
+    </button>
+  </div>
 </nav>
 
-<!-- Mobile Menu Overlay -->
-<div id="menuOverlay" class="fixed inset-0 z-40 bg-navy-950/70 backdrop-blur-sm"></div>
-
-<!-- Mobile Menu Drawer -->
-<div id="mobileMenu" class="fixed top-0 right-0 z-50 h-full w-72 glass-card border-l border-white/10 flex flex-col py-20 px-8 gap-6">
-    <button id="closeMenu" class="absolute top-6 right-6 text-white/60 hover:text-white text-xl transition"><i class="fas fa-times"></i></button>
-    <a href="#home" class="mobile-nav-link nav-link text-base py-3 border-b border-white/5 block">Home</a>
-    <a href="#about" class="mobile-nav-link nav-link text-base py-3 border-b border-white/5 block">About</a>
-    <a href="#services" class="mobile-nav-link nav-link text-base py-3 border-b border-white/5 block">Services</a>
-    <a href="#values" class="mobile-nav-link nav-link text-base py-3 border-b border-white/5 block">Values</a>
-    <a href="#contact" class="mobile-nav-link nav-link text-base py-3 block">Contact</a>
-    <a href="#contact" class="mt-4 cta-btn text-white font-label text-xs tracking-widest px-5 py-3 rounded-full text-center">
-        <span>Get A Quote</span>
-    </a>
+<!-- Overlay -->
+<div id="overlay" class="fixed inset-0 z-40 bg-navy-950/80 backdrop-blur-md"></div>
+<!-- Mobile Drawer -->
+<div id="mobileMenu" class="fixed top-0 right-0 z-50 h-full w-72 glass border-l border-cobalt/20 flex flex-col py-20 px-8 gap-1">
+  <button id="closeBtn" class="absolute top-6 right-6 text-white/50 hover:text-white text-xl transition"><i class="fas fa-times"></i></button>
+  <a href="#hero"     class="nav-link text-base py-4 border-b border-white/5 block mobile-link">Home</a>
+  <a href="#about"    class="nav-link text-base py-4 border-b border-white/5 block mobile-link">About</a>
+  <a href="#services" class="nav-link text-base py-4 border-b border-white/5 block mobile-link">Services</a>
+  <a href="#values"   class="nav-link text-base py-4 border-b border-white/5 block mobile-link">Values</a>
+  <a href="#contact"  class="nav-link text-base py-4 block mobile-link">Contact</a>
+  <a href="#contact"  class="mt-8 btn-primary text-center justify-center mobile-link">Get A Quote</a>
 </div>
 
 <!-- ═══════════════════════ HERO ═══════════════════════ -->
-<section id="home" class="hero-bg relative min-h-screen flex flex-col justify-center overflow-hidden">
-    <!-- Particle canvas -->
-    <canvas id="particleCanvas"></canvas>
+<section id="hero" class="relative min-h-screen flex flex-col overflow-hidden">
+  <!-- BG -->
+  <div class="hero-bg-img absolute inset-0 scanlines"></div>
 
-    <!-- Animated molecule rings -->
-    <div class="molecule-ring absolute w-[500px] h-[500px] top-1/2 right-[-100px] -translate-y-1/2 animate-molecule-rotate opacity-20"></div>
-    <div class="molecule-ring absolute w-[350px] h-[350px] top-1/2 right-[-25px] -translate-y-1/2 animate-spin-slow opacity-15" style="animation-direction:reverse"></div>
-    <div class="molecule-ring absolute w-[200px] h-[200px] top-1/2 right-[50px] -translate-y-1/2 animate-spin-slow opacity-25" style="animation-duration:8s"></div>
+  <!-- Blobs -->
+  <div class="blob" style="width:600px;height:600px;background:radial-gradient(circle,rgba(10,61,145,0.35),transparent);top:-100px;right:-150px;animation-duration:18s;"></div>
+  <div class="blob" style="width:400px;height:400px;background:radial-gradient(circle,rgba(0,179,89,0.2),transparent);bottom:100px;left:-100px;animation-duration:22s;animation-delay:-8s;"></div>
 
-    <!-- Floating drip drops -->
-    <div class="absolute top-1/4 right-[12%] drip-drop opacity-70" style="animation-delay:0s"></div>
-    <div class="absolute top-1/3 right-[18%] drip-drop opacity-50" style="animation-delay:1.5s; transform:scale(0.7)"></div>
-    <div class="absolute top-[60%] right-[8%] drip-drop opacity-40" style="animation-delay:3s; transform:scale(0.5)"></div>
+  <!-- Particle canvas -->
+  <canvas id="particleCanvas"></canvas>
 
-    <!-- Green glow blobs -->
-    <div class="absolute top-20 left-[-100px] w-80 h-80 rounded-full opacity-20 blur-3xl pointer-events-none" style="background:radial-gradient(#00c853,transparent)"></div>
-    <div class="absolute bottom-20 right-[-80px] w-64 h-64 rounded-full opacity-15 blur-3xl pointer-events-none" style="background:radial-gradient(#3b82f6,transparent)"></div>
+  <!-- Drifting chemical formulas -->
+  <div class="formula-float" style="left:8%;bottom:40%;animation-duration:15s;animation-delay:0s">H₂SO₄</div>
+  <div class="formula-float" style="left:15%;bottom:30%;animation-duration:12s;animation-delay:3s">NaOCl</div>
+  <div class="formula-float" style="right:12%;bottom:45%;animation-duration:18s;animation-delay:1s">C₁₂H₂₂O₁₁</div>
+  <div class="formula-float" style="right:22%;bottom:25%;animation-duration:14s;animation-delay:5s">pH 7.4</div>
+  <div class="formula-float" style="left:50%;bottom:50%;animation-duration:20s;animation-delay:2s">H₂O₂</div>
+  <div class="formula-float" style="left:35%;bottom:35%;animation-duration:16s;animation-delay:7s">KMnO₄</div>
 
-    <!-- Hero content -->
-    <div class="relative z-10 max-w-7xl mx-auto px-5 pt-28 pb-20 grid lg:grid-cols-2 gap-16 items-center">
+  <!-- Large orbit rings (decorative) -->
+  <div class="mol-orbit" style="width:700px;height:700px;animation:spinCW 40s linear infinite;margin-left:-350px;margin-top:-350px;"></div>
+  <div class="mol-orbit" style="width:500px;height:500px;border-color:rgba(0,230,118,0.08);animation:spinCCW 28s linear infinite;margin-left:-250px;margin-top:-250px;"></div>
 
-        <!-- Left: text -->
-        <div>
-            <!-- Label pill -->
-            <div class="inline-flex items-center gap-2 glass px-4 py-2 rounded-full mb-6 animate-slide-up" style="animation-fill-mode:both">
-                <span class="w-2 h-2 rounded-full bg-mint animate-pulse"></span>
-                <span class="font-label text-mint text-[10px] tracking-[0.2em] uppercase">Est. 2019 · South Africa</span>
-            </div>
+  <!-- Main Hero Content -->
+  <div class="hero-content max-w-7xl mx-auto px-6 pt-32 pb-10 flex-1 flex flex-col justify-center grid lg:grid-cols-2 gap-16 items-center w-full">
 
-            <h1 class="font-display tracking-wide leading-none mb-6 animate-slide-up" style="font-size:clamp(3.5rem,8vw,6.5rem);animation-delay:0.1s;animation-fill-mode:both">
-                <span class="text-white">CHEMICAL</span><br>
-                <span class="grad-text">FORMULATION</span><br>
-                <span class="text-white/80 text-[0.65em]">MANUFACTURING &amp; DISTRIBUTION</span>
-            </h1>
+    <!-- Left: Text -->
+    <div style="animation:slideUp 1s ease-out 0.2s both">
+      <!-- Label -->
+      <div class="section-label mb-6" style="justify-content:flex-start">
+        <span></span>
+        Est. 2019 · Proudly South African
+        <span></span>
+      </div>
 
-            <p class="text-white/55 text-base md:text-lg leading-relaxed mb-10 max-w-xl animate-slide-up" style="animation-delay:0.2s;animation-fill-mode:both">
-                Manufacturing and supplying unique detergents, industrial chemicals, and cleaning solutions — tested, certified, and delivered nationwide since 2019.
-            </p>
+      <h1 class="font-condensed font-900 leading-none mb-6" style="font-size:clamp(3.2rem,8vw,6rem);font-weight:900;line-height:0.9;">
+        <span style="display:block;color:rgba(232,245,255,0.95);letter-spacing:0.04em;font-size:0.55em;font-weight:300;margin-bottom:4px;font-family:'Barlow Condensed',sans-serif">Chemical</span>
+        <span class="text-gradient" style="display:block;letter-spacing:0.02em;">FORMULATION</span>
+        <span style="display:block;color:rgba(232,245,255,0.7);font-size:0.45em;font-weight:500;letter-spacing:0.15em;margin-top:6px;font-family:'Barlow Condensed',sans-serif">Manufacturing &amp; Distribution</span>
+      </h1>
 
-            <div class="flex flex-col sm:flex-row gap-4 animate-slide-up" style="animation-delay:0.3s;animation-fill-mode:both">
-                <a href="#contact" class="cta-btn text-white font-label text-xs tracking-widest px-8 py-4 rounded-full inline-flex items-center justify-center gap-3">
-                    <span class="flex items-center gap-3"><i class="fas fa-flask"></i> Request A Quote</span>
-                </a>
-                <a href="#services" class="glass border border-white/20 hover:border-mint/40 text-white font-label text-xs tracking-widest px-8 py-4 rounded-full inline-flex items-center justify-center gap-3 transition-all duration-300 hover:bg-white/5">
-                    <span class="flex items-center gap-3"><i class="fas fa-arrow-right"></i> Our Services</span>
-                </a>
-            </div>
+      <p style="color:rgba(232,245,255,0.5);font-size:1rem;line-height:1.8;max-width:500px;margin-bottom:36px">
+        Manufacturing and supplying precision-engineered detergents, industrial chemicals, and cleaning solutions — TUT certified, SARS aligned, delivered nationwide.
+      </p>
 
-            <!-- Stats row -->
-            <div class="flex gap-8 mt-14 animate-slide-up" style="animation-delay:0.4s;animation-fill-mode:both">
-                <div>
-                    <div class="stat-number text-2xl grad-text">100%</div>
-                    <div class="text-white/40 text-xs mt-1 tracking-wide">BWO Company</div>
-                </div>
-                <div class="w-px bg-white/10"></div>
-                <div>
-                    <div class="stat-number text-2xl grad-text">5+</div>
-                    <div class="text-white/40 text-xs mt-1 tracking-wide">Years Active</div>
-                </div>
-                <div class="w-px bg-white/10"></div>
-                <div>
-                    <div class="stat-number text-2xl grad-text">L1</div>
-                    <div class="text-white/40 text-xs mt-1 tracking-wide">B-BBEE EME</div>
-                </div>
-            </div>
+      <div class="flex flex-wrap gap-4 mb-12">
+        <a href="#contact" class="btn-primary">
+          <i class="fas fa-flask text-xs"></i>
+          <span>Request A Quote</span>
+        </a>
+        <a href="#services" class="btn-ghost">
+          <i class="fas fa-chevron-right text-xs"></i>
+          <span>Explore Services</span>
+        </a>
+      </div>
+
+      <!-- Hero stats row -->
+      <div class="flex flex-wrap gap-4">
+        <div class="hero-stat">
+          <div class="font-condensed font-bold text-2xl text-gradient-blue" style="line-height:1">100%</div>
+          <div style="font-size:0.7rem;color:rgba(232,245,255,0.4);letter-spacing:0.1em;text-transform:uppercase;margin-top:4px;font-family:'Barlow Condensed',sans-serif;">BWO Company</div>
         </div>
-
-        <!-- Right: Chemical flask visual -->
-        <div class="flex justify-center items-center animate-slide-in-right" style="animation-fill-mode:both">
-            <div class="relative w-64 h-64 lg:w-80 lg:h-80">
-                <!-- Glow ring -->
-                <div class="absolute inset-0 rounded-full animate-glow-pulse pointer-events-none" style="background:radial-gradient(circle, rgba(0,200,83,0.15) 0%, transparent 70%)"></div>
-
-                <!-- Outer ring -->
-                <div class="absolute inset-0 rounded-full border border-mint/20 animate-spin-slow"></div>
-                <div class="absolute inset-4 rounded-full border border-cobalt-bright/20 animate-spin-slow" style="animation-direction:reverse;animation-duration:12s"></div>
-
-                <!-- Center flask card -->
-                <div class="absolute inset-8 rounded-full glass-light flex flex-col items-center justify-center border border-white/10">
-                    <!-- Animated beaker SVG -->
-                    <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
-                        <!-- Flask body -->
-                        <path d="M28 10 L28 40 L10 68 Q8 72 12 72 L68 72 Q72 72 70 68 L52 40 L52 10 Z"
-                              fill="url(#fGrad)" opacity="0.9" stroke="rgba(0,200,83,0.5)" stroke-width="1.5"/>
-                        <!-- Neck top -->
-                        <rect x="26" y="8" width="28" height="5" rx="2" fill="rgba(0,200,83,0.5)"/>
-                        <!-- Liquid fill -->
-                        <clipPath id="liqClip">
-                            <path d="M28 40 L10 68 Q8 72 12 72 L68 72 Q72 72 70 68 L52 40 Z"/>
-                        </clipPath>
-                        <rect x="0" y="50" width="80" height="30" fill="url(#lGrad)" clip-path="url(#liqClip)" opacity="0.85">
-                            <animate attributeName="y" values="55;48;55" dur="3s" repeatCount="indefinite"/>
-                        </rect>
-                        <!-- Bubbles in flask -->
-                        <circle cx="30" cy="62" r="3" fill="rgba(255,255,255,0.3)">
-                            <animate attributeName="cy" values="65;58;65" dur="2s" repeatCount="indefinite"/>
-                            <animate attributeName="opacity" values="0.3;0.7;0.3" dur="2s" repeatCount="indefinite"/>
-                        </circle>
-                        <circle cx="48" cy="60" r="2" fill="rgba(255,255,255,0.25)">
-                            <animate attributeName="cy" values="63;56;63" dur="2.5s" repeatCount="indefinite"/>
-                        </circle>
-                        <circle cx="38" cy="65" r="1.5" fill="rgba(255,255,255,0.2)">
-                            <animate attributeName="cy" values="68;60;68" dur="1.8s" repeatCount="indefinite"/>
-                        </circle>
-                        <!-- Shine -->
-                        <path d="M33 20 Q36 18 40 22" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" stroke-linecap="round"/>
-                        <defs>
-                            <linearGradient id="fGrad" x1="0" y1="0" x2="1" y2="1">
-                                <stop offset="0%" stop-color="rgba(0,200,83,0.25)"/>
-                                <stop offset="100%" stop-color="rgba(59,130,246,0.25)"/>
-                            </linearGradient>
-                            <linearGradient id="lGrad" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="0%" stop-color="#00c853" stop-opacity="0.8"/>
-                                <stop offset="100%" stop-color="#1a4fa0" stop-opacity="0.9"/>
-                            </linearGradient>
-                        </defs>
-                    </svg>
-                    <div class="font-label text-mint text-[9px] tracking-[0.25em] mt-2 uppercase">Formulating</div>
-                </div>
-
-                <!-- Orbiting atoms -->
-                <div class="absolute inset-0 animate-molecule-rotate">
-                    <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-mint/80 shadow-lg" style="box-shadow:0 0 12px #00c853"></div>
-                    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-3 h-3 rounded-full bg-cobalt-bright/80" style="box-shadow:0 0 10px #3b82f6"></div>
-                </div>
-                <div class="absolute inset-0 animate-molecule-rotate" style="animation-direction:reverse;animation-duration:10s">
-                    <div class="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 w-3.5 h-3.5 rounded-full bg-white/60" style="box-shadow:0 0 8px rgba(255,255,255,0.6)"></div>
-                    <div class="absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-mint/60"></div>
-                </div>
-            </div>
+        <div class="hero-stat">
+          <div class="font-condensed font-bold text-2xl text-gradient" style="line-height:1">L1</div>
+          <div style="font-size:0.7rem;color:rgba(232,245,255,0.4);letter-spacing:0.1em;text-transform:uppercase;margin-top:4px;font-family:'Barlow Condensed',sans-serif;">B-BBEE EME</div>
         </div>
+        <div class="hero-stat">
+          <div class="font-condensed font-bold text-2xl text-gradient-blue" style="line-height:1">5+</div>
+          <div style="font-size:0.7rem;color:rgba(232,245,255,0.4);letter-spacing:0.1em;text-transform:uppercase;margin-top:4px;font-family:'Barlow Condensed',sans-serif;">Years Active</div>
+        </div>
+        <div class="hero-stat">
+          <div class="font-condensed font-bold text-2xl text-gradient" style="line-height:1">4</div>
+          <div style="font-size:0.7rem;color:rgba(232,245,255,0.4);letter-spacing:0.1em;text-transform:uppercase;margin-top:4px;font-family:'Barlow Condensed',sans-serif;">Container Sizes</div>
+        </div>
+      </div>
     </div>
 
-    <!-- Ticker bar -->
-    <div class="relative z-10 w-full border-t border-white/5 overflow-hidden">
-        <div class="glass py-3">
-            <div class="ticker-wrap">
-                <div class="ticker-inner font-label text-[10px] tracking-[0.2em] text-white/30 uppercase">
-                    <span class="mx-8">Chemical Formulation</span><span class="text-mint/50 mx-4">◆</span>
-                    <span class="mx-8">Industrial Degreasers</span><span class="text-mint/50 mx-4">◆</span>
-                    <span class="mx-8">Water Treatment</span><span class="text-mint/50 mx-4">◆</span>
-                    <span class="mx-8">Mining Chemicals</span><span class="text-mint/50 mx-4">◆</span>
-                    <span class="mx-8">Cleaning Services</span><span class="text-mint/50 mx-4">◆</span>
-                    <span class="mx-8">Nationwide Distribution</span><span class="text-mint/50 mx-4">◆</span>
-                    <span class="mx-8">B-BBEE Level 1</span><span class="text-mint/50 mx-4">◆</span>
-                    <span class="mx-8">TUT Tested &amp; Certified</span><span class="text-mint/50 mx-4">◆</span>
-                    <!-- Duplicate for seamless loop -->
-                    <span class="mx-8">Chemical Formulation</span><span class="text-mint/50 mx-4">◆</span>
-                    <span class="mx-8">Industrial Degreasers</span><span class="text-mint/50 mx-4">◆</span>
-                    <span class="mx-8">Water Treatment</span><span class="text-mint/50 mx-4">◆</span>
-                    <span class="mx-8">Mining Chemicals</span><span class="text-mint/50 mx-4">◆</span>
-                    <span class="mx-8">Cleaning Services</span><span class="text-mint/50 mx-4">◆</span>
-                    <span class="mx-8">Nationwide Distribution</span><span class="text-mint/50 mx-4">◆</span>
-                    <span class="mx-8">B-BBEE Level 1</span><span class="text-mint/50 mx-4">◆</span>
-                    <span class="mx-8">TUT Tested &amp; Certified</span><span class="text-mint/50 mx-4">◆</span>
-                </div>
-            </div>
+    <!-- Right: 3D Molecule Visualizer -->
+    <div class="hero-visual flex items-center justify-center" style="animation:slideInRight 1s ease-out 0.4s both">
+      <div class="relative" style="width:340px;height:340px">
+        <!-- Glow aura -->
+        <div style="position:absolute;inset:-40px;background:radial-gradient(circle,rgba(45,127,255,0.18),transparent 70%);border-radius:50%;animation:glowPulse 3s ease-in-out infinite;"></div>
+
+        <!-- Orbit rings -->
+        <div style="position:absolute;inset:0;border-radius:50%;border:1px solid rgba(45,127,255,0.2);animation:spinCW 12s linear infinite;"></div>
+        <div style="position:absolute;inset:20px;border-radius:50%;border:1px solid rgba(0,230,118,0.15);animation:spinCCW 9s linear infinite;"></div>
+        <div style="position:absolute;inset:40px;border-radius:50%;border:1px solid rgba(232,245,255,0.08);animation:spinCW 6s linear infinite;"></div>
+
+        <!-- Orbiting atoms on ring 1 -->
+        <div style="position:absolute;inset:0;animation:spinCW 12s linear infinite;border-radius:50%;">
+          <div style="position:absolute;top:-8px;left:50%;transform:translateX(-50%);width:16px;height:16px;border-radius:50%;background:var(--cobalt-bright);box-shadow:0 0 16px var(--cobalt-bright);"></div>
+          <div style="position:absolute;bottom:-8px;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:var(--emerald);box-shadow:0 0 12px var(--emerald);"></div>
         </div>
+        <!-- Orbiting atoms on ring 2 -->
+        <div style="position:absolute;inset:20px;animation:spinCCW 9s linear infinite;border-radius:50%;">
+          <div style="position:absolute;top:-6px;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:var(--ice);box-shadow:0 0 10px var(--ice);opacity:0.7;"></div>
+          <div style="position:absolute;right:-6px;top:50%;transform:translateY(-50%);width:10px;height:10px;border-radius:50%;background:var(--emerald-dim);box-shadow:0 0 10px var(--emerald-dim);"></div>
+        </div>
+
+        <!-- Central Flask -->
+        <div style="position:absolute;inset:60px;border-radius:50%;background:rgba(6,21,39,0.8);backdrop-filter:blur(30px);border:1px solid rgba(45,127,255,0.3);display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:inset 0 0 40px rgba(45,127,255,0.1);">
+          <svg width="90" height="90" viewBox="0 0 90 90" fill="none">
+            <!-- Flask neck -->
+            <rect x="31" y="8" width="28" height="6" rx="3" fill="rgba(45,127,255,0.4)" stroke="rgba(45,127,255,0.6)" stroke-width="1"/>
+            <!-- Flask body -->
+            <path d="M34 14 L34 44 L12 76 Q10 80 14 80 L76 80 Q80 80 78 76 L56 44 L56 14 Z"
+                  fill="url(#fg)" opacity="0.9" stroke="rgba(0,230,118,0.4)" stroke-width="1.5"/>
+            <!-- Liquid -->
+            <clipPath id="lc"><path d="M34 44 L12 76 Q10 80 14 80 L76 80 Q80 80 78 76 L56 44 Z"/></clipPath>
+            <rect x="0" y="56" width="90" height="32" fill="url(#lg)" clip-path="url(#lc)" opacity="0.9">
+              <animate attributeName="y" values="62;54;62" dur="3s" repeatCount="indefinite"/>
+            </rect>
+            <!-- Bubbles -->
+            <circle cx="34" cy="68" r="3.5" fill="rgba(255,255,255,0.25)">
+              <animate attributeName="cy" values="72;62;72" dur="2s" repeatCount="indefinite"/>
+              <animate attributeName="opacity" values="0.25;0.6;0.25" dur="2s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="54" cy="65" r="2.5" fill="rgba(255,255,255,0.2)">
+              <animate attributeName="cy" values="68;58;68" dur="2.5s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="44" cy="72" r="2" fill="rgba(255,255,255,0.18)">
+              <animate attributeName="cy" values="75;65;75" dur="1.8s" repeatCount="indefinite"/>
+            </circle>
+            <!-- Shine -->
+            <path d="M38 22 Q42 19 46 24" stroke="rgba(255,255,255,0.5)" stroke-width="1.8" stroke-linecap="round"/>
+            <defs>
+              <linearGradient id="fg" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="rgba(45,127,255,0.2)"/>
+                <stop offset="100%" stop-color="rgba(0,230,118,0.15)"/>
+              </linearGradient>
+              <linearGradient id="lg" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#00e676" stop-opacity="0.9"/>
+                <stop offset="100%" stop-color="#0a3d91" stop-opacity="1"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:0.6rem;letter-spacing:0.25em;color:var(--emerald);text-transform:uppercase;margin-top:4px;">Formulating</div>
+        </div>
+
+        <!-- Chemical bubbles floating up -->
+        <div class="bubble" style="width:8px;height:8px;left:30%;bottom:0;animation-duration:4s;--drift:-15px;"></div>
+        <div class="bubble" style="width:6px;height:6px;left:50%;bottom:0;animation-duration:5s;animation-delay:1s;--drift:10px;"></div>
+        <div class="bubble" style="width:10px;height:10px;left:70%;bottom:0;animation-duration:3.5s;animation-delay:2s;--drift:-20px;"></div>
+      </div>
     </div>
+  </div>
+
+  <!-- Ticker -->
+  <div class="relative z-10 border-t" style="border-color:rgba(45,127,255,0.1);background:rgba(1,6,15,0.7);backdrop-filter:blur(20px);">
+    <div class="ticker-wrap py-3">
+      <div class="ticker-inner" style="font-family:'Barlow Condensed',sans-serif;font-size:0.7rem;letter-spacing:0.25em;color:rgba(232,245,255,0.25);text-transform:uppercase;">
+        <span class="mx-10">Chemical Formulation</span><span style="color:var(--emerald);opacity:0.5;" class="mx-4">◆</span>
+        <span class="mx-10">Industrial Degreasers</span><span style="color:var(--cobalt-bright);opacity:0.5;" class="mx-4">◆</span>
+        <span class="mx-10">Water Treatment</span><span style="color:var(--emerald);opacity:0.5;" class="mx-4">◆</span>
+        <span class="mx-10">Mining Chemicals</span><span style="color:var(--cobalt-bright);opacity:0.5;" class="mx-4">◆</span>
+        <span class="mx-10">Professional Cleaning</span><span style="color:var(--emerald);opacity:0.5;" class="mx-4">◆</span>
+        <span class="mx-10">Nationwide Distribution</span><span style="color:var(--cobalt-bright);opacity:0.5;" class="mx-4">◆</span>
+        <span class="mx-10">B-BBEE Level 1 EME</span><span style="color:var(--emerald);opacity:0.5;" class="mx-4">◆</span>
+        <span class="mx-10">TUT Tested &amp; Certified</span><span style="color:var(--cobalt-bright);opacity:0.5;" class="mx-4">◆</span>
+        <!-- duplicate for seamless loop -->
+        <span class="mx-10">Chemical Formulation</span><span style="color:var(--emerald);opacity:0.5;" class="mx-4">◆</span>
+        <span class="mx-10">Industrial Degreasers</span><span style="color:var(--cobalt-bright);opacity:0.5;" class="mx-4">◆</span>
+        <span class="mx-10">Water Treatment</span><span style="color:var(--emerald);opacity:0.5;" class="mx-4">◆</span>
+        <span class="mx-10">Mining Chemicals</span><span style="color:var(--cobalt-bright);opacity:0.5;" class="mx-4">◆</span>
+        <span class="mx-10">Professional Cleaning</span><span style="color:var(--emerald);opacity:0.5;" class="mx-4">◆</span>
+        <span class="mx-10">Nationwide Distribution</span><span style="color:var(--cobalt-bright);opacity:0.5;" class="mx-4">◆</span>
+        <span class="mx-10">B-BBEE Level 1 EME</span><span style="color:var(--emerald);opacity:0.5;" class="mx-4">◆</span>
+        <span class="mx-10">TUT Tested &amp; Certified</span><span style="color:var(--cobalt-bright);opacity:0.5;" class="mx-4">◆</span>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- ═══════════════════════ ABOUT ═══════════════════════ -->
-<section id="about" class="about-bg relative py-28 px-5">
-    <div class="glow-line absolute top-0 inset-x-0"></div>
+<section id="about" class="about-section relative py-28 px-6">
+  <div class="glow-line absolute top-0 inset-x-0"></div>
+  <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-20 items-center">
 
-    <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-20 items-center">
+    <!-- Left: Image -->
+    <div class="reveal-left">
+      <div class="about-frame float-img" style="aspect-ratio:4/5;max-height:580px">
+        <div class="corner-tl"></div>
+        <div class="corner-br"></div>
+        <img src="https://images.unsplash.com/photo-1582719471384-894fbb16e074?w=900&q=85" alt="MCLAU Laboratory"
+             class="w-full h-full object-cover" style="border-radius:24px;">
 
-        <!-- Left: text -->
-        <div class="reveal-left">
-            <div class="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full glass border border-white/10">
-                <span class="w-1.5 h-1.5 rounded-full bg-mint"></span>
-                <span class="font-label text-mint/80 text-[10px] tracking-widest uppercase">Who We Are</span>
+        <!-- Overlay gradient -->
+        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(1,6,15,0.85) 0%,rgba(1,6,15,0.1) 50%,transparent 100%);border-radius:24px;z-index:1;pointer-events:none;"></div>
+
+        <!-- Bottom badge -->
+        <div style="position:absolute;bottom:24px;left:24px;right:24px;z-index:2;">
+          <div class="glass" style="border-radius:16px;padding:16px 20px;border-color:rgba(45,127,255,0.25)">
+            <div class="flex items-center gap-4">
+              <div style="width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,rgba(0,230,118,0.2),rgba(45,127,255,0.2));border:1px solid rgba(0,230,118,0.3);display:flex;align-items:center;justify-content:center;color:var(--emerald);font-size:1.1rem;flex-shrink:0;">
+                <i class="fas fa-flask-vial"></i>
+              </div>
+              <div>
+                <div style="color:#fff;font-weight:600;font-size:0.85rem;">Precision Formulated</div>
+                <div style="color:rgba(232,245,255,0.45);font-size:0.75rem;margin-top:2px;font-family:'Barlow Condensed',sans-serif;letter-spacing:0.05em;">5L · 25L · 210L · 1000L Containers</div>
+              </div>
             </div>
-
-            <h2 class="font-display text-5xl md:text-6xl tracking-wide leading-none mb-8">
-                <span class="text-white">ABOUT</span><br>
-                <span class="grad-text">MCLAU</span>
-            </h2>
-
-            <div class="space-y-4 text-white/55 leading-relaxed text-base">
-                <p>Since <span class="text-mint font-semibold">2019</span>, MCLAU Solutions Pty Ltd has been manufacturing and supplying a unique range of detergents to end users. We are a <span class="text-white font-semibold">100% Youth, 100% Women &amp; 100% Black owned</span> company.</p>
-                <p>We specialize in manufacturing and distributing detergent products, cleaning materials, chemicals and paper products to retailers and customers across South Africa.</p>
-                <p>Our products are <span class="text-cobalt-bright font-semibold">tested at Tshwane University of Technology</span> and Technology Innovation Agency, aligned with SARS Quality Standards.</p>
-            </div>
-
-            <!-- Certifications -->
-            <div class="mt-10 grid grid-cols-2 gap-4">
-                <div class="glass border border-white/10 rounded-2xl p-4 hover:border-mint/30 transition-all duration-300 hover:-translate-y-1">
-                    <div class="text-mint text-xl mb-2"><i class="fas fa-certificate"></i></div>
-                    <div class="text-white text-sm font-semibold">B-BBEE Level 1</div>
-                    <div class="text-white/40 text-xs mt-1">EME Recognition</div>
-                </div>
-                <div class="glass border border-white/10 rounded-2xl p-4 hover:border-cobalt-bright/30 transition-all duration-300 hover:-translate-y-1">
-                    <div class="text-cobalt-bright text-xl mb-2"><i class="fas fa-microscope"></i></div>
-                    <div class="text-white text-sm font-semibold">TUT Tested</div>
-                    <div class="text-white/40 text-xs mt-1">Quality Certified</div>
-                </div>
-                <div class="glass border border-white/10 rounded-2xl p-4 hover:border-mint/30 transition-all duration-300 hover:-translate-y-1">
-                    <div class="text-mint text-xl mb-2"><i class="fas fa-building"></i></div>
-                    <div class="text-white text-sm font-semibold">Reg: 2019/345296/07</div>
-                    <div class="text-white/40 text-xs mt-1">Formally Registered</div>
-                </div>
-                <div class="glass border border-white/10 rounded-2xl p-4 hover:border-cobalt-bright/30 transition-all duration-300 hover:-translate-y-1">
-                    <div class="text-cobalt-bright text-xl mb-2"><i class="fas fa-truck"></i></div>
-                    <div class="text-white text-sm font-semibold">Nationwide</div>
-                    <div class="text-white/40 text-xs mt-1">Door-to-Door Delivery</div>
-                </div>
-            </div>
+          </div>
         </div>
-
-        <!-- Right: visual card -->
-        <div class="reveal-right">
-            <div class="relative rounded-3xl overflow-hidden" style="aspect-ratio:4/5;max-height:550px">
-                <img src="https://images.unsplash.com/photo-1582719471384-894fbb16e074?w=900&q=80"
-                     alt="Chemical laboratory" class="w-full h-full object-cover">
-                <!-- Overlay gradient -->
-                <div class="absolute inset-0" style="background:linear-gradient(to top, rgba(5,13,26,0.9) 0%, rgba(5,13,26,0.2) 60%, transparent 100%)"></div>
-                <!-- Floating badge -->
-                <div class="absolute bottom-6 left-6 right-6 glass-light rounded-2xl p-5 border border-white/10">
-                    <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 rounded-xl flex items-center justify-center text-mint text-xl flex-shrink-0"
-                             style="background:linear-gradient(135deg,rgba(0,200,83,0.2),rgba(59,130,246,0.2));border:1px solid rgba(0,200,83,0.3)">
-                            <i class="fas fa-flask-vial"></i>
-                        </div>
-                        <div>
-                            <div class="text-white font-semibold text-sm">Formulated with Precision</div>
-                            <div class="text-white/50 text-xs mt-0.5">Available in 5L · 25L · 210L · 1000L containers</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
-    <div class="glow-line absolute bottom-0 inset-x-0"></div>
+
+    <!-- Right: Content -->
+    <div class="reveal-right">
+      <div class="section-label mb-6">Who We Are</div>
+
+      <h2 class="font-condensed font-black leading-none mb-8" style="font-size:clamp(2.8rem,6vw,4.5rem);font-weight:900;letter-spacing:0.02em;">
+        <span style="color:rgba(232,245,255,0.9);">ABOUT </span>
+        <span class="text-gradient">MCLAU</span>
+      </h2>
+
+      <div style="color:rgba(232,245,255,0.5);line-height:1.9;font-size:0.95rem;" class="space-y-4 mb-10">
+        <p>Since <span style="color:var(--emerald);font-weight:600;">2019</span>, MCLAU Solutions Pty Ltd has been manufacturing and supplying a unique range of detergents to end users. We are a <span style="color:#fff;font-weight:600;">100% Youth, 100% Women &amp; 100% Black owned</span> company.</p>
+        <p>We specialise in manufacturing and distributing detergent products, cleaning materials, chemicals and paper products to retailers and customers across South Africa.</p>
+        <p>Our products are <span style="color:var(--cobalt-glow);font-weight:600;">tested at Tshwane University of Technology</span> and Technology Innovation Agency, aligned with SARS Quality Standards.</p>
+      </div>
+
+      <!-- Process pipeline -->
+      <div class="mb-10">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:0.7rem;letter-spacing:0.2em;color:rgba(232,245,255,0.3);text-transform:uppercase;margin-bottom:16px;">Our Process</div>
+        <div class="pipeline-step">
+          <div class="pipe-dot"><i class="fas fa-flask text-cobalt-bright text-xs"></i></div>
+          <div>
+            <div style="color:#fff;font-weight:600;font-size:0.9rem;margin-bottom:2px;">Formulation R&amp;D</div>
+            <div style="color:rgba(232,245,255,0.4);font-size:0.8rem;">Precision chemical engineering in certified facilities</div>
+          </div>
+        </div>
+        <div class="pipeline-step">
+          <div class="pipe-dot"><i class="fas fa-microscope" style="color:var(--emerald);font-size:0.75rem;"></i></div>
+          <div>
+            <div style="color:#fff;font-weight:600;font-size:0.9rem;margin-bottom:2px;">TUT Quality Testing</div>
+            <div style="color:rgba(232,245,255,0.4);font-size:0.8rem;">Independently certified at Tshwane University of Technology</div>
+          </div>
+        </div>
+        <div class="pipeline-step">
+          <div class="pipe-dot"><i class="fas fa-boxes-stacking" style="color:var(--cobalt-bright);font-size:0.75rem;"></i></div>
+          <div>
+            <div style="color:#fff;font-weight:600;font-size:0.9rem;margin-bottom:2px;">Manufacturing &amp; Packaging</div>
+            <div style="color:rgba(232,245,255,0.4);font-size:0.8rem;">Available in 5L, 25L, 210L and 1000L containers</div>
+          </div>
+        </div>
+        <div class="pipeline-step" style="padding-bottom:0">
+          <div class="pipe-dot"><i class="fas fa-truck" style="color:var(--emerald);font-size:0.75rem;"></i></div>
+          <div>
+            <div style="color:#fff;font-weight:600;font-size:0.9rem;margin-bottom:2px;">Nationwide Distribution</div>
+            <div style="color:rgba(232,245,255,0.4);font-size:0.8rem;">Personal delivery or courier across South Africa</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Certifications grid -->
+      <div class="grid grid-cols-2 gap-3">
+        <div class="cert-card p-4">
+          <div style="color:var(--emerald);font-size:1rem;margin-bottom:8px;"><i class="fas fa-certificate"></i></div>
+          <div style="color:#fff;font-size:0.85rem;font-weight:600;">B-BBEE Level 1</div>
+          <div style="color:rgba(232,245,255,0.4);font-size:0.75rem;margin-top:2px;">EME Recognition</div>
+        </div>
+        <div class="cert-card p-4">
+          <div style="color:var(--cobalt-bright);font-size:1rem;margin-bottom:8px;"><i class="fas fa-microscope"></i></div>
+          <div style="color:#fff;font-size:0.85rem;font-weight:600;">TUT Certified</div>
+          <div style="color:rgba(232,245,255,0.4);font-size:0.75rem;margin-top:2px;">Quality Tested</div>
+        </div>
+        <div class="cert-card p-4">
+          <div style="color:var(--emerald);font-size:1rem;margin-bottom:8px;"><i class="fas fa-building"></i></div>
+          <div style="color:#fff;font-size:0.85rem;font-weight:600;">Reg No.</div>
+          <div style="color:rgba(232,245,255,0.4);font-size:0.75rem;margin-top:2px;">2019/345296/07</div>
+        </div>
+        <div class="cert-card p-4">
+          <div style="color:var(--cobalt-bright);font-size:1rem;margin-bottom:8px;"><i class="fas fa-truck"></i></div>
+          <div style="color:#fff;font-size:0.85rem;font-weight:600;">Nationwide</div>
+          <div style="color:rgba(232,245,255,0.4);font-size:0.75rem;margin-top:2px;">Door-to-Door Delivery</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="glow-line absolute bottom-0 inset-x-0"></div>
 </section>
 
 <!-- ═══════════════════════ SERVICES ═══════════════════════ -->
-<section id="services" class="services-bg relative py-28 px-5">
-    <div class="max-w-7xl mx-auto">
+<section id="services" class="services-section relative py-28 px-6 hex-bg">
+  <div class="max-w-7xl mx-auto">
 
-        <div class="text-center mb-16 reveal">
-            <div class="inline-flex items-center gap-2 mb-5 px-4 py-2 rounded-full glass border border-white/10">
-                <span class="w-1.5 h-1.5 rounded-full bg-cobalt-bright"></span>
-                <span class="font-label text-cobalt-bright/80 text-[10px] tracking-widest uppercase">What We Do</span>
-            </div>
-            <h2 class="font-display text-5xl md:text-6xl tracking-wide leading-none">
-                <span class="text-white">OUR </span><span class="grad-text">SERVICES</span>
-            </h2>
-        </div>
-
-        <div class="grid md:grid-cols-3 gap-6">
-
-            <!-- Service 1 -->
-            <div class="service-card rounded-3xl p-8 reveal" style="transition-delay:0.1s">
-                <div class="service-icon mb-6 text-mint">
-                    <i class="fas fa-flask-vial"></i>
-                </div>
-                <h3 class="text-white font-semibold text-lg mb-3 leading-snug">Detergents &amp; Chemicals</h3>
-                <p class="text-white/45 text-sm leading-relaxed">
-                    Specifically formulated degreasers, industrial chemicals, mining chemicals, and water treatment products. Available in 5L, 25L, 210L or 1000L containers for any scale operation.
-                </p>
-                <div class="mt-6 pt-6 border-t border-white/5 flex flex-wrap gap-2">
-                    <span class="text-[10px] font-label tracking-wider text-mint/70 px-3 py-1 rounded-full" style="background:rgba(0,200,83,0.08);border:1px solid rgba(0,200,83,0.2)">Industrial</span>
-                    <span class="text-[10px] font-label tracking-wider text-cobalt-bright/70 px-3 py-1 rounded-full" style="background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.2)">Mining</span>
-                    <span class="text-[10px] font-label tracking-wider text-mint/70 px-3 py-1 rounded-full" style="background:rgba(0,200,83,0.08);border:1px solid rgba(0,200,83,0.2)">Water Treatment</span>
-                </div>
-            </div>
-
-            <!-- Service 2 (featured) -->
-            <div class="service-card rounded-3xl p-8 reveal" style="transition-delay:0.2s;border-color:rgba(0,200,83,0.2)">
-                <div class="absolute inset-0 rounded-3xl pointer-events-none" style="background:linear-gradient(135deg,rgba(0,200,83,0.06) 0%,transparent 60%)"></div>
-                <div class="service-icon mb-6 text-mint" style="background:linear-gradient(135deg,rgba(0,200,83,0.25),rgba(59,130,246,0.15));border-color:rgba(0,200,83,0.4)">
-                    <i class="fas fa-broom"></i>
-                </div>
-                <div class="inline-flex items-center gap-1.5 mb-4 px-2.5 py-1 rounded-full" style="background:rgba(0,200,83,0.12);border:1px solid rgba(0,200,83,0.25)">
-                    <span class="w-1.5 h-1.5 rounded-full bg-mint animate-pulse"></span>
-                    <span class="font-label text-mint text-[9px] tracking-widest">Most Popular</span>
-                </div>
-                <h3 class="text-white font-semibold text-lg mb-3 leading-snug">Professional Cleaning</h3>
-                <p class="text-white/45 text-sm leading-relaxed">
-                    Comprehensive cleaning services for households, offices, PPE, kitchens, bathrooms, and carpets. Hygienic, environmentally sound, and thorough — every time.
-                </p>
-                <div class="mt-6 pt-6 border-t border-white/5 flex flex-wrap gap-2">
-                    <span class="text-[10px] font-label tracking-wider text-mint/70 px-3 py-1 rounded-full" style="background:rgba(0,200,83,0.08);border:1px solid rgba(0,200,83,0.2)">Residential</span>
-                    <span class="text-[10px] font-label tracking-wider text-cobalt-bright/70 px-3 py-1 rounded-full" style="background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.2)">Commercial</span>
-                    <span class="text-[10px] font-label tracking-wider text-mint/70 px-3 py-1 rounded-full" style="background:rgba(0,200,83,0.08);border:1px solid rgba(0,200,83,0.2)">PPE</span>
-                </div>
-            </div>
-
-            <!-- Service 3 -->
-            <div class="service-card rounded-3xl p-8 reveal" style="transition-delay:0.3s">
-                <div class="service-icon mb-6 text-cobalt-bright">
-                    <i class="fas fa-wrench"></i>
-                </div>
-                <h3 class="text-white font-semibold text-lg mb-3 leading-snug">Maintenance Services</h3>
-                <p class="text-white/45 text-sm leading-relaxed">
-                    Building repair &amp; maintenance including light replacements, air conditioner servicing, lock repairs, and landscaping. One call, complete solution.
-                </p>
-                <div class="mt-6 pt-6 border-t border-white/5 flex flex-wrap gap-2">
-                    <span class="text-[10px] font-label tracking-wider text-mint/70 px-3 py-1 rounded-full" style="background:rgba(0,200,83,0.08);border:1px solid rgba(0,200,83,0.2)">Repairs</span>
-                    <span class="text-[10px] font-label tracking-wider text-cobalt-bright/70 px-3 py-1 rounded-full" style="background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.2)">HVAC</span>
-                    <span class="text-[10px] font-label tracking-wider text-mint/70 px-3 py-1 rounded-full" style="background:rgba(0,200,83,0.08);border:1px solid rgba(0,200,83,0.2)">Landscaping</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Product size visual -->
-        <div class="mt-16 glass rounded-3xl border border-white/8 p-8 reveal">
-            <div class="text-center mb-8">
-                <div class="font-label text-white/30 text-[10px] tracking-widest uppercase mb-2">Available Container Sizes</div>
-                <h3 class="text-white font-semibold text-lg">Products Delivered in Your Preferred Volume</h3>
-            </div>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                <div class="text-center group cursor-pointer">
-                    <div class="w-16 h-20 mx-auto rounded-2xl flex items-end justify-center pb-2 mb-3 transition-all duration-300 group-hover:-translate-y-2"
-                         style="background:linear-gradient(to bottom,rgba(0,200,83,0.15),rgba(0,200,83,0.05));border:1px solid rgba(0,200,83,0.25)">
-                        <div class="w-6 rounded-sm bg-mint/60 group-hover:bg-mint transition-all duration-300" style="height:40%"></div>
-                    </div>
-                    <div class="stat-number text-mint text-xl">5L</div>
-                    <div class="text-white/30 text-xs mt-1">Retail / Home</div>
-                </div>
-                <div class="text-center group cursor-pointer">
-                    <div class="w-20 h-24 mx-auto rounded-2xl flex items-end justify-center pb-2 mb-3 transition-all duration-300 group-hover:-translate-y-2"
-                         style="background:linear-gradient(to bottom,rgba(0,200,83,0.15),rgba(0,200,83,0.05));border:1px solid rgba(0,200,83,0.25)">
-                        <div class="w-8 rounded-sm bg-mint/60 group-hover:bg-mint transition-all duration-300" style="height:55%"></div>
-                    </div>
-                    <div class="stat-number text-mint text-xl">25L</div>
-                    <div class="text-white/30 text-xs mt-1">Commercial</div>
-                </div>
-                <div class="text-center group cursor-pointer">
-                    <div class="w-24 h-28 mx-auto rounded-2xl flex items-end justify-center pb-2 mb-3 transition-all duration-300 group-hover:-translate-y-2"
-                         style="background:linear-gradient(to bottom,rgba(59,130,246,0.15),rgba(59,130,246,0.05));border:1px solid rgba(59,130,246,0.25)">
-                        <div class="w-10 rounded-sm bg-cobalt-bright/60 group-hover:bg-cobalt-bright transition-all duration-300" style="height:70%"></div>
-                    </div>
-                    <div class="stat-number text-cobalt-bright text-xl">210L</div>
-                    <div class="text-white/30 text-xs mt-1">Industrial</div>
-                </div>
-                <div class="text-center group cursor-pointer">
-                    <div class="w-28 h-32 mx-auto rounded-2xl flex items-end justify-center pb-2 mb-3 transition-all duration-300 group-hover:-translate-y-2"
-                         style="background:linear-gradient(to bottom,rgba(59,130,246,0.15),rgba(59,130,246,0.05));border:1px solid rgba(59,130,246,0.25)">
-                        <div class="w-12 rounded-sm bg-cobalt-bright/60 group-hover:bg-cobalt-bright transition-all duration-300" style="height:85%"></div>
-                    </div>
-                    <div class="stat-number text-cobalt-bright text-xl">1000L</div>
-                    <div class="text-white/30 text-xs mt-1">Bulk / Mining</div>
-                </div>
-            </div>
-        </div>
+    <div class="text-center mb-20 reveal">
+      <div class="section-label mb-5 justify-center">What We Do</div>
+      <h2 class="font-condensed font-black leading-none" style="font-size:clamp(2.8rem,7vw,5rem);font-weight:900;letter-spacing:0.02em;">
+        <span style="color:rgba(232,245,255,0.9);">OUR </span><span class="text-gradient">SERVICES</span>
+      </h2>
+      <p style="color:rgba(232,245,255,0.4);max-width:500px;margin:16px auto 0;font-size:0.95rem;line-height:1.8;">
+        From industrial-grade formulations to professional cleaning — everything your operation needs, under one roof.
+      </p>
     </div>
+
+    <!-- Service cards -->
+    <div class="grid md:grid-cols-3 gap-6 mb-8">
+
+      <!-- Card 1: Chemicals -->
+      <div class="svc-card p-8 reveal" style="transition-delay:0.1s">
+        <div class="svc-icon mb-6" style="color:var(--emerald)">
+          <i class="fas fa-flask-vial"></i>
+        </div>
+        <h3 style="color:#fff;font-size:1.1rem;font-weight:700;margin-bottom:12px;line-height:1.3;">Detergents &amp; Industrial Chemicals</h3>
+        <p style="color:rgba(232,245,255,0.4);font-size:0.85rem;line-height:1.8;">
+          Specifically formulated degreasers, industrial chemicals, mining chemicals, and water treatment products. Available in 5L through 1000L for any scale operation.
+        </p>
+        <div class="flex flex-wrap gap-2 mt-6 pt-6" style="border-top:1px solid rgba(232,245,255,0.06)">
+          <span class="chip chip-green">Industrial</span>
+          <span class="chip chip-blue">Mining</span>
+          <span class="chip chip-green">Water Treatment</span>
+        </div>
+        <div class="flex items-center gap-2 mt-6" style="color:var(--emerald);font-family:'Barlow Condensed',sans-serif;font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;">
+          <span>Learn More</span>
+          <i class="fas fa-arrow-right svc-arrow text-xs"></i>
+        </div>
+      </div>
+
+      <!-- Card 2: Cleaning (featured) -->
+      <div class="svc-card p-8 reveal" style="transition-delay:0.2s;border-color:rgba(0,230,118,0.2);">
+        <div class="featured-badge">
+          <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+          Most Popular
+        </div>
+        <div class="svc-icon mb-6" style="color:var(--emerald);background:linear-gradient(135deg,rgba(0,230,118,0.2),rgba(45,127,255,0.1));border-color:rgba(0,230,118,0.35)">
+          <i class="fas fa-broom"></i>
+        </div>
+        <h3 style="color:#fff;font-size:1.1rem;font-weight:700;margin-bottom:12px;line-height:1.3;">Professional Cleaning Services</h3>
+        <p style="color:rgba(232,245,255,0.4);font-size:0.85rem;line-height:1.8;">
+          Comprehensive cleaning for households, offices, PPE, kitchens, bathrooms, and carpets. Hygienic, environmentally sound, and thorough — every time.
+        </p>
+        <div class="flex flex-wrap gap-2 mt-6 pt-6" style="border-top:1px solid rgba(232,245,255,0.06)">
+          <span class="chip chip-green">Residential</span>
+          <span class="chip chip-blue">Commercial</span>
+          <span class="chip chip-green">PPE</span>
+        </div>
+        <div class="flex items-center gap-2 mt-6" style="color:var(--emerald);font-family:'Barlow Condensed',sans-serif;font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;">
+          <span>Learn More</span>
+          <i class="fas fa-arrow-right svc-arrow text-xs"></i>
+        </div>
+      </div>
+
+      <!-- Card 3: Maintenance -->
+      <div class="svc-card p-8 reveal" style="transition-delay:0.3s">
+        <div class="svc-icon mb-6" style="color:var(--cobalt-glow)">
+          <i class="fas fa-wrench"></i>
+        </div>
+        <h3 style="color:#fff;font-size:1.1rem;font-weight:700;margin-bottom:12px;line-height:1.3;">Building Maintenance Services</h3>
+        <p style="color:rgba(232,245,255,0.4);font-size:0.85rem;line-height:1.8;">
+          Light replacements, air conditioner servicing, lock repairs, and landscaping. One call, complete solution — we handle the upkeep so you don't have to.
+        </p>
+        <div class="flex flex-wrap gap-2 mt-6 pt-6" style="border-top:1px solid rgba(232,245,255,0.06)">
+          <span class="chip chip-green">Repairs</span>
+          <span class="chip chip-blue">HVAC</span>
+          <span class="chip chip-green">Landscaping</span>
+        </div>
+        <div class="flex items-center gap-2 mt-6" style="color:var(--cobalt-glow);font-family:'Barlow Condensed',sans-serif;font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;">
+          <span>Learn More</span>
+          <i class="fas fa-arrow-right svc-arrow text-xs"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- Container Sizes Visual -->
+    <div class="glass reveal" style="border-radius:24px;padding:40px;border-color:rgba(45,127,255,0.15);">
+      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mb-10">
+        <div>
+          <div class="section-label mb-2" style="justify-content:flex-start;">Container Sizes</div>
+          <h3 style="color:#fff;font-size:1.2rem;font-weight:700;">Products Available in Your Preferred Volume</h3>
+        </div>
+        <a href="#contact" class="btn-primary" style="flex-shrink:0;">
+          <i class="fas fa-shopping-cart text-xs"></i>
+          <span>Order Now</span>
+        </a>
+      </div>
+
+      <div class="space-y-4">
+        <div class="flex items-center gap-5 group cursor-pointer">
+          <div style="width:80px;flex-shrink:0;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.1rem;color:var(--emerald);">5L</div>
+          <div style="flex:1;">
+            <div class="container-bar" style="background:rgba(45,127,255,0.08);height:32px;border-radius:8px;overflow:hidden;">
+              <div class="container-bar-fill" style="width:20%;height:100%;"></div>
+            </div>
+          </div>
+          <div style="width:120px;text-align:right;font-family:'Barlow Condensed',sans-serif;font-size:0.75rem;letter-spacing:0.1em;color:rgba(232,245,255,0.35);text-transform:uppercase;">Retail / Home</div>
+        </div>
+        <div class="flex items-center gap-5 group cursor-pointer">
+          <div style="width:80px;flex-shrink:0;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.1rem;color:var(--emerald);">25L</div>
+          <div style="flex:1;">
+            <div class="container-bar" style="background:rgba(45,127,255,0.08);height:32px;border-radius:8px;overflow:hidden;">
+              <div class="container-bar-fill" style="width:42%;height:100%;"></div>
+            </div>
+          </div>
+          <div style="width:120px;text-align:right;font-family:'Barlow Condensed',sans-serif;font-size:0.75rem;letter-spacing:0.1em;color:rgba(232,245,255,0.35);text-transform:uppercase;">Commercial</div>
+        </div>
+        <div class="flex items-center gap-5 group cursor-pointer">
+          <div style="width:80px;flex-shrink:0;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.1rem;color:var(--cobalt-bright);">210L</div>
+          <div style="flex:1;">
+            <div class="container-bar" style="background:rgba(45,127,255,0.08);height:32px;border-radius:8px;overflow:hidden;">
+              <div class="container-bar-fill" style="width:68%;height:100%;background:linear-gradient(90deg,var(--cobalt-bright),var(--cobalt-glow));"></div>
+            </div>
+          </div>
+          <div style="width:120px;text-align:right;font-family:'Barlow Condensed',sans-serif;font-size:0.75rem;letter-spacing:0.1em;color:rgba(232,245,255,0.35);text-transform:uppercase;">Industrial</div>
+        </div>
+        <div class="flex items-center gap-5 group cursor-pointer">
+          <div style="width:80px;flex-shrink:0;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.1rem;color:var(--cobalt-bright);">1000L</div>
+          <div style="flex:1;">
+            <div class="container-bar" style="background:rgba(45,127,255,0.08);height:32px;border-radius:8px;overflow:hidden;">
+              <div class="container-bar-fill" style="width:95%;height:100%;background:linear-gradient(90deg,var(--cobalt-bright),var(--cobalt-glow));"></div>
+            </div>
+          </div>
+          <div style="width:120px;text-align:right;font-family:'Barlow Condensed',sans-serif;font-size:0.75rem;letter-spacing:0.1em;color:rgba(232,245,255,0.35);text-transform:uppercase;">Bulk / Mining</div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- ═══════════════════════ VALUES ═══════════════════════ -->
-<section id="values" class="values-bg relative py-28 px-5">
-    <div class="glow-line absolute top-0 inset-x-0"></div>
-    <div class="max-w-7xl mx-auto">
-
-        <div class="text-center mb-16 reveal">
-            <div class="inline-flex items-center gap-2 mb-5 px-4 py-2 rounded-full glass border border-white/10">
-                <span class="w-1.5 h-1.5 rounded-full bg-mint"></span>
-                <span class="font-label text-mint/80 text-[10px] tracking-widest uppercase">What Drives Us</span>
-            </div>
-            <h2 class="font-display text-5xl md:text-6xl tracking-wide leading-none">
-                <span class="text-white">OUR </span><span class="grad-text">VALUES</span>
-            </h2>
-        </div>
-
-        <div class="grid md:grid-cols-5 gap-4">
-
-            <!-- Care -->
-            <div class="value-card rounded-3xl p-6 text-center reveal" style="transition-delay:0.05s">
-                <div class="w-14 h-14 mx-auto rounded-2xl flex items-center justify-center text-2xl text-mint mb-5 transition-all duration-300 group-hover:scale-110"
-                     style="background:rgba(0,200,83,0.1);border:1px solid rgba(0,200,83,0.2)">
-                    <i class="fas fa-heart"></i>
-                </div>
-                <h3 class="text-white font-semibold text-sm mb-2">Care &amp; Respect</h3>
-                <p class="text-white/40 text-xs leading-relaxed">Acknowledging individuals' opinions, wishes, and needs with deep understanding.</p>
-            </div>
-
-            <!-- Innovation -->
-            <div class="value-card rounded-3xl p-6 text-center reveal" style="transition-delay:0.1s">
-                <div class="w-14 h-14 mx-auto rounded-2xl flex items-center justify-center text-2xl text-cobalt-bright mb-5"
-                     style="background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.2)">
-                    <i class="fas fa-lightbulb"></i>
-                </div>
-                <h3 class="text-white font-semibold text-sm mb-2">Innovation</h3>
-                <p class="text-white/40 text-xs leading-relaxed">Products, services, and solutions that deliver real, significant value.</p>
-            </div>
-
-            <!-- Integrity -->
-            <div class="value-card rounded-3xl p-6 text-center reveal" style="transition-delay:0.15s;border-color:rgba(0,200,83,0.15)">
-                <div class="w-14 h-14 mx-auto rounded-2xl flex items-center justify-center text-2xl text-mint mb-5"
-                     style="background:rgba(0,200,83,0.15);border:1px solid rgba(0,200,83,0.3)">
-                    <i class="fas fa-shield-alt"></i>
-                </div>
-                <h3 class="text-white font-semibold text-sm mb-2">Integrity</h3>
-                <p class="text-white/40 text-xs leading-relaxed">Honest, dependable, doing the right thing even in difficult circumstances.</p>
-            </div>
-
-            <!-- Safety -->
-            <div class="value-card rounded-3xl p-6 text-center reveal" style="transition-delay:0.2s">
-                <div class="w-14 h-14 mx-auto rounded-2xl flex items-center justify-center text-2xl text-cobalt-bright mb-5"
-                     style="background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.2)">
-                    <i class="fas fa-user-shield"></i>
-                </div>
-                <h3 class="text-white font-semibold text-sm mb-2">Safety</h3>
-                <p class="text-white/40 text-xs leading-relaxed">Zero harm to people, environment and property — always.</p>
-            </div>
-
-            <!-- Accountability -->
-            <div class="value-card rounded-3xl p-6 text-center reveal" style="transition-delay:0.25s">
-                <div class="w-14 h-14 mx-auto rounded-2xl flex items-center justify-center text-2xl text-mint mb-5"
-                     style="background:rgba(0,200,83,0.1);border:1px solid rgba(0,200,83,0.2)">
-                    <i class="fas fa-balance-scale"></i>
-                </div>
-                <h3 class="text-white font-semibold text-sm mb-2">Accountability</h3>
-                <p class="text-white/40 text-xs leading-relaxed">We do what we say and say what we do, at every level.</p>
-            </div>
-        </div>
+<section id="values" class="values-section relative py-28 px-6">
+  <div class="glow-line absolute top-0 inset-x-0"></div>
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-20 reveal">
+      <div class="section-label mb-5 justify-center">What Drives Us</div>
+      <h2 class="font-condensed font-black leading-none" style="font-size:clamp(2.8rem,7vw,5rem);font-weight:900;letter-spacing:0.02em;">
+        <span style="color:rgba(232,245,255,0.9);">OUR </span><span class="text-gradient">VALUES</span>
+      </h2>
     </div>
-    <div class="glow-line absolute bottom-0 inset-x-0"></div>
+
+    <div class="grid md:grid-cols-5 gap-4">
+
+      <div class="val-card p-6 text-center reveal" style="transition-delay:0.05s">
+        <div class="val-card-glow" style="background:var(--emerald);"></div>
+        <div class="val-icon mx-auto mb-5" style="background:rgba(0,230,118,0.1);border:1px solid rgba(0,230,118,0.2);color:var(--emerald)">
+          <i class="fas fa-heart"></i>
+        </div>
+        <h3 style="color:#fff;font-weight:700;font-size:0.9rem;margin-bottom:8px;">Care &amp; Respect</h3>
+        <p style="color:rgba(232,245,255,0.38);font-size:0.78rem;line-height:1.7;">Acknowledging individuals' opinions, wishes, and needs.</p>
+      </div>
+
+      <div class="val-card p-6 text-center reveal" style="transition-delay:0.1s">
+        <div class="val-card-glow" style="background:var(--cobalt-bright);"></div>
+        <div class="val-icon mx-auto mb-5" style="background:rgba(45,127,255,0.1);border:1px solid rgba(45,127,255,0.2);color:var(--cobalt-bright)">
+          <i class="fas fa-lightbulb"></i>
+        </div>
+        <h3 style="color:#fff;font-weight:700;font-size:0.9rem;margin-bottom:8px;">Innovation</h3>
+        <p style="color:rgba(232,245,255,0.38);font-size:0.78rem;line-height:1.7;">Solutions that deliver real, significant value.</p>
+      </div>
+
+      <div class="val-card p-6 text-center reveal" style="transition-delay:0.15s;border-color:rgba(0,230,118,0.12);">
+        <div class="val-card-glow" style="background:var(--emerald);"></div>
+        <div class="val-icon mx-auto mb-5" style="background:rgba(0,230,118,0.12);border:1px solid rgba(0,230,118,0.3);color:var(--emerald)">
+          <i class="fas fa-shield-alt"></i>
+        </div>
+        <h3 style="color:#fff;font-weight:700;font-size:0.9rem;margin-bottom:8px;">Integrity</h3>
+        <p style="color:rgba(232,245,255,0.38);font-size:0.78rem;line-height:1.7;">Honest and dependable — doing what's right always.</p>
+      </div>
+
+      <div class="val-card p-6 text-center reveal" style="transition-delay:0.2s">
+        <div class="val-card-glow" style="background:var(--cobalt-bright);"></div>
+        <div class="val-icon mx-auto mb-5" style="background:rgba(45,127,255,0.1);border:1px solid rgba(45,127,255,0.2);color:var(--cobalt-bright)">
+          <i class="fas fa-user-shield"></i>
+        </div>
+        <h3 style="color:#fff;font-weight:700;font-size:0.9rem;margin-bottom:8px;">Safety</h3>
+        <p style="color:rgba(232,245,255,0.38);font-size:0.78rem;line-height:1.7;">Zero harm to people, environment and property.</p>
+      </div>
+
+      <div class="val-card p-6 text-center reveal" style="transition-delay:0.25s">
+        <div class="val-card-glow" style="background:var(--emerald);"></div>
+        <div class="val-icon mx-auto mb-5" style="background:rgba(0,230,118,0.1);border:1px solid rgba(0,230,118,0.2);color:var(--emerald)">
+          <i class="fas fa-balance-scale"></i>
+        </div>
+        <h3 style="color:#fff;font-weight:700;font-size:0.9rem;margin-bottom:8px;">Accountability</h3>
+        <p style="color:rgba(232,245,255,0.38);font-size:0.78rem;line-height:1.7;">We do what we say and say what we do.</p>
+      </div>
+    </div>
+  </div>
+  <div class="glow-line absolute bottom-0 inset-x-0"></div>
 </section>
 
 <!-- ═══════════════════════ CONTACT ═══════════════════════ -->
-<section id="contact" class="contact-bg relative py-28 px-5">
-    <div class="max-w-7xl mx-auto">
-
-        <div class="text-center mb-16 reveal">
-            <div class="inline-flex items-center gap-2 mb-5 px-4 py-2 rounded-full glass border border-white/10">
-                <span class="w-1.5 h-1.5 rounded-full bg-mint animate-pulse"></span>
-                <span class="font-label text-mint/80 text-[10px] tracking-widest uppercase">Reach Out</span>
-            </div>
-            <h2 class="font-display text-5xl md:text-6xl tracking-wide leading-none">
-                <span class="text-white">GET IN </span><span class="grad-text">TOUCH</span>
-            </h2>
-            <p class="text-white/40 text-base mt-4 max-w-lg mx-auto">Ready to source quality chemicals or book our services? We deliver personally or via courier nationwide.</p>
-        </div>
-
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
-
-            <!-- Location -->
-            <div class="contact-card rounded-3xl p-6 reveal group" style="transition-delay:0.05s">
-                <div class="w-12 h-12 rounded-xl flex items-center justify-center text-mint text-xl mb-5 transition-all duration-300 group-hover:scale-110 group-hover:rotate-6"
-                     style="background:rgba(0,200,83,0.1);border:1px solid rgba(0,200,83,0.2)">
-                    <i class="fas fa-map-pin"></i>
-                </div>
-                <div class="font-label text-white/30 text-[10px] tracking-widest uppercase mb-2">Location</div>
-                <div class="text-white font-semibold text-sm">South Africa</div>
-                <div class="text-white/45 text-xs mt-1">Nationwide Coverage</div>
-            </div>
-
-            <!-- Email -->
-            <div class="contact-card rounded-3xl p-6 reveal group" style="transition-delay:0.1s">
-                <div class="w-12 h-12 rounded-xl flex items-center justify-center text-cobalt-bright text-xl mb-5 transition-all duration-300 group-hover:scale-110 group-hover:rotate-6"
-                     style="background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.2)">
-                    <i class="fas fa-envelope"></i>
-                </div>
-                <div class="font-label text-white/30 text-[10px] tracking-widest uppercase mb-2">Email</div>
-                <a href="mailto:Ndivhuwo.nemukombame@gmail.com"
-                   class="text-cobalt-bright text-xs leading-relaxed hover:text-mint transition-colors duration-300 break-all">
-                    Ndivhuwo.nemukombame@gmail.com
-                </a>
-            </div>
-
-            <!-- Phone -->
-            <div class="contact-card rounded-3xl p-6 reveal group" style="transition-delay:0.15s">
-                <div class="w-12 h-12 rounded-xl flex items-center justify-center text-mint text-xl mb-5 transition-all duration-300 group-hover:scale-110 group-hover:rotate-6"
-                     style="background:rgba(0,200,83,0.1);border:1px solid rgba(0,200,83,0.2)">
-                    <i class="fas fa-phone"></i>
-                </div>
-                <div class="font-label text-white/30 text-[10px] tracking-widest uppercase mb-2">Phone</div>
-                <a href="tel:0715384746" class="text-white font-semibold text-sm hover:text-mint transition-colors duration-300">071 538 4746</a>
-                <div class="text-white/40 text-xs mt-1">Contact: Ndivhuwo</div>
-            </div>
-
-            <!-- Business Details -->
-            <div class="contact-card rounded-3xl p-6 reveal group" style="transition-delay:0.2s">
-                <div class="w-12 h-12 rounded-xl flex items-center justify-center text-cobalt-bright text-xl mb-5 transition-all duration-300 group-hover:scale-110 group-hover:rotate-6"
-                     style="background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.2)">
-                    <i class="fas fa-id-card"></i>
-                </div>
-                <div class="font-label text-white/30 text-[10px] tracking-widest uppercase mb-2">Business</div>
-                <div class="text-white text-xs font-semibold leading-relaxed">MCLAU Solutions (Pty) Ltd</div>
-                <div class="text-white/40 text-[11px] mt-2 space-y-0.5">
-                    <div>Reg: 2019/345296/07</div>
-                    <div>B-BBEE: EME Level 1</div>
-                    <div class="text-mint/70">100% BWO</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- CTA Banner -->
-        <div class="mt-12 glass rounded-3xl border border-white/8 p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-8 reveal">
-            <div>
-                <h3 class="font-display text-3xl md:text-4xl text-white tracking-wide leading-none mb-2">READY TO ORDER?</h3>
-                <p class="text-white/40 text-sm">Get in touch for bulk pricing, custom formulations, or service bookings.</p>
-            </div>
-            <a href="mailto:Ndivhuwo.nemukombame@gmail.com"
-               class="cta-btn text-white font-label text-xs tracking-widest px-10 py-4 rounded-full inline-flex items-center gap-3 flex-shrink-0">
-                <span class="flex items-center gap-3"><i class="fas fa-paper-plane"></i> Send Us A Message</span>
-            </a>
-        </div>
+<section id="contact" class="contact-section relative py-28 px-6">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-16 reveal">
+      <div class="section-label mb-5 justify-center">Reach Out</div>
+      <h2 class="font-condensed font-black leading-none" style="font-size:clamp(2.8rem,7vw,5rem);font-weight:900;letter-spacing:0.02em;">
+        <span style="color:rgba(232,245,255,0.9);">GET IN </span><span class="text-gradient">TOUCH</span>
+      </h2>
+      <p style="color:rgba(232,245,255,0.4);max-width:500px;margin:16px auto 0;font-size:0.95rem;line-height:1.8;">
+        Ready to source quality chemicals or book our services? We deliver personally or via courier — nationwide.
+      </p>
     </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
+
+      <div class="contact-card p-6 reveal" style="transition-delay:0.05s">
+        <div class="contact-icon mb-5">
+          <i class="fas fa-map-pin" style="color:var(--emerald)"></i>
+        </div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:0.65rem;letter-spacing:0.2em;color:rgba(232,245,255,0.3);text-transform:uppercase;margin-bottom:8px;">Location</div>
+        <div style="color:#fff;font-weight:600;font-size:0.9rem;">South Africa</div>
+        <div style="color:rgba(232,245,255,0.4);font-size:0.8rem;margin-top:4px;">Nationwide Coverage</div>
+      </div>
+
+      <div class="contact-card p-6 reveal" style="transition-delay:0.1s">
+        <div class="contact-icon mb-5" style="background:linear-gradient(135deg,rgba(45,127,255,0.12),rgba(0,230,118,0.12));border-color:rgba(45,127,255,0.2)">
+          <i class="fas fa-envelope" style="color:var(--cobalt-glow)"></i>
+        </div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:0.65rem;letter-spacing:0.2em;color:rgba(232,245,255,0.3);text-transform:uppercase;margin-bottom:8px;">Email</div>
+        <a href="mailto:Ndivhuwo.nemukombame@gmail.com"
+           style="color:var(--cobalt-glow);font-size:0.75rem;line-height:1.6;word-break:break-all;transition:color 0.3s;"
+           onmouseover="this.style.color='var(--emerald)'" onmouseout="this.style.color='var(--cobalt-glow)'">
+          Ndivhuwo.nemukombame<br>@gmail.com
+        </a>
+      </div>
+
+      <div class="contact-card p-6 reveal" style="transition-delay:0.15s">
+        <div class="contact-icon mb-5">
+          <i class="fas fa-phone" style="color:var(--emerald)"></i>
+        </div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:0.65rem;letter-spacing:0.2em;color:rgba(232,245,255,0.3);text-transform:uppercase;margin-bottom:8px;">Phone</div>
+        <a href="tel:0715384746" style="color:#fff;font-weight:700;font-size:1rem;display:block;transition:color 0.3s;"
+           onmouseover="this.style.color='var(--emerald)'" onmouseout="this.style.color='#fff'">071 538 4746</a>
+        <div style="color:rgba(232,245,255,0.4);font-size:0.8rem;margin-top:4px;">Contact: Ndivhuwo</div>
+      </div>
+
+      <div class="contact-card p-6 reveal" style="transition-delay:0.2s">
+        <div class="contact-icon mb-5" style="background:linear-gradient(135deg,rgba(45,127,255,0.12),rgba(0,230,118,0.12));border-color:rgba(45,127,255,0.2)">
+          <i class="fas fa-id-card" style="color:var(--cobalt-glow)"></i>
+        </div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:0.65rem;letter-spacing:0.2em;color:rgba(232,245,255,0.3);text-transform:uppercase;margin-bottom:8px;">Business</div>
+        <div style="color:#fff;font-size:0.8rem;font-weight:600;">MCLAU Solutions (Pty) Ltd</div>
+        <div style="color:rgba(232,245,255,0.35);font-size:0.72rem;margin-top:6px;line-height:1.7;">
+          Reg: 2019/345296/07<br>B-BBEE: EME Level 1<br>
+          <span style="color:var(--emerald);">100% BWO</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA Banner -->
+    <div class="glass reveal" style="border-radius:24px;padding:40px 48px;border-color:rgba(45,127,255,0.15);">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-8">
+        <div>
+          <div class="font-condensed font-black leading-none mb-3" style="font-size:clamp(2rem,5vw,3.5rem);font-weight:900;letter-spacing:0.03em;">
+            <span style="color:#fff;">READY TO </span><span class="text-gradient">ORDER?</span>
+          </div>
+          <p style="color:rgba(232,245,255,0.4);font-size:0.9rem;">Get in touch for bulk pricing, custom formulations, or service bookings.</p>
+        </div>
+        <div class="flex flex-wrap gap-4 flex-shrink-0">
+          <a href="mailto:Ndivhuwo.nemukombame@gmail.com" class="btn-primary">
+            <i class="fas fa-paper-plane text-xs"></i>
+            <span>Send A Message</span>
+          </a>
+          <a href="tel:0715384746" class="btn-ghost">
+            <i class="fas fa-phone text-xs"></i>
+            <span>Call Us</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- ═══════════════════════ FOOTER ═══════════════════════ -->
-<footer class="py-10 px-5" style="background:#030a14;border-top:1px solid rgba(255,255,255,0.05)">
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-        <div class="flex items-center gap-3">
-            <div class="w-8 h-8 rounded-lg flex items-center justify-center font-display text-white text-sm"
-                 style="background:linear-gradient(135deg,#00c853,#1a4fa0)">MC</div>
-            <div class="font-label text-white/60 text-[10px] tracking-widest uppercase">MCLAU Solutions</div>
-        </div>
-        <div class="flex flex-wrap items-center gap-6 justify-center">
-            <a href="#home" class="text-white/30 hover:text-mint text-xs tracking-wider uppercase transition-colors duration-300">Home</a>
-            <a href="#about" class="text-white/30 hover:text-mint text-xs tracking-wider uppercase transition-colors duration-300">About</a>
-            <a href="#services" class="text-white/30 hover:text-mint text-xs tracking-wider uppercase transition-colors duration-300">Services</a>
-            <a href="#values" class="text-white/30 hover:text-mint text-xs tracking-wider uppercase transition-colors duration-300">Values</a>
-            <a href="#contact" class="text-white/30 hover:text-mint text-xs tracking-wider uppercase transition-colors duration-300">Contact</a>
-        </div>
-        <div class="text-white/20 text-xs">© 2025 MCLAU Solutions. All rights reserved.</div>
+<footer class="py-10 px-6">
+  <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+    <div class="flex items-center gap-3">
+      <div style="width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,#00b359,#0a3d91);display:flex;align-items:center;justify-content:center;">
+        <span class="font-display text-white" style="font-size:0.65rem;letter-spacing:0.05em;">MC</span>
+      </div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:0.65rem;letter-spacing:0.25em;color:rgba(232,245,255,0.4);text-transform:uppercase;">MCLAU Solutions</div>
     </div>
+    <div class="flex flex-wrap items-center gap-6 justify-center">
+      <a href="#hero"     style="color:rgba(232,245,255,0.25);font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;transition:color 0.3s;font-family:'Barlow Condensed',sans-serif;" onmouseover="this.style.color='var(--emerald)'" onmouseout="this.style.color='rgba(232,245,255,0.25)'">Home</a>
+      <a href="#about"    style="color:rgba(232,245,255,0.25);font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;transition:color 0.3s;font-family:'Barlow Condensed',sans-serif;" onmouseover="this.style.color='var(--emerald)'" onmouseout="this.style.color='rgba(232,245,255,0.25)'">About</a>
+      <a href="#services" style="color:rgba(232,245,255,0.25);font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;transition:color 0.3s;font-family:'Barlow Condensed',sans-serif;" onmouseover="this.style.color='var(--emerald)'" onmouseout="this.style.color='rgba(232,245,255,0.25)'">Services</a>
+      <a href="#values"   style="color:rgba(232,245,255,0.25);font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;transition:color 0.3s;font-family:'Barlow Condensed',sans-serif;" onmouseover="this.style.color='var(--emerald)'" onmouseout="this.style.color='rgba(232,245,255,0.25)'">Values</a>
+      <a href="#contact"  style="color:rgba(232,245,255,0.25);font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;transition:color 0.3s;font-family:'Barlow Condensed',sans-serif;" onmouseover="this.style.color='var(--emerald)'" onmouseout="this.style.color='rgba(232,245,255,0.25)'">Contact</a>
+    </div>
+    <div style="color:rgba(232,245,255,0.2);font-size:0.72rem;">© 2025 MCLAU Solutions. All rights reserved.</div>
+  </div>
 </footer>
 
-<!-- ═══════════════════════ SCRIPTS ═══════════════════════ -->
+<!-- ─── SCRIPTS ─── -->
 <script>
 // ── Particle system ──
 const canvas = document.getElementById('particleCanvas');
 const ctx = canvas.getContext('2d');
-let particles = [], W, H;
+let W, H, particles = [];
 
 function resize() {
-    W = canvas.width = canvas.offsetWidth;
-    H = canvas.height = canvas.offsetHeight;
+  W = canvas.width  = canvas.offsetWidth;
+  H = canvas.height = canvas.offsetHeight;
 }
 window.addEventListener('resize', resize);
 resize();
 
 class Particle {
-    constructor() { this.reset(); }
-    reset() {
-        this.x = Math.random() * W;
-        this.y = Math.random() * H;
-        this.r = Math.random() * 2 + 0.5;
-        this.vx = (Math.random() - 0.5) * 0.4;
-        this.vy = -Math.random() * 0.6 - 0.2;
-        this.alpha = Math.random() * 0.4 + 0.1;
-        this.color = Math.random() > 0.5 ? '#00c853' : '#3b82f6';
-    }
-    update() {
-        this.x += this.vx; this.y += this.vy;
-        this.alpha -= 0.001;
-        if (this.y < 0 || this.alpha <= 0) this.reset();
-    }
-    draw() {
-        ctx.save();
-        ctx.globalAlpha = this.alpha;
-        ctx.fillStyle = this.color;
-        ctx.shadowBlur = 6; ctx.shadowColor = this.color;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.restore();
-    }
+  constructor() { this.reset(true); }
+  reset(init) {
+    this.x = Math.random() * W;
+    this.y = init ? Math.random() * H : H + 10;
+    this.r  = Math.random() * 1.8 + 0.3;
+    this.vx = (Math.random() - 0.5) * 0.5;
+    this.vy = -(Math.random() * 0.8 + 0.2);
+    this.alpha = Math.random() * 0.5 + 0.1;
+    this.fade  = 0.0008 + Math.random() * 0.001;
+    this.color = Math.random() > 0.55 ? '#2d7fff' : '#00e676';
+  }
+  update() {
+    this.x += this.vx;
+    this.y += this.vy;
+    this.alpha -= this.fade;
+    if (this.alpha <= 0 || this.y < -10) this.reset(false);
+  }
+  draw() {
+    ctx.save();
+    ctx.globalAlpha = Math.max(0, this.alpha);
+    ctx.fillStyle = this.color;
+    ctx.shadowBlur = 8;
+    ctx.shadowColor = this.color;
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+  }
 }
 
-for (let i = 0; i < 80; i++) particles.push(new Particle());
+// Connection lines
+function drawConnections() {
+  for (let i = 0; i < particles.length; i++) {
+    for (let j = i + 1; j < particles.length; j++) {
+      const dx = particles[i].x - particles[j].x;
+      const dy = particles[i].y - particles[j].y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < 100) {
+        ctx.save();
+        ctx.globalAlpha = (1 - dist / 100) * 0.06;
+        ctx.strokeStyle = '#2d7fff';
+        ctx.lineWidth = 0.5;
+        ctx.beginPath();
+        ctx.moveTo(particles[i].x, particles[i].y);
+        ctx.lineTo(particles[j].x, particles[j].y);
+        ctx.stroke();
+        ctx.restore();
+      }
+    }
+  }
+}
+
+for (let i = 0; i < 120; i++) particles.push(new Particle());
 
 function animate() {
-    ctx.clearRect(0, 0, W, H);
-    particles.forEach(p => { p.update(); p.draw(); });
-    requestAnimationFrame(animate);
+  ctx.clearRect(0, 0, W, H);
+  drawConnections();
+  particles.forEach(p => { p.update(); p.draw(); });
+  requestAnimationFrame(animate);
 }
 animate();
 
 // ── Nav scroll ──
-const nav = document.getElementById('mainNav');
+const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 60);
+  nav.classList.toggle('scrolled', window.scrollY > 60);
 });
 
 // ── Mobile menu ──
 const hamburger = document.getElementById('hamburger');
-const mobileMenu = document.getElementById('mobileMenu');
-const menuOverlay = document.getElementById('menuOverlay');
-const closeMenu = document.getElementById('closeMenu');
-const h1 = document.getElementById('hLine1');
-const h2 = document.getElementById('hLine2');
-const h3 = document.getElementById('hLine3');
+const menu      = document.getElementById('mobileMenu');
+const overlay   = document.getElementById('overlay');
+const closeBtn  = document.getElementById('closeBtn');
+const h1 = document.getElementById('h1');
+const h2 = document.getElementById('h2');
+const h3 = document.getElementById('h3');
 
 function openMenu() {
-    mobileMenu.classList.add('open');
-    menuOverlay.classList.add('open');
-    h1.style.transform = 'rotate(45deg) translate(5px,5px)';
-    h2.style.opacity = '0';
-    h3.style.transform = 'rotate(-45deg) translate(4px,-4px)';
-    document.body.style.overflow = 'hidden';
+  menu.classList.add('open'); overlay.classList.add('open');
+  h1.style.cssText = 'transform:rotate(45deg) translate(4px,4px);width:24px';
+  h2.style.opacity = '0';
+  h3.style.cssText = 'transform:rotate(-45deg) translate(3px,-3px);width:24px';
+  document.body.style.overflow = 'hidden';
 }
-function closeMenuFn() {
-    mobileMenu.classList.remove('open');
-    menuOverlay.classList.remove('open');
-    h1.style.transform = ''; h2.style.opacity = ''; h3.style.transform = '';
-    document.body.style.overflow = '';
+function closeMenu() {
+  menu.classList.remove('open'); overlay.classList.remove('open');
+  h1.style.cssText = ''; h2.style.opacity = ''; h3.style.cssText = '';
+  document.body.style.overflow = '';
 }
 hamburger.addEventListener('click', openMenu);
-closeMenu.addEventListener('click', closeMenuFn);
-menuOverlay.addEventListener('click', closeMenuFn);
-document.querySelectorAll('.mobile-nav-link').forEach(l => l.addEventListener('click', closeMenuFn));
+closeBtn.addEventListener('click', closeMenu);
+overlay.addEventListener('click', closeMenu);
+document.querySelectorAll('.mobile-link').forEach(l => l.addEventListener('click', closeMenu));
 
 // ── Scroll reveal ──
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
-document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => observer.observe(el));
+document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => revealObserver.observe(el));
 
 // ── Smooth scroll ──
 document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-        const target = document.querySelector(a.getAttribute('href'));
-        if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
-    });
+  a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
+  });
 });
+
+// ── Keyframe injection ──
+const style = document.createElement('style');
+style.textContent = `
+@keyframes slideUp { from { opacity:0; transform:translateY(50px); } to { opacity:1; transform:translateY(0); } }
+@keyframes slideInRight { from { opacity:0; transform:translateX(60px); } to { opacity:1; transform:translateX(0); } }
+@keyframes glowPulse {
+  0%,100% { box-shadow: 0 0 30px rgba(0,230,118,0.2), 0 0 60px rgba(0,230,118,0.08); }
+  50%      { box-shadow: 0 0 60px rgba(0,230,118,0.4), 0 0 120px rgba(0,230,118,0.15); }
+}
+`;
+document.head.appendChild(style);
 </script>
 </body>
 </html>
