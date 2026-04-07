@@ -347,12 +347,10 @@
 </head>
 <body class="bg-navy-950 text-white font-body">
 
-<!-- ═══════════════════════ NAV ═══════════════════════ -->
 <nav id="mainNav" class="fixed top-0 inset-x-0 z-50 glass border-b border-white/5 transition-all duration-300">
     <div class="max-w-7xl mx-auto px-5 py-4 flex items-center justify-between">
 
-        <!-- Logo -->
-        <a href="#" class="flex items-center gap-3 group">
+        <a href="index.html" class="flex items-center gap-3 group">
             <div class="w-10 h-10 rounded-xl flex items-center justify-center text-white text-lg font-display tracking-wide animate-glow-pulse"
                  style="height: auto; width:auto"><img src="./assets/LAULOGO.png"style="height: 76px; width: auto;"alt="MCLAU Logo" class="w-80 h-8"></div>
             <div>
@@ -361,7 +359,6 @@
             </div>
         </a>
 
-        <!-- Desktop links -->
         <ul class="hidden md:flex items-center gap-8">
             <li><a href="#home" class="nav-link">Home</a></li>
             <li><a href="about.html" class="nav-link">About</a></li>
@@ -369,12 +366,10 @@
             <li><a href="contact.html" class="nav-link">Contact</a></li>
         </ul>
 
-        <!-- CTA Desktop -->
         <a href="#contact" class="hidden md:inline-flex items-center gap-2 cta-btn text-white font-label text-xs tracking-widest px-5 py-2.5 rounded-full">
             <span class="flex items-center gap-2"><i class="fas fa-flask text-xs"></i> Get A Quote</span>
         </a>
 
-        <!-- Hamburger -->
         <button id="hamburger" class="md:hidden text-white/80 hover:text-white transition w-9 h-9 flex flex-col justify-center gap-1.5 items-end">
             <span class="block h-0.5 bg-current w-6 transition-all duration-300" id="hLine1"></span>
             <span class="block h-0.5 bg-current w-4 transition-all duration-300" id="hLine2"></span>
@@ -383,7 +378,6 @@
     </div>
 </nav>
 
-<!-- Mobile Menu Overlay -->
 <div id="menuOverlay" class="fixed inset-0 z-40 bg-navy-950/70 backdrop-blur-sm"></div>
 
 <!-- Mobile Menu Drawer -->
@@ -398,7 +392,6 @@
     </a>
 </div>
 
-<!-- ═══════════════════════ HERO ═══════════════════════ -->
 <section id="home" class="hero-bg relative min-h-screen flex flex-col justify-center overflow-hidden">
     <!-- Particle canvas -->
     <canvas id="particleCanvas"></canvas>
@@ -560,7 +553,6 @@
     </div>
 </section>
 
-<!-- ═══════════════════════ ABOUT ═══════════════════════ -->
 <section id="about" class="about-bg relative py-28 px-5">
     <div class="glow-line absolute top-0 inset-x-0"></div>
 
@@ -635,7 +627,6 @@
     <div class="glow-line absolute bottom-0 inset-x-0"></div>
 </section>
 
-<!-- ═══════════════════════ SERVICES ═══════════════════════ -->
 <section id="services" class="services-bg relative py-28 px-5">
     <div class="max-w-7xl mx-auto">
 
@@ -749,7 +740,6 @@
     </div>
 </section>
 
-<!-- ═══════════════════════ VALUES ═══════════════════════ -->
 <section id="values" class="values-bg relative py-28 px-5">
     <div class="glow-line absolute top-0 inset-x-0"></div>
     <div class="max-w-7xl mx-auto">
@@ -820,7 +810,6 @@
     <div class="glow-line absolute bottom-0 inset-x-0"></div>
 </section>
 
-<!-- ═══════════════════════ CONTACT ═══════════════════════ -->
 <section id="contact" class="contact-bg relative py-28 px-5">
     <div class="max-w-7xl mx-auto">
 
@@ -902,7 +891,6 @@
     </div>
 </section>
 
-<!-- ═══════════════════════ FOOTER ═══════════════════════ -->
 <footer class="py-10 px-5" style="background:#030a14;border-top:1px solid rgba(255,255,255,0.05)">
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
         <div class="flex items-center gap-3">
@@ -921,7 +909,6 @@
     </div>
 </footer>
 
-<!-- ═══════════════════════ SCRIPTS ═══════════════════════ -->
 <script>
 // ── Particle system ──
 const canvas = document.getElementById('particleCanvas');

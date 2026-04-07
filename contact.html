@@ -310,13 +310,13 @@
                 <!-- right: contact form glass -->
                 <div class="glass-card rounded-2xl p-6 md:p-8 reveal-up">
                     <h3 class="font-condensed text-2xl font-bold text-white mb-6">Send a <span class="text-grad">Message</span></h3>
-                    <form id="contactForm" class="space-y-5">
-                        <div><input type="text" id="name" placeholder="Full Name *" class="w-full px-5 py-3 rounded-xl form-glass text-ice/90 text-sm" required></div>
-                        <div><input type="email" id="email" placeholder="Email Address *" class="w-full px-5 py-3 rounded-xl form-glass text-ice/90 text-sm" required></div>
-                        <div><input type="tel" id="phone" placeholder="Phone Number" class="w-full px-5 py-3 rounded-xl form-glass text-ice/90 text-sm"></div>
-                        <div><input type="text" id="company" placeholder="Company Name" class="w-full px-5 py-3 rounded-xl form-glass text-ice/90 text-sm"></div>
+                    <form id="contactForm" action="https://formsubmit.co/kmngomezulu82@gmail.com" method="POST" class="space-y-5">
+                        <div><input type="text" name="name" id="name" placeholder="Full Name *" class="w-full px-5 py-3 rounded-xl form-glass text-ice/90 text-sm" required></div>
+                        <div><input type="email" name="email" id="email" placeholder="Email Address *" class="w-full px-5 py-3 rounded-xl form-glass text-ice/90 text-sm" required></div>
+                        <div><input type="tel" name="phone" id="phone" placeholder="Phone Number" class="w-full px-5 py-3 rounded-xl form-glass text-ice/90 text-sm"></div>
+                        <div><input type="text" name="company" id="company" placeholder="Company Name" class="w-full px-5 py-3 rounded-xl form-glass text-ice/90 text-sm"></div>
                         <div>
-                            <select id="service" class="w-full px-5 py-3 rounded-xl form-glass text-ice/80 text-sm">
+                            <select name="service" id="service" class="w-full px-5 py-3 rounded-xl form-glass text-ice/80 text-sm">
                                 <option value="" class="bg-navy-800">Service Interested In</option>
                                 <option value="chemicals">Chemical Formulation & Manufacturing</option>
                                 <option value="cleaning">Professional Cleaning Services</option>
@@ -325,7 +325,13 @@
                                 <option value="other">Other Inquiry</option>
                             </select>
                         </div>
-                        <div><textarea id="message" rows="4" placeholder="Tell us about your requirements *" class="w-full px-5 py-3 rounded-xl form-glass text-ice/90 text-sm" required></textarea></div>
+                        <div><textarea name="message" id="message" rows="4" placeholder="Tell us about your requirements *" class="w-full px-5 py-3 rounded-xl form-glass text-ice/90 text-sm" required></textarea></div>
+                        
+                        <!-- Hidden fields for FormSubmit.co -->
+                        <input type="hidden" name="_subject" value="New Contact Form Submission - MCLAU Solutions">
+                        <input type="hidden" name="_template" value="table">
+                        <input type="hidden" name="_captcha" value="false">
+
                         <button type="submit" class="btn-submit w-full py-3 rounded-xl text-white font-condensed tracking-wider text-sm flex items-center justify-center gap-2 transition-all"><i class="fas fa-paper-plane"></i> Send Message</button>
                     </form>
                     <div id="successMessage" class="mt-4 hidden p-4 rounded-xl bg-emerald/20 border border-emerald/40 text-emerald text-sm text-center animate-pulse"></div>
@@ -419,26 +425,46 @@
             }
         }
 
-        // form submission simulation
+        // Real form submission to kmngomezulu82@gmail.com
         const form = document.getElementById('contactForm');
         const successDiv = document.getElementById('successMessage');
         if (form) {
-            form.addEventListener('submit', (e) => {
+            form.addEventListener('submit', async (e) => {
                 e.preventDefault();
                 const name = document.getElementById('name').value;
-                if (!name) { alert('Please enter your name.'); return; }
+                if (!name) { 
+                    alert('Please enter your name.'); 
+                    return; 
+                }
+
                 const btn = form.querySelector('button');
                 const original = btn.innerHTML;
                 btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
                 btn.disabled = true;
-                setTimeout(() => {
-                    successDiv.innerHTML = `✓ Thanks ${name}! Your message has been sent. We'll respond within 24 hours.`;
-                    successDiv.classList.remove('hidden');
-                    form.reset();
-                    btn.innerHTML = original;
-                    btn.disabled = false;
-                    setTimeout(() => successDiv.classList.add('hidden'), 5000);
-                }, 1200);
+
+                try {
+                    const response = await fetch(form.action, {
+                        method: 'POST',
+                        body: new FormData(form),
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    });
+
+                    if (response.ok) {
+                        successDiv.innerHTML = `✓ Thanks ${name}! Your message has been sent. We'll respond within 24 hours.`;
+                        successDiv.classList.remove('hidden');
+                        form.reset();
+                        setTimeout(() => successDiv.classList.add('hidden'), 5000);
+                    } else {
+                        alert("Failed to send message. Please try again.");
+                    }
+                } catch (err) {
+                    alert("Failed to send message. Please try again or email us directly at kmngomezulu82@gmail.com");
+                }
+
+                btn.innerHTML = original;
+                btn.disabled = false;
             });
         }
 
